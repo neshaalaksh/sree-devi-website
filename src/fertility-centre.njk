@@ -1,0 +1,94 @@
+---
+layout: layouts/base.njk
+title: Fertility Centre
+pageClass: fertility
+permalink: /fertility-centre/
+description: Fertility evaluation, counselling and treatment at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy, including ovulation induction, IUI, IVF, ICSI and egg and embryo freezing.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, btnBook, faqBlock, doctorPhoto with context -%}
+{%- set fc = fertility -%}
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 class="h-hero">{{ fc.hero_title | accent | safe }}</h1>
+      <p class="hero__lead">{{ fc.hero_text }}</p>
+      <div class="btn-row">{{ btnWhatsApp() }} {{ btnBook() }}</div>
+    </div>
+    <div class="hero__media">
+      <img class="arch--top" src="/assets/images/fc-hero.webp" alt="The Fertility Centre reception" style="width:100%;aspect-ratio:560/600;object-fit:cover;object-position:60% center;max-height:560px" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <div class="center" style="margin-bottom:24px">
+      <p class="eyebrow">Your journey</p>
+      <h2 class="h-display h-display--lg">An illustrative path through <em>care</em>.</h2>
+      <p class="lead">{{ fc.journey_intro }}</p>
+    </div>
+    <div class="journey">
+      {%- for st in fc.steps %}
+      <div class="journey__row{% if loop.index % 2 == 0 %} journey__row--flip{% endif %}">
+        <div class="journey__text"><h3>{{ st.title }}</h3><p>{{ st.text }}</p></div>
+        <span class="journey__num">{{ "0" if loop.index < 10 }}{{ loop.index }}</span>
+        <figure class="journey__media">
+          {%- if st.image %}<img src="{{ st.image }}" alt="" loading="lazy">{% endif %}
+          {%- if st.caption %}<figcaption>{{ st.caption }}</figcaption>{% endif %}
+        </figure>
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--plum" id="treatments">
+  <div class="container">
+    <div class="center">
+      <p class="eyebrow eyebrow--peach">Treatments</p>
+      <h2 class="h-display h-display--lg">Fertility <em>treatments</em>.</h2>
+      <p class="lead">{{ fc.treatments_intro }}</p>
+    </div>
+    <div class="treat-grid">
+      {%- for t in fc.treatments %}
+      <article class="treat-card">
+        <span class="num">{{ "0" if loop.index < 10 }}{{ loop.index }}</span>
+        <h3>{{ t.title }}</h3>
+        <p>{{ t.text }}</p>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{%- set team = collections.doctors | where("data.show_on_fertility", true) %}
+<section class="section section--cream">
+  <div class="container team">
+    <div>
+      <p class="eyebrow">Our {{ "Doctor" if team.length == 1 else "Doctors" }}</p>
+      <h2 class="h-display h-display--lg">Meet your care <em>team</em>.</h2>
+      <p>Fertility care at the hospital is led by experienced consultants. Read their full profiles on the Doctors page.</p>
+      <ul class="doctor-mini">
+        {%- for doc in team %}
+        <li><strong>{{ doc.data.name }}</strong><span>{{ doc.data.qualifications }} · {{ doc.data.experience }} experience</span><span>{{ doc.data.specialties | join(" · ") }}</span></li>
+        {%- endfor %}
+      </ul>
+      <a class="btn btn--primary" href="/doctors/{% if team.length %}#{{ team[0].page.fileSlug }}{% endif %}">View Doctor Profile{{ "s" if team.length > 1 }} {{ icon("arrow", 16) }}</a>
+    </div>
+    <div class="team__media"><img src="/assets/images/fc-team.webp" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+{{ faqBlock(faqs.items | where("show_on", "fertility"), lead="Contact the Fertility Centre for confirmed information, timings and next steps.") }}
+
+<section class="section section--cream cta-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="h-display h-display--lg">Ready to take the <em>first step?</em></h2>
+    <p class="lead">Reach out to the Fertility Centre to speak with the team and understand how they can support you.</p>
+    <div class="btn-row center">{{ btnWhatsApp() }} {{ btnCall() }}</div>
+    <p style="margin-top:20px;font-size:.8rem">{{ settings.address.short }} · Since {{ settings.established_year }}</p>
+  </div>
+</section>

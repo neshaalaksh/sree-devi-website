@@ -1,0 +1,58 @@
+# Facility gallery. Add a photo to each item through the CMS once the photo shoot is done.
+# "featured" items (first four) appear on the homepage.
+highlights:
+  - title: 24×7 emergency & delivery
+    text: Emergency and delivery care, round the clock, every day.
+    icon: clock
+  - title: ICU / HDU
+    text: Intensive and high-dependency care for patients who need close monitoring.
+    icon: pulse
+  - title: Laboratory (24 hrs)
+    text: In-house laboratory, open 24 hours.
+    icon: flask
+  - title: Pharmacy
+    text: In-house pharmacy for prescribed medicines.
+    icon: pill
+  - title: Parking
+    text: Parking is available at the hospital.
+    icon: car
+  - title: Food for admitted patients
+    text: Homemade food is provided for admitted patients (not for attenders).
+    icon: bowl
+  - title: Insurance & cashless
+    text: All insurance accepted, with cashless facility. CM Health Insurance Scheme is not accepted.
+    icon: shield
+items:
+  - title: Hospital interiors
+    image: ""
+    featured: true
+  - title: Fertility centre
+    image: ""
+    featured: true
+  - title: Consultation rooms
+    image: ""
+    featured: true
+  - title: Scan and diagnostic rooms
+    image: ""
+    featured: true
+  - title: Labour room
+    image: ""
+    featured: false
+  - title: Operation theatre
+    image: ""
+    featured: false
+  - title: ICU / HDU
+    image: ""
+    featured: false
+  - title: Laboratory
+    image: ""
+    featured: false
+  - title: Pharmacy
+    image: ""
+    featured: false
+  - title: Patient rooms
+    image: ""
+    featured: false
+  - title: Reception and waiting area
+    image: ""
+    featured: false

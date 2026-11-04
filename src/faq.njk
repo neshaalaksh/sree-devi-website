@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+title: Frequently Asked Questions
+pageClass: faq
+permalink: /faq/
+---
+{%- from "partials/components.njk" import faqBlock with context -%}
+<section class="page-hero page-hero--center">
+  <div class="container container--narrow">
+    <h1 class="h-hero">Frequently Asked <em>Questions</em></h1>
+    <p class="lead">Answers to the questions our reception team hears most often.</p>
+  </div>
+</section>
+{{ faqBlock(faqs.items | where("show_on", "faq"), title="Your *questions*, answered.", eyebrow="FAQs") }}

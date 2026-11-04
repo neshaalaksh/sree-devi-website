@@ -1,0 +1,50 @@
+---
+layout: layouts/base.njk
+title: Facilities
+pageClass: facilities
+permalink: /facilities/
+description: Facilities at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy, including 24x7 emergency and delivery, ICU/HDU, a 24-hour laboratory, pharmacy and parking.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp with context -%}
+
+<section class="page-hero page-hero--center">
+  <div class="container container--narrow">
+    <h1 class="h-hero">Our <em>Facilities</em></h1>
+    <p class="lead">Everything you need for your care, under one roof in Srirangam.</p>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <ul class="highlights">
+      {%- for h in facilities.highlights %}<li>{{ icon(h.icon, 22) }}<h3>{{ h.title }}</h3><p>{{ h.text }}</p></li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--sage">
+  <div class="container">
+    <p class="eyebrow">Inside the hospital</p>
+    <h2 class="h-display h-display--lg" style="margin-bottom:28px">A look <em>around</em>.</h2>
+    <div class="gallery">
+      {%- for f in facilities.items %}
+      <figure>
+        {%- if f.image %}<img src="{{ f.image }}" alt="{{ f.title }}" loading="lazy">{% else %}<div class="fac-tile__ph" aria-hidden="true"></div>{% endif %}
+        <figcaption>{{ f.title }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <p class="eyebrow">Diagnostics &amp; services</p>
+    <h2 class="h-display h-display--lg" style="margin-bottom:28px">Services under <em>one roof</em>.</h2>
+    <ul class="svc-list">
+      {%- for it in hospital_services.items %}<li>{{ icon(it.icon or "check", 20) }} {{ it.name }}</li>{% endfor %}
+    </ul>
+    <div class="btn-row" style="margin-top:32px">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>

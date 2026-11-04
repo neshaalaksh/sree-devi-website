@@ -1,0 +1,180 @@
+{%- from "partials/icons.njk" import icon -%}
+
+{%- macro btnCall(label="Call the Hospital", cls="btn--primary") -%}
+<a class="btn {{ cls }}" href="{{ settings.contact.primary_phone | tel }}">{{ icon("phone", 16) }} {{ label }}</a>
+{%- endmacro -%}
+
+{%- macro btnWhatsApp(label="Chat on WhatsApp", cls="btn--outline") -%}
+<a class="btn {{ cls }}" href="{{ settings.contact.whatsapp_hospital | wa }}" target="_blank" rel="noopener" data-wa>{{ icon("whatsapp", 16) }} {{ label }}</a>
+{%- endmacro -%}
+
+{%- macro btnBook(label="Book a Consultation", cls="btn--primary") -%}
+<a class="btn {{ cls }}" href="/patients-and-visitors/#booking">{{ label }} {{ icon("arrow", 16) }}</a>
+{%- endmacro -%}
+
+{#- Section heading with eyebrow and accented title -#}
+{%- macro heading(eyebrow, title, tag="h2", cls="") -%}
+<div class="section-head {{ cls }}">
+  {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+  <{{ tag }} class="h-display">{{ title | accent | safe }}</{{ tag }}>
+</div>
+{%- endmacro -%}
+
+{#- FAQ accordion with "Still have questions?" card -#}
+{%- macro faqBlock(list, title="Frequently Asked *Questions*.", eyebrow="FAQs", lead="Contact the hospital for confirmed information, timings and next steps.") -%}
+<section class="section section--peach" id="faqs">
+  <div class="container">
+    <p class="eyebrow">{{ eyebrow }}</p>
+    <h2 class="h-display h-display--lg">{{ title | accent | safe }}</h2>
+    <div class="faq">
+      <aside class="faq__card">
+        <h3>Still have questions?</h3>
+        <p>{{ lead }}</p>
+        {{ btnCall("Call the Hospital", "btn--primary btn--sm") }}
+        {{ btnWhatsApp("Chat on WhatsApp", "btn--outline btn--sm") }}
+      </aside>
+      <div class="faq__list">
+        {%- for f in list %}
+        <details class="faq__item"{% if loop.first %} open{% endif %}>
+          <summary><span>{{ f.question }}</span><span class="faq__icon" aria-hidden="true"></span></summary>
+          <div class="faq__answer">{{ f.answer | md | safe }}</div>
+        </details>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{#- Doctor avatar: photo if available, otherwise initials -#}
+{%- macro doctorPhoto(d, cls="") -%}
+{%- if d.photo -%}
+<img class="doc-photo {{ cls }}" src="{{ d.photo }}" alt="Portrait of {{ d.name }}" loading="lazy">
+{%- else -%}
+<div class="doc-photo doc-photo--placeholder {{ cls }}" role="img" aria-label="Photo of {{ d.name }} coming soon"><span>{{ d.name | initials }}</span></div>
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro doctorCard(doc) -%}
+{%- set d = doc.data -%}
+<article class="doc-card" data-dept="{{ d.department | slug2 }}">
+  <div class="doc-card__media">
+    {{ doctorPhoto(d) }}
+    <span class="tag tag--float">{{ d.department }}</span>
+  </div>
+  <div class="doc-card__body">
+    <h3 class="doc-card__name">{{ d.name }}</h3>
+    {%- if d.designation %}<p class="doc-card__designation">{{ d.designation }}</p>{% endif %}
+    <p class="doc-card__quals">{{ d.qualifications }}</p>
+    <div class="chips">
+      {%- for sp in d.specialties | limit(2) %}<span class="chip chip--{{ loop.index }}">{{ sp }}</span>{% endfor %}
+    </div>
+    <p class="doc-card__meta">{{ icon("award", 14) }} {{ d.experience }} experience</p>
+    <button class="link-arrow" type="button" data-doctor="{{ doc.page.fileSlug }}" aria-haspopup="dialog">View Profile {{ icon("arrow", 16) }}</button>
+  </div>
+</article>
+{%- endmacro -%}
+
+{#- Full profile, rendered into a <template> and shown in the modal -#}
+{%- macro doctorProfile(doc) -%}
+{%- set d = doc.data -%}
+<template id="doctor-{{ doc.page.fileSlug }}">
+  <div class="profile">
+    <div class="profile__side">
+      <div class="profile__photo">
+        {{ doctorPhoto(d) }}
+        <span class="tag tag--float tag--left">{{ d.department }}</span>
+      </div>
+      <p class="profile__exp">Experience: {{ d.experience }}</p>
+      {%- if d.registration_no %}<p class="profile__reg">TNMC Reg. No. {{ d.registration_no }}</p>{% endif %}
+    </div>
+    <div class="profile__main">
+      <h2 class="profile__name" id="profile-title">{{ d.name }}</h2>
+      {%- if d.designation %}<p class="profile__designation">{{ d.designation }}</p>{% endif %}
+      <p class="profile__quals">{{ d.qualifications }}</p>
+      <div class="chips">
+        {%- for sp in d.specialties %}<span class="chip chip--{{ loop.index }}">{{ sp }}</span>{% endfor %}
+      </div>
+
+      <h3 class="profile__h">About the <em>Doctor</em></h3>
+      <div class="profile__bio">
+        <p>{{ d.bio }}</p>
+        {%- if d.approach %}<blockquote>“{{ d.approach }}”</blockquote>{% endif %}
+      </div>
+
+      {%- set expertise = (d.procedures or []).concat(d.conditions or []) %}
+      {%- if expertise.length %}
+      <h3 class="profile__h">Areas of Expertise</h3>
+      <div class="pills">{% for e in expertise %}<span class="pill">{{ e }}</span>{% endfor %}</div>
+      {%- endif %}
+
+      {%- if d.case_note or (d.previous_positions and d.previous_positions.length) or (d.memberships and d.memberships.length) or (d.honours and d.honours.length) or d.publications %}
+      <h3 class="profile__h">Experience &amp; Credentials</h3>
+      <dl class="profile__list">
+        {%- if d.previous_positions and d.previous_positions.length %}<dt>Previous positions</dt><dd><ul>{% for p in d.previous_positions %}<li>{{ p }}</li>{% endfor %}</ul></dd>{% endif %}
+        {%- if d.case_note %}<dt>Experience</dt><dd>{{ d.case_note }}</dd>{% endif %}
+        {%- if d.memberships and d.memberships.length %}<dt>Memberships</dt><dd>{{ d.memberships | join(", ") }}</dd>{% endif %}
+        {%- if d.honours and d.honours.length %}<dt>Roles &amp; honours</dt><dd><ul>{% for h in d.honours %}<li>{{ h }}</li>{% endfor %}</ul></dd>{% endif %}
+        {%- if d.publications %}<dt>Publications</dt><dd>{{ d.publications }}</dd>{% endif %}
+      </dl>
+      {%- endif %}
+
+      <h3 class="profile__h">Consultation Information</h3>
+      <div class="profile__consult">
+        <p><strong>OPD timings</strong>{{ d.opd or (settings.timings.opd_days + ", " + settings.timings.opd_hours + ". Please call to confirm the doctor's availability.") }}</p>
+        <p><strong>Location</strong>{{ settings.name }}, {{ settings.address.short }}</p>
+        <p><strong>Languages spoken</strong>{{ d.languages | join(" · ") }}</p>
+        <p><strong>Consultation</strong>For appointments and consultation enquiries, contact the hospital directly.</p>
+      </div>
+    </div>
+  </div>
+</template>
+{%- endmacro -%}
+
+{#- Contact details + map, used on Home and Contact pages -#}
+{%- macro contactBlock(showHead=true) -%}
+{%- set s = settings -%}
+<section class="section section--cream" id="contact">
+  <div class="container">
+    {%- if showHead %}
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="h-display h-display--lg">Contact <em>Us</em></h2>
+    <p class="lead">Call the hospital or walk in during OPD hours. Our team will guide you to the right doctor.</p>
+    {%- endif %}
+    <div class="contact">
+      <div class="contact__details">
+        <div class="contact__row">{{ icon("pin", 20) }}<div><h3>Address</h3><p>{{ s.name }}<br>{{ s.address.line1 }}<br>{{ s.address.line2 }}, {{ s.address.state }}</p><a class="link-arrow" href="{{ s.address.directions_url }}" target="_blank" rel="noopener">Get directions {{ icon("arrow", 16) }}</a></div></div>
+        <div class="contact__row">{{ icon("phone", 20) }}<div><h3>Call</h3>
+          <p>Reception: <a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a><br>
+          Hospital: <a href="{{ s.contact.hospital_mobile | tel }}">{{ s.contact.hospital_mobile }}</a><br>
+          Lab &amp; Pharmacy: <a href="{{ s.contact.lab_pharmacy_phone | tel }}">{{ s.contact.lab_pharmacy_phone }}</a></p></div></div>
+        <div class="contact__row">{{ icon("whatsapp", 20) }}<div><h3>WhatsApp</h3>
+          <p>Hospital: <a href="{{ s.contact.whatsapp_hospital | wa }}" target="_blank" rel="noopener">{{ s.contact.whatsapp_hospital }}</a><br>
+          Lab &amp; Pharmacy: <a href="{{ s.contact.whatsapp_lab_pharmacy | wa }}" target="_blank" rel="noopener">{{ s.contact.whatsapp_lab_pharmacy }}</a></p></div></div>
+        {%- if s.contact.email_general or s.contact.email_lab %}
+        <div class="contact__row">{{ icon("mail", 20) }}<div><h3>Email</h3><p>
+          {%- if s.contact.email_general %}<a href="{{ s.contact.email_general | mailto }}">{{ s.contact.email_general }}</a><br>{% endif %}
+          {%- if s.contact.email_lab %}Lab: <a href="{{ s.contact.email_lab | mailto }}">{{ s.contact.email_lab }}</a>{% endif %}</p></div></div>
+        {%- endif %}
+        <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days }}, {{ s.timings.opd_hours }}<br>{{ s.timings.sunday }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
+        <div class="contact__actions">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+      </div>
+      <div class="contact__map">
+        <iframe title="Map showing {{ s.name }}" src="https://maps.google.com/maps?q={{ s.address.map_query | urlencode }}&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endmacro -%}
+
+{#- Dark band CTA -#}
+{%- macro ctaBand(eyebrow, title, text, cls="section--plum") -%}
+<section class="section {{ cls }} cta-band">
+  <div class="container container--narrow center">
+    {% if eyebrow %}<p class="eyebrow">{{ eyebrow }}</p>{% endif %}
+    <h2 class="h-display h-display--lg">{{ title | accent | safe }}</h2>
+    {% if text %}<p class="lead">{{ text }}</p>{% endif %}
+    <div class="btn-row center">{{ caller() }}</div>
+  </div>
+</section>
+{%- endmacro -%}

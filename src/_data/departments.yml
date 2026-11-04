@@ -1,0 +1,22 @@
+# Departments listed by the hospital. Shown on the Services and About pages.
+items:
+  - name: Obstetrics
+    description: Pregnancy care, normal and caesarean delivery, and postnatal care.
+  - name: Gynaecology
+    description: Menstrual, hormonal and reproductive health concerns at every age.
+  - name: Infertility
+    description: Fertility evaluation, counselling and treatment including IUI, IVF and ICSI.
+  - name: ENT
+    description: Ear, nose and throat conditions, with audiometry and hearing aid fitting.
+  - name: General Medicine
+    description: Diagnosis and treatment of common adult medical conditions.
+  - name: General Surgery
+    description: Surgical assessment and procedures.
+  - name: Orthopaedics
+    description: Bone, joint and muscle conditions.
+  - name: Dermatology
+    description: Skin, hair and nail conditions.
+  - name: Pulmonology
+    description: Lung and breathing conditions.
+  - name: Physiotherapy
+    description: Rehabilitation, including postpartum exercise.

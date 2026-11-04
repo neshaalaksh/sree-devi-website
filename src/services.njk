@@ -1,0 +1,107 @@
+---
+layout: layouts/base.njk
+title: Our Services
+pageClass: services
+permalink: /services/
+description: Pregnancy and delivery, fertility (IUI, IVF, ICSI), gynaecology, gynaecological surgery, screening, scans and diagnostics at Sree Devi Hospital, Srirangam, Trichy, plus ten departments.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, btnBook with context -%}
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 class="h-hero" style="font-style:italic">Our <em>services</em></h1>
+      <p class="hero__lead">Care for women and families at every stage, with specialists across {{ departments.items.length }} departments.</p>
+      <div class="btn-row">{{ btnWhatsApp() }} {{ btnBook() }}</div>
+    </div>
+    <div class="hero__media">
+      <img class="arch--soft" src="/assets/images/services-hero.webp" alt="A doctor in consultation with a patient" style="aspect-ratio:668/480;width:100%;object-fit:cover" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<nav class="pill-nav" aria-label="Service areas">
+  <div class="container">
+    <ul>
+      {%- for svc in collections.services %}
+      <li><a href="#{{ svc.page.fileSlug }}">{{ svc.data.name }}</a></li>
+      {%- endfor %}
+      <li><a href="#departments">All Departments</a></li>
+      <li><a href="#hospital-services">Diagnostics &amp; Facilities</a></li>
+    </ul>
+  </div>
+</nav>
+
+{%- for svc in collections.services %}
+{%- set d = svc.data %}
+<section class="section {{ 'section--sage' if loop.index % 2 == 0 else 'section--cream' }}" id="{{ svc.page.fileSlug }}" style="scroll-margin-top:130px">
+  <div class="container svc{% if loop.index % 2 == 0 %} svc--flip{% endif %}">
+    <div class="svc__media{% if d.image2 %} svc__media--two{% endif %}">
+      {%- if d.image %}<img src="{{ d.image }}" alt="" loading="lazy">{% endif %}
+      {%- if d.image2 %}<img src="{{ d.image2 }}" alt="" loading="lazy">{% endif %}
+    </div>
+    <div class="svc__copy">
+      <p class="svc__eyebrow">{{ d.name }}</p>
+      <h2 class="h-display h-display--lg">{{ d.heading | accent | safe }}</h2>
+      <p class="svc__summary">{{ d.summary }}</p>
+      <ul class="bullets">
+        {%- for it in d.items %}<li>{{ it }}</li>{% endfor %}
+      </ul>
+      {%- if d.note %}<p class="legal-note">{{ icon("info", 16) }} {{ d.note }}</p>{% endif %}
+      {%- if d.cta == "fertility" %}
+      <a class="btn btn--primary btn--sm" href="/fertility-centre/">Visit Fertility Centre</a>
+      {%- else %}
+      {{ btnCall("Call the Hospital", "btn--primary btn--sm") }}
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- if loop.index == 4 %}
+<section class="section section--plum cta-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow eyebrow--peach">Get in touch</p>
+    <h2 class="h-display h-display--lg">Have questions? We're here <em>to help.</em></h2>
+    <p class="lead">Call or WhatsApp our team about any service, treatment questions, or to plan a consultation. We're happy to guide you through the next steps.</p>
+    <div class="btn-row center">{{ btnCall() }} {{ btnWhatsApp("Chat on WhatsApp", "btn--white") }}</div>
+  </div>
+</section>
+{%- endif %}
+{%- endfor %}
+
+<section class="section section--sage" id="departments" style="scroll-margin-top:130px">
+  <div class="container">
+    <p class="eyebrow">Departments</p>
+    <h2 class="h-display h-display--lg">Specialists across <em>{{ departments.items.length }} departments</em>.</h2>
+    <p class="lead" style="margin-bottom:32px">Beyond women's health, the hospital has specialists for the whole family.</p>
+    <div class="dept-grid">
+      {%- for dep in departments.items %}
+      <div class="dept-card"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream" id="hospital-services" style="scroll-margin-top:130px">
+  <div class="container">
+    <p class="eyebrow">Diagnostics &amp; facilities</p>
+    <h2 class="h-display h-display--lg">Services under <em>one roof</em>.</h2>
+    <ul class="svc-list" style="margin-top:28px">
+      {%- for it in hospital_services.items %}<li>{{ icon(it.icon or "check", 20) }} {{ it.name }}</li>{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--peach cta-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="h-display h-display--lg">Have a question about our <em>services</em>?</h2>
+    <p class="lead">Contact the hospital to understand the next steps. This is not an online booking or a confirmed appointment.</p>
+    <div class="stat-row">
+      <div><strong>{{ departments.items.length }}</strong><span>Departments</span></div>
+      <div><strong>24/7</strong><span>Emergency and delivery</span></div>
+      <div><strong>{{ settings.established_year }}</strong><span>Caring for Srirangam since</span></div>
+    </div>
+    <div class="btn-row center">{{ btnWhatsApp() }} {{ btnCall() }}</div>
+  </div>
+</section>

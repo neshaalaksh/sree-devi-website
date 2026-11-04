@@ -1,0 +1,89 @@
+{%- from "partials/icons.njk" import icon -%}
+{%- set s = settings -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}{{ s.name }}, Srirangam, Trichy</title>
+  <meta name="description" content="{{ description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + ', ' + s.timings.opd_hours + '. Emergency & delivery ' + s.timings.emergency + '.') }}">
+  <meta name="theme-color" content="#3a1f33">
+  <meta property="og:title" content="{{ title or s.name }}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/images/home-hero-building.webp">
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Hospital",
+    "name": {{ s.name | dump | safe }},
+    "telephone": {{ s.contact.reception_phone | dump | safe }},
+    "foundingDate": "2005-09-08",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": {{ s.address.line1 | dump | safe }},
+      "addressLocality": "Srirangam, Tiruchirappalli",
+      "postalCode": "620006",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "openingHours": "Mo-Sa 10:00-13:00"
+  }
+  </script>
+</head>
+<body class="page-{{ pageClass or 'default' }}">
+<a class="skip" href="#main">Skip to content</a>
+
+{%- if s.notice.enabled and s.notice.text %}
+<div class="notice">
+  <div class="container">{{ icon("info", 16) }} <span>{{ s.notice.text }}</span>{% if s.notice.link %} <a href="{{ s.notice.link }}">Learn more</a>{% endif %}</div>
+</div>
+{%- endif %}
+
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__left">{{ s.name }} · {{ s.address.short }} · Est. {{ s.established_year }}</span>
+    <span class="topbar__right">
+      <a href="{{ s.contact.primary_phone | tel }}">Emergency &amp; Delivery: 24 × 7</a>
+      <span class="topbar__sep" aria-hidden="true">|</span>
+      <span>OPD: {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}</span>
+    </span>
+  </div>
+</div>
+
+{% include "partials/header.njk" %}
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+{% include "partials/footer.njk" %}
+
+<dialog class="wa-dialog" id="wa-dialog" aria-labelledby="wa-title">
+  <form method="dialog" class="wa-dialog__inner">
+    <div class="wa-dialog__head">
+      <h2 id="wa-title">Chat on WhatsApp</h2>
+      <button class="icon-btn" value="close" aria-label="Close">{{ icon("x", 18) }}</button>
+    </div>
+    <p class="wa-dialog__lead">Who would you like to message?</p>
+    <a class="wa-option" href="{{ s.contact.whatsapp_hospital | wa }}" target="_blank" rel="noopener">
+      <span class="wa-option__icon">{{ icon("stethoscope", 20) }}</span>
+      <span><strong>Hospital</strong><small>General enquiries, doctors and consultations</small></span>
+      {{ icon("arrow", 16) }}
+    </a>
+    <a class="wa-option" href="{{ s.contact.whatsapp_lab_pharmacy | wa }}" target="_blank" rel="noopener">
+      <span class="wa-option__icon">{{ icon("flask", 20) }}</span>
+      <span><strong>Lab &amp; Pharmacy</strong><small>Test reports and medicines</small></span>
+      {{ icon("arrow", 16) }}
+    </a>
+    <p class="wa-dialog__note">{{ icon("info", 14) }} WhatsApp messages are for general enquiries only and are not confirmed appointments.</p>
+  </form>
+</dialog>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

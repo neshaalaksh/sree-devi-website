@@ -1,0 +1,22 @@
+# Diagnostic and hospital services. Shown on the Services and Facilities pages.
+items:
+  - name: IUI, IVF, ICSI
+    icon: heart
+  - name: Obesity management
+    icon: scale
+  - name: 3D/4D & colour Doppler
+    icon: scan
+  - name: Ultrasound scan
+    icon: scan
+  - name: Audiometry
+    icon: ear
+  - name: Hearing aid fitting
+    icon: ear
+  - name: ECG, Echo
+    icon: pulse
+  - name: Lab (24 hrs)
+    icon: flask
+  - name: Pharmacy
+    icon: pill
+  - name: X-ray
+    icon: bone

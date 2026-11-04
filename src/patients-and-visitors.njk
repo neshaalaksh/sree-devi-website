@@ -1,0 +1,139 @@
+---
+layout: layouts/base.njk
+title: Patients & Visitors
+pageClass: patients
+permalink: /patients-and-visitors/
+description: OPD timings, how to book a consultation, what to bring, admission, insurance and payment information for Sree Devi Hospital & Fertility Centre, Srirangam, Trichy.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, btnBook with context -%}
+{%- set s = settings -%}
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 class="h-hero">Your comfort, our first priority.</h1>
+      <p class="booking__sub" style="color:var(--plum);font-size:1.4rem">Caring for you, every step of the way.</p>
+      <p class="hero__lead" style="max-width:46ch">At {{ s.name }}, we believe every patient and visitor deserves a warm, informed and dignified experience. This guide will help you plan your visit and know what to expect.</p>
+      <div class="btn-row">{{ btnWhatsApp() }} {{ btnBook() }}</div>
+    </div>
+    <div class="hero__media" style="display:grid;gap:14px">
+      <img src="/assets/images/svc-fertility.webp" alt="" style="width:50%;aspect-ratio:269/120;object-fit:cover;border-radius:16px 16px 40px 16px">
+      <img src="/assets/images/home-intro-newborn.webp" alt="" style="width:100%;aspect-ratio:528/213;object-fit:cover;border-radius:120px 60px 0 60px">
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container info-cards">
+    <div class="info-card">
+      <div class="info-card__head">{{ icon("clock", 22) }}<h3>OPD Days</h3></div>
+      <dl><dt>{{ s.timings.opd_days }}</dt><dd>{{ s.timings.opd_hours }}</dd><dt>Sundays &amp; holidays</dt><dd>OPD closed</dd></dl>
+      <p class="hint">{{ icon("info", 14) }} Call the hospital to confirm a doctor's availability.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card__head">{{ icon("pulse", 22) }}<h3>Emergency &amp; Delivery</h3></div>
+      <dl><dt>Emergency care</dt><dd>24 hours, 7 days</dd><dt>Labour &amp; delivery</dt><dd>24 hours, 7 days</dd></dl>
+      <p class="hint">{{ icon("info", 14) }} The hospital does not run an ambulance service.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card__head">{{ icon("users", 22) }}<h3>Visitor Timings</h3></div>
+      {%- if s.timings.visiting_hours %}
+      <dl><dt>Visiting hours</dt><dd>{{ s.timings.visiting_hours }}</dd></dl>
+      {%- else %}
+      <p>Planning to visit a patient?<br>Please call the hospital before your visit.</p>
+      {%- endif %}
+      <p class="hint">{{ icon("phone", 14) }} <span>Call us on <a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a> to confirm visiting hours.</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking" style="scroll-margin-top:80px">
+  <div class="booking__media"><img src="/assets/images/pv-booking.webp" alt="" loading="lazy"></div>
+  <div class="booking__copy">
+    <p class="eyebrow eyebrow--peach">How to book</p>
+    <h2 class="h-display h-display--lg">Booking a <em>Consultation</em></h2>
+    <p class="booking__sub">Simple steps to see the right doctor.</p>
+    <ol class="steps">
+      <li><span class="num">1</span><div><h3>Call or walk in</h3><p>Call the hospital or walk in during OPD hours ({{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}). Reception will tell you which specialist suits your needs.</p></div></li>
+      <li><span class="num">2</span><div><h3>Register at reception</h3><p>Share your details at reception. If you called ahead, reception will confirm the doctor's availability.</p></div></li>
+      <li><span class="num">3</span><div><h3>Attend your consultation</h3><p>Bring your previous medical records, prescriptions and current medicines. The care team will guide you from there.</p></div></li>
+    </ol>
+    <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp("Chat on WhatsApp", "btn--white") }}</div>
+    <p class="hint">{{ icon("info", 14) }} WhatsApp messages are for general enquiries only and are not confirmed appointments.</p>
+  </div>
+</section>
+
+<section class="section section--sand">
+  <div class="container plan">
+    <div class="plan__card">
+      <div class="plan__head">{{ icon("pin", 22) }}<div><p class="eyebrow">Getting here</p><h2>Plan Your Visit</h2></div></div>
+      <p class="plan__label">Our address</p>
+      <p>{{ s.name }}<br>{{ s.address.line1 }}<br>{{ s.address.line2 }}, {{ s.address.state }}</p>
+      <div class="plan__map"><iframe title="Map showing {{ s.name }}" src="https://maps.google.com/maps?q={{ s.address.map_query | urlencode }}&z=15&output=embed" loading="lazy"></iframe></div>
+      <a class="link-arrow" href="{{ s.address.directions_url }}" target="_blank" rel="noopener">Get directions in Google Maps {{ icon("arrow", 16) }}</a>
+      <p class="plan__label">Before you travel</p>
+      <ul class="checks">
+        <li>{{ icon("check", 16) }} OPD runs {{ s.timings.opd_days }}, {{ s.timings.opd_hours }}.</li>
+        <li>{{ icon("check", 16) }} Call ahead to confirm your doctor's availability.</li>
+        <li>{{ icon("check", 16) }} Parking is available at the hospital.</li>
+      </ul>
+    </div>
+    <div class="plan__card plan__card--light">
+      <div class="plan__head">{{ icon("bag", 22) }}<div><p class="eyebrow">Preparing your visit</p><h2>What to Bring</h2></div></div>
+      <p style="font-size:.88rem">What you need depends on your condition and treatment. These help your doctor understand your health history:</p>
+      <ul class="bring">
+        <li>{{ icon("file", 18) }}<span><strong>Previous reports &amp; records</strong>Investigation reports, scan reports, discharge summaries and test results related to your condition.</span></li>
+        <li>{{ icon("clipboard", 18) }}<span><strong>Prescriptions</strong>Current and recent prescriptions from any doctor or hospital, including fertility treatment records if applicable.</span></li>
+        <li>{{ icon("pill", 18) }}<span><strong>Current medicines</strong>A list of medicines you are taking, with dosage. Bringing the medicine strips or bottles helps.</span></li>
+        <li>{{ icon("card", 18) }}<span><strong>ID &amp; insurance documents</strong>A government-issued ID for registration, and your insurance card or policy details if you plan to use insurance.</span></li>
+      </ul>
+      <p class="hint" style="margin-top:14px">{{ icon("info", 14) }} If you are unsure what to bring for a specific condition or procedure, call the hospital in advance. Our team is happy to guide you.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--peach">
+  <div class="container">
+    <div class="split-head">
+      <h2 class="h-display h-display--lg">Admission &amp; Financial Information</h2>
+      <p>We want your care experience to be clear and stress-free. Below is general guidance; please contact the hospital for information specific to your situation.</p>
+    </div>
+    <div class="admit">
+      <div class="info-card">
+        <h3>Admission Process</h3>
+        <p>{{ s.timings.admission }}</p>
+        <p>For planned admissions, your doctor will advise on the necessary steps. For emergencies, reception will guide your family through the process immediately.</p>
+        <p class="hint">{{ icon("phone", 14) }} <span>Admission enquiries: <a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a></span></p>
+      </div>
+      <div class="info-card">
+        <h3>Cost Estimates</h3>
+        <p>Consultation and procedure costs vary by doctor and the nature of your care, so fees are not listed on this website.</p>
+        <p>Please ask reception for an estimate before your appointment or planned procedure.</p>
+        <p class="hint">{{ icon("info", 14) }} Ask reception for estimates specific to your procedure or consultation.</p>
+      </div>
+      <div class="info-card">
+        <h3>Payment &amp; Insurance</h3>
+        <p><strong>Payment:</strong> cash, UPI and cards are accepted.</p>
+        <p><strong>Insurance:</strong> all health insurance is accepted, with a cashless facility. The CM Health Insurance Scheme is not accepted.</p>
+        <p class="hint">{{ icon("info", 14) }} Speak with reception about your policy before admission.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="help">
+  <div class="help__media"><img src="/assets/images/home-hero-building.webp" alt="Sree Devi Hospital & Fertility Centre building" loading="lazy" style="object-position:center 30%"></div>
+  <div class="help__copy">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="h-display h-display--lg">We are here to help you.</h2>
+    <p class="help__sub">Every question deserves a kind answer.</p>
+    <div class="contact__details" style="margin:24px 0">
+      <div class="contact__row">{{ icon("pin", 20) }}<div><h3>Address</h3><p>{{ s.address.line1 }}, {{ s.address.line2 }}, {{ s.address.state }}</p></div></div>
+      <div class="contact__row">{{ icon("phone", 20) }}<div><h3>Call the hospital</h3><p><a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a> · <a href="{{ s.contact.hospital_mobile | tel }}">{{ s.contact.hospital_mobile }}</a></p></div></div>
+      <div class="contact__row">{{ icon("whatsapp", 20) }}<div><h3>WhatsApp</h3><p>Hospital: {{ s.contact.whatsapp_hospital }}<br>Lab &amp; Pharmacy: {{ s.contact.whatsapp_lab_pharmacy }}</p></div></div>
+      <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
+    </div>
+    <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>

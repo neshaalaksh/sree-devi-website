@@ -1,0 +1,55 @@
+{%- from "partials/icons.njk" import icon -%}
+{%- set s = settings -%}
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="footer__name">Sree Devi Hospital</p>
+      <p class="footer__sub">&amp; Fertility Centre</p>
+      <span class="footer__rule" aria-hidden="true"></span>
+      <p>{{ s.address.short }}.<br>Caring for women and families since {{ s.established_year }}.</p>
+      {%- set socials = [["youtube", s.social.youtube, "YouTube"], ["instagram", s.social.instagram, "Instagram"], ["facebook", s.social.facebook, "Facebook"]] %}
+      <div class="footer__social">
+        {%- for so in socials %}{% if so[1] %}
+        <a href="{{ so[1] }}" target="_blank" rel="noopener" aria-label="{{ so[2] }}">{{ icon(so[0], 16) }}</a>
+        {%- endif %}{% endfor %}
+      </div>
+    </div>
+    <div>
+      <p class="footer__head">Quick links</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/doctors/">Our Doctors</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/facilities/">Facilities</a></li>
+        <li><a href="/faq/">FAQs</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__head">Areas of care</p>
+      <ul>
+        {%- for svc in collections.services %}{% if svc.data.show_on_home %}
+        <li><a href="/services/#{{ svc.page.fileSlug }}">{{ svc.data.name }}</a></li>
+        {%- endif %}{% endfor %}
+      </ul>
+    </div>
+    <div>
+      <p class="footer__head">Contact</p>
+      <ul class="footer__contact">
+        <li>{{ icon("pin", 16) }}<span>{{ s.address.line1 }}, {{ s.address.line2 }}</span></li>
+        <li>{{ icon("phone", 16) }}<span>Reception: <a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a><br>Hospital: <a href="{{ s.contact.hospital_mobile | tel }}">{{ s.contact.hospital_mobile }}</a><br>Lab &amp; Pharmacy: <a href="{{ s.contact.lab_pharmacy_phone | tel }}">{{ s.contact.lab_pharmacy_phone }}</a></span></li>
+        {%- if s.contact.email_general or s.contact.email_lab %}
+        <li>{{ icon("mail", 16) }}<span>{% if s.contact.email_general %}<a href="{{ s.contact.email_general | mailto }}">{{ s.contact.email_general }}</a><br>{% endif %}{% if s.contact.email_lab %}<a href="{{ s.contact.email_lab | mailto }}">{{ s.contact.email_lab }}</a>{% endif %}</span></li>
+        {%- endif %}
+      </ul>
+      <p class="footer__hours"><strong>OPD</strong> {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}<br>Emergency &amp; Delivery: 24 × 7</p>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© {{ "" | year }} {{ s.name }}. All rights reserved.
+      {%- if s.registrations.clinical_establishment %} · Clinical Establishment Reg. No. {{ s.registrations.clinical_establishment }}{% endif %}
+      {%- if s.registrations.art_clinic %} · ART Clinic Reg. No. {{ s.registrations.art_clinic }}{% endif %}</p>
+    <p class="footer__disclaimer">Information on this website is for general guidance and does not replace a consultation with a doctor.</p>
+  </div>
+</footer>

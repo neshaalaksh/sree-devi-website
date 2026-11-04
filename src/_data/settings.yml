@@ -1,0 +1,59 @@
+# Hospital-wide details. Edit through the CMS (Settings).
+name: Sree Devi Hospital & Fertility Centre
+short_name: Sree Devi Hospital
+tagline: Your health is our motive
+established_year: "2005"
+established_date: 8 September 2005
+site_url: ""
+
+address:
+  line1: No 16/4, Gandhi Road
+  line2: Srirangam, Trichy 620006
+  state: Tamil Nadu
+  short: Gandhi Road, Srirangam, Trichy
+  map_query: Sree Devi Hospital & Fertility Centre, No 16/4, Gandhi Road, Srirangam, Trichy 620006
+  directions_url: https://www.google.com/maps/search/?api=1&query=Sree+Devi+Hospital+%26+Fertility+Centre+Gandhi+Road+Srirangam+Trichy
+
+contact:
+  # Number used by every "Call the Hospital" button
+  primary_phone: "+91 98434 99055"
+  reception_phone: "+91 431 243 7071"
+  hospital_mobile: "+91 98434 99055"
+  lab_pharmacy_phone: "+91 73058 79055"
+  whatsapp_hospital: "+91 98434 99055"
+  whatsapp_lab_pharmacy: "+91 73058 79055"
+  email_general: ""
+  email_lab: sreedevihospitallab@gmail.com
+
+timings:
+  opd_days: Monday to Saturday
+  opd_days_short: Mon – Sat
+  opd_hours: 10 AM – 1 PM
+  sunday: OPD closed on Sundays and holidays
+  emergency: 24 hours, 7 days
+  visiting_hours: ""
+  admission: Admissions are taken at any time. Please contact the hospital for admission guidance.
+
+social:
+  youtube: ""
+  instagram: ""
+  facebook: ""
+
+registrations:
+  clinical_establishment: ""
+  art_clinic: ""
+
+# Optional banner shown at the very top of every page (e.g. holiday timings)
+notice:
+  enabled: false
+  text: ""
+  link: ""
+
+home:
+  hero_eyebrow: Trichy · Since 2005
+  hero_title: Your health is our *motive*
+  hero_text: Women's healthcare, pregnancy care and fertility treatment, with specialists across ten departments, close to home.
+  intro_title: Healthcare that feels closer to *home*.
+  intro_text: Since 2005, Sree Devi Hospital & Fertility Centre has cared for women and families in Srirangam, with services spanning pregnancy, fertility, gynaecology, surgery and diagnostics, alongside specialists in ENT, general medicine and more.
+  doctors_title: Meet the *doctors* who care for you.
+  doctors_text: Our consultants cover obstetrics and gynaecology, fertility, ENT, anaesthesia, radiology and psychiatry. Every doctor listed here has shared their own qualifications and approach to care, so you know who you will be seeing.

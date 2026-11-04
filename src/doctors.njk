@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+title: Our Doctors
+pageClass: doctors
+permalink: /doctors/
+description: Meet the specialists at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy, in obstetrics and gynaecology, fertility, ENT, radiology, anaesthesia and psychiatry.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorCard, doctorProfile with context -%}
+{%- set docs = collections.doctors -%}
+{%- set depts = [] -%}
+{%- for doc in docs %}{% if not (doc.data.department in depts) %}{% set depts = (depts.push(doc.data.department), depts) %}{% endif %}{% endfor -%}
+
+<section class="page-hero page-hero--center">
+  <div class="container container--narrow">
+    <h1 class="h-hero">Meet Our <em>Specialists</em></h1>
+    <p class="lead">{{ settings.name }} brings together a dedicated team of specialists committed to compassionate care for women and families.</p>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <div class="center" style="margin-bottom:28px">
+      <h2 class="h-display h-display--lg">Dedicated to <em>Your Care</em></h2>
+      <p class="lead">Each profile below was provided by the doctor. Tap a card to see their qualifications, experience and approach to care.</p>
+    </div>
+
+    {%- if depts.length > 1 %}
+    <div class="filter" data-filter-group="doctors" role="group" aria-label="Filter by department">
+      <button type="button" data-filter="all" aria-pressed="true">All doctors</button>
+      {%- for dep in depts %}<button type="button" data-filter="{{ dep | slug2 }}" aria-pressed="false">{{ dep }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+
+    <div class="doc-grid" data-filter-target="doctors" data-filter-attr="data-dept">
+      {%- for doc in docs %}{{ doctorCard(doc) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--peach" style="padding:48px 0">
+  <div class="container care-strip">
+    <div>
+      <h2 class="h-display">Speak with our <em>Care Team</em></h2>
+      <p>OPD: {{ settings.timings.opd_days }}, {{ settings.timings.opd_hours }} · Emergency &amp; Delivery: 24 × 7</p>
+      <p>{{ settings.address.short }} · Est. {{ settings.established_year }}</p>
+    </div>
+    <div class="btn-row">{{ btnCall("Call Us") }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>
+
+{%- for doc in docs %}{{ doctorProfile(doc) }}{% endfor %}
+
+<dialog class="doc-modal" id="doctor-modal" aria-labelledby="profile-title">
+  <div class="doc-modal__bar">
+    <p>Doctor Profile</p>
+    <button class="icon-btn" type="button" data-close aria-label="Close profile">{{ icon("x", 18) }}</button>
+  </div>
+  <div class="doc-modal__body"></div>
+  <div class="doc-modal__foot">
+    {{ btnCall() }} {{ btnWhatsApp() }}
+  </div>
+</dialog>

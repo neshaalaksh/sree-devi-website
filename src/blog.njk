@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+title: Blog
+pageClass: blog
+permalink: /blog/
+description: Health videos and articles from the doctors at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- set vids = videos.items or [] -%}
+{%- set arts = collections.articles or [] -%}
+
+<section class="page-hero page-hero--center">
+  <div class="container container--narrow">
+    <h1 class="h-hero">From Our <em>Blog</em></h1>
+    <p class="lead">Helpful information for your health, from our doctors.</p>
+    {%- if settings.social.youtube %}<div class="btn-row center" style="margin-top:20px"><a class="btn btn--primary" href="{{ settings.social.youtube }}" target="_blank" rel="noopener">{{ icon("youtube", 16) }} Visit our YouTube channel</a></div>{% endif %}
+  </div>
+</section>
+
+<section class="section section--sage">
+  <div class="container">
+    <h2 class="h-display h-display--lg" style="margin-bottom:24px">Videos</h2>
+    {%- if vids.length %}
+    {%- set cats = vids | uniqueBy("category") %}
+    {%- if cats.length > 1 %}
+    <div class="tabs" role="tablist" data-filter-group="blog-videos">
+      <button role="tab" aria-selected="true" data-filter="all">All</button>
+      {%- for c in cats %}<button role="tab" aria-selected="false" data-filter="{{ c | slug2 }}">{{ c }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+    <div class="video-grid" data-filter-target="blog-videos">
+      {%- for v in vids %}{% set id = v.url | youtubeId %}{% if id %}
+      <a class="video-card" href="{{ v.url }}" target="_blank" rel="noopener" data-cat="{{ v.category | slug2 }}">
+        <span class="video-card__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy">{{ icon("play", 44, "video-card__play") }}</span>
+        <span class="video-card__meta">{{ v.category }}{% if v.date %} · {{ v.date | readableDate }}{% endif %}</span>
+        <span class="video-card__title">{{ v.title }}</span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+    {%- else %}
+    <p class="empty">Health videos from our doctors are coming soon.</p>
+    {%- endif %}
+  </div>
+</section>
+
+{%- if arts.length %}
+<section class="section section--cream">
+  <div class="container container--narrow">
+    <h2 class="h-display h-display--lg" style="margin-bottom:24px">Articles</h2>
+    <div class="article-list">
+      {%- for a in arts %}
+      <a class="article-card" href="{{ a.url }}">
+        {%- if a.data.cover %}<img src="{{ a.data.cover }}" alt="" loading="lazy">{% else %}<div class="fac-tile__ph" style="min-height:160px;border-radius:0"></div>{% endif %}
+        <div>
+          <p class="video-card__meta" style="margin:0 0 4px">{{ a.data.category }} · {{ a.date | readableDate }}{% if a.data.author %} · {{ a.data.author }}{% endif %}</p>
+          <h3>{{ a.data.title }}</h3>
+          <p>{{ a.data.excerpt }}</p>
+          <span class="link-arrow">Read more {{ icon("arrow", 16) }}</span>
+        </div>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}

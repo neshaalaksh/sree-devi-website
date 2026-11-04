@@ -1,0 +1,80 @@
+---
+layout: layouts/base.njk
+title: About Us
+pageClass: about
+permalink: /about/
+description: Sree Devi Hospital & Fertility Centre has cared for women and families in Srirangam, Trichy since 8 September 2005.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorPhoto with context -%}
+{%- set s = settings -%}
+{%- set lead = collections.doctors | where("data.lead", true) -%}
+
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow eyebrow--plain">About us · Since {{ s.established_year }}</p>
+      <h1 class="h-hero">Care that stays <em>close to home</em>.</h1>
+      <p class="hero__lead">{{ s.name }} opened on {{ s.established_date }} to serve the community of Srirangam and Trichy.</p>
+      <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+    </div>
+    <div class="hero__media"><img class="arch--tl" src="/assets/images/home-hero-building.webp" alt="The hospital building on Gandhi Road, Srirangam" style="width:100%;object-fit:cover"></div>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container container--narrow">
+    <p class="eyebrow">Our story</p>
+    <h2 class="h-display h-display--lg">Built to serve the <em>community</em>.</h2>
+    <p class="lead">The hospital was started to do right by the community. When it opened in {{ s.established_year }}, it brought the best technologies of the time to Srirangam, so families could find good care close to home.</p>
+    <p>Today the hospital offers pregnancy and delivery care, a dedicated Fertility Centre, gynaecology and gynaecological surgery, scans and diagnostics, and specialists across {{ departments.items.length }} departments, with emergency and delivery care available 24 hours a day.</p>
+    <dl class="stats">
+      <div><dt>{{ s.established_year }}</dt><dd>Established</dd></div>
+      <div><dt>{{ departments.items.length }}</dt><dd>Departments</dd></div>
+      <div><dt>24/7</dt><dd>Emergency &amp; delivery</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--sage">
+  <div class="container">
+    <div class="center" style="margin-bottom:32px">
+      <p class="eyebrow">What we want you to feel</p>
+      <h2 class="h-display h-display--lg">Safe. Affordable. <em>Relieved.</em></h2>
+    </div>
+    <div class="values">
+      <div class="value"><h3>Safe</h3><p>Experienced specialists, 24×7 emergency and delivery care, ICU/HDU, and an in-house laboratory and pharmacy.</p></div>
+      <div class="value"><h3>Affordable</h3><p>Care planned around your needs. All health insurance accepted, with a cashless facility.</p></div>
+      <div class="value"><h3>Relieved</h3><p>Clear information, doctors who explain, and a team that guides you through every step.</p></div>
+    </div>
+  </div>
+</section>
+
+{%- if lead.length %}{% set d = lead[0].data %}
+<section class="section section--cream">
+  <div class="container">
+    <div class="lead-doc">
+      {{ doctorPhoto(d) }}
+      <div>
+        <p class="eyebrow">Led by</p>
+        <h2 class="h-display h-display--lg" style="margin-bottom:.2em">{{ d.name }}</h2>
+        <p style="color:var(--muted)">{{ d.qualifications }} · {{ d.experience }} experience</p>
+        <p>{{ d.bio }}</p>
+        {%- if d.approach %}<p style="font-style:italic;color:var(--plum-dark)">“{{ d.approach }}”</p>{% endif %}
+        <a class="btn btn--primary" href="/doctors/#{{ lead[0].page.fileSlug }}">View full profile {{ icon("arrow", 16) }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section--peach">
+  <div class="container">
+    <p class="eyebrow">Departments</p>
+    <h2 class="h-display h-display--lg" style="margin-bottom:28px">Specialists across <em>{{ departments.items.length }} departments</em>.</h2>
+    <div class="dept-grid">
+      {%- for dep in departments.items %}<div class="dept-card"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></div>{% endfor %}
+    </div>
+    <div class="btn-row" style="margin-top:28px"><a class="btn btn--primary" href="/doctors/">Meet our doctors</a> <a class="btn btn--outline" href="/services/">Explore services</a></div>
+  </div>
+</section>

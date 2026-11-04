@@ -1,0 +1,185 @@
+---
+layout: layouts/base.njk
+pageClass: home
+permalink: /
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, btnBook, faqBlock, contactBlock with context -%}
+{%- set s = settings -%}
+{%- set h = settings.home -%}
+
+<section class="hero hero--home">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow eyebrow--plain">{{ h.hero_eyebrow }}</p>
+      <h1 class="h-hero">{{ h.hero_title | accent | safe }}</h1>
+      <p class="hero__lead">{{ h.hero_text }}</p>
+      <div class="btn-row">{{ btnWhatsApp() }} {{ btnBook() }}</div>
+    </div>
+    <div class="hero__media">
+      <img class="arch arch--tl" src="/assets/images/home-hero-building.webp" alt="Sree Devi Hospital & Fertility Centre building on Gandhi Road, Srirangam" width="960" height="1056" fetchpriority="high">
+    </div>
+  </div>
+  <div class="container">
+    <div class="info-strip">
+      <div class="info-strip__item">
+        <span class="info-strip__icon">{{ icon("clock", 20) }}</span>
+        <p class="info-strip__label">OPD Days</p>
+        <p class="info-strip__value">{{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}</p>
+      </div>
+      <div class="info-strip__item">
+        <span class="info-strip__icon">{{ icon("pulse", 20) }}</span>
+        <p class="info-strip__label">Emergency &amp; Delivery</p>
+        <p class="info-strip__value">{{ s.timings.emergency }}</p>
+      </div>
+      <a class="info-strip__item" href="{{ s.address.directions_url }}" target="_blank" rel="noopener">
+        <span class="info-strip__icon">{{ icon("pin", 20) }}</span>
+        <p class="info-strip__label">Find Us</p>
+        <p class="info-strip__value">{{ s.address.short }}</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sage" id="about">
+  <div class="container intro">
+    <div class="intro__media" aria-hidden="true">
+      <img class="intro__img1" src="/assets/images/home-intro-consult.webp" alt="" loading="lazy">
+      <span class="intro__dot"></span>
+      <img class="intro__img2" src="/assets/images/home-intro-newborn.webp" alt="" loading="lazy">
+    </div>
+    <div class="intro__copy">
+      <p class="eyebrow">Introduction</p>
+      <h2 class="h-display h-display--lg">{{ h.intro_title | accent | safe }}</h2>
+      <p>{{ h.intro_text }}</p>
+      <dl class="stats">
+        <div><dt>{{ s.established_year }}</dt><dd>Established</dd></div>
+        <div><dt>{{ departments.items.length }}</dt><dd>Departments</dd></div>
+        <div><dt>24/7</dt><dd>Emergency &amp; delivery</dd></div>
+      </dl>
+      <a class="btn btn--outline" href="/about/">Know More About Us {{ icon("arrow", 16) }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <div class="split-head">
+      <h2 class="h-display h-display--lg">What we <em>offer</em></h2>
+      <p>Care for every stage of a woman's health, from adolescence and pregnancy to menopause, with specialists in {{ departments.items.length }} departments.</p>
+    </div>
+    <div class="offer-grid">
+      {%- for svc in collections.services %}{% if svc.data.show_on_home %}
+      {%- set d = svc.data %}
+      <a class="offer-card offer-card--{{ d.card_colour }}" href="{{ d.card_link }}">
+        {%- if d.card_image %}<img class="offer-card__photo" src="{{ d.card_image }}" alt="" loading="lazy">{% endif %}
+        {%- if d.card_icon %}<img class="offer-card__icon" src="{{ d.card_icon }}" alt="" width="44" height="44" loading="lazy">{% endif %}
+        <h3>{{ d.name }}</h3>
+        <p>{{ d.summary }}</p>
+        <span class="offer-card__link">{{ d.card_link_label }} →</span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+    <p class="center more-link"><a class="link-arrow" href="/services/#departments">See all {{ departments.items.length }} departments {{ icon("arrow", 16) }}</a></p>
+  </div>
+</section>
+
+<section class="section section--plum fertility-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow eyebrow--peach">Fertility Centre</p>
+    <h2 class="h-display h-display--md">Specialist care for your <em>fertility journey</em>.</h2>
+    <p>Fertility evaluation, counselling and treatments including IUI, IVF and ICSI, with care and guidance from the hospital team.</p>
+    <a class="btn btn--plum-light" href="/fertility-centre/">Explore Fertility Centre →</a>
+  </div>
+</section>
+
+<section class="section section--sage">
+  <div class="container doctors-feature">
+    <div class="doctors-feature__copy">
+      <h2 class="h-display h-display--lg">{{ h.doctors_title | accent | safe }}</h2>
+      <p>{{ h.doctors_text }}</p>
+      <ul class="doctor-mini">
+        {%- for doc in collections.doctors | limit(5) %}
+        <li><strong>{{ doc.data.name }}</strong><span>{{ doc.data.department }} · {{ doc.data.qualifications }}</span></li>
+        {%- endfor %}
+      </ul>
+      <a class="btn btn--primary" href="/doctors/">Meet All Doctors →</a>
+    </div>
+    <div class="doctors-feature__media">
+      <img src="/assets/images/home-doctors-team.webp" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream" id="facilities">
+  <div class="container">
+    <div class="split-head split-head--center">
+      <h2 class="h-display h-display--lg">Our <em>Facilities</em></h2>
+      <a class="link-arrow" href="/facilities/">Explore Our Facilities {{ icon("arrow", 16) }}</a>
+    </div>
+    {%- set feat = facilities.items | where("featured", true) | limit(4) %}
+    <div class="fac-grid">
+      {%- for f in feat %}
+      <figure class="fac-tile fac-tile--{{ loop.index }}">
+        {%- if f.image %}<img src="{{ f.image }}" alt="{{ f.title }}" loading="lazy">{% else %}<div class="fac-tile__ph" aria-hidden="true"></div>{% endif %}
+        <figcaption>{{ f.title }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--peach">
+  <div class="container">
+    <div class="center">
+      <p class="eyebrow">Your first visit</p>
+      <h2 class="h-display h-display--md">What to <em>expect</em></h2>
+    </div>
+    <ol class="expect">
+      <li><span class="num">1</span><h3>Before You Visit</h3><p>Call the hospital or plan to walk in during OPD hours ({{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}). Keep your previous reports ready.</p></li>
+      <li><span class="num">2</span><h3>When You Arrive</h3><p>Register at reception. The care team will guide you to the right doctor.</p></li>
+      <li><span class="num">3</span><h3>During Your Consultation</h3><p>Discuss your concerns with the doctor and understand the next steps.</p></li>
+    </ol>
+  </div>
+</section>
+
+{%- set vids = videos.items or [] %}
+{%- set arts = collections.articles or [] %}
+{%- if vids.length or arts.length or s.social.youtube %}
+<section class="section section--sage" id="blog">
+  <div class="container">
+    <div class="split-head split-head--center">
+      <h2 class="h-display h-display--lg">From Our <em>Blog</em></h2>
+      <p class="split-head__strong">Helpful information for your health.</p>
+    </div>
+    {%- if vids.length %}
+    {%- set cats = vids | uniqueBy("category") %}
+    {%- if cats.length > 1 %}
+    <div class="tabs" role="tablist" data-filter-group="home-blog">
+      <button role="tab" aria-selected="true" data-filter="all">All</button>
+      {%- for c in cats %}<button role="tab" aria-selected="false" data-filter="{{ c | slug2 }}">{{ c }}</button>{% endfor %}
+    </div>
+    {%- endif %}
+    <div class="video-grid" data-filter-target="home-blog">
+      {%- for v in vids | limit(6) %}{% set id = v.url | youtubeId %}{% if id %}
+      <a class="video-card" href="{{ v.url }}" target="_blank" rel="noopener" data-cat="{{ v.category | slug2 }}">
+        <span class="video-card__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy">{{ icon("play", 44, "video-card__play") }}</span>
+        <span class="video-card__meta">{{ v.category }}{% if v.date %} · {{ v.date | readableDate }}{% endif %}</span>
+        <span class="video-card__title">{{ v.title }}</span>
+      </a>
+      {%- endif %}{% endfor %}
+    </div>
+    {%- elif arts.length == 0 %}
+    <p class="empty">Health videos from our doctors are coming soon.</p>
+    {%- endif %}
+    <div class="btn-row center">
+      {%- if s.social.youtube %}<a class="btn btn--primary" href="{{ s.social.youtube }}" target="_blank" rel="noopener">{{ icon("youtube", 16) }} Watch on YouTube</a>{% endif %}
+      <a class="btn btn--outline" href="/blog/">Visit the Blog {{ icon("arrow", 16) }}</a>
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{{ faqBlock(faqs.items | where("show_on", "home")) }}
+
+{{ contactBlock() }}

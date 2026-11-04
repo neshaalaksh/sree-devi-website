@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+pageClass: article
+---
+{%- from "partials/icons.njk" import icon -%}
+<section class="page-hero">
+  <div class="container container--narrow">
+    <p class="eyebrow">{{ category }}</p>
+    <h1 class="h-hero" style="font-size:clamp(2.2rem,5vw,3.4rem)">{{ title }}</h1>
+    <p>{{ page.date | readableDate }}{% if author %} · {{ author }}{% endif %}</p>
+  </div>
+</section>
+<article class="section section--cream">
+  <div class="container container--narrow prose">
+    {%- if cover %}<img src="{{ cover }}" alt="">{% endif %}
+    {{ content | safe }}
+    <p style="margin-top:2em"><a class="link-arrow" href="/blog/">{{ icon("arrow", 16) }} Back to the blog</a></p>
+  </div>
+</article>

@@ -1,0 +1,333 @@
+# Pages CMS configuration (https://pagescms.org)
+# Staff sign in at https://app.pagescms.org with their GitHub account,
+# open this repository, and edit content through the forms below.
+# Every save is a commit; GitHub Actions rebuilds the live site in about a minute.
+
+media:
+  input: src/assets/images
+  output: /assets/images
+  extensions: [jpg, jpeg, png, webp, gif]
+
+content:
+  # ------------------------------------------------------------------ Doctors
+  - name: doctors
+    label: Doctors
+    description: Doctor profiles shown on the Doctors page (cards + pop-up profile).
+    type: collection
+    path: src/content/doctors
+    filename: "{primary}.md"
+    view:
+      primary: name
+      fields: [name, department, published, order]
+      sort: [order, name]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - { name: name, label: "Full name (with title, e.g. Dr. Punitha Rajesh)", type: string, required: true }
+      - { name: published, label: Show on website, type: boolean, default: true }
+      - { name: order, label: "Display order (1 = first)", type: number, default: 10 }
+      - { name: lead, label: "Lead doctor (featured on the About page)", type: boolean, default: false }
+      - { name: photo, label: "Photo (portrait, at least 800px tall)", type: image }
+      - { name: designation, label: "Designation (e.g. Chief Gynaecologist)", type: string }
+      - name: department
+        label: Department (used for the filter and card tag)
+        type: select
+        required: true
+        options:
+          values:
+            - Obstetrics & Gynaecology
+            - Infertility
+            - ENT
+            - General Medicine
+            - General Surgery
+            - Orthopaedics
+            - Dermatology
+            - Pulmonology
+            - Physiotherapy
+            - Radiology
+            - Anaesthesia
+            - Psychiatry
+            - Paediatrics
+      - { name: specialties, label: "Specialty tags (first two show on the card)", type: string, list: true }
+      - { name: qualifications, label: "Qualifications (e.g. MBBS, MS (OG), DNB)", type: string, required: true }
+      - { name: registration_no, label: TNMC registration number, type: string }
+      - { name: experience, label: "Experience (e.g. 25 years)", type: string }
+      - { name: languages, label: Languages spoken, type: string, list: true }
+      - { name: bio, label: "About the doctor (3 to 5 lines)", type: text, required: true }
+      - { name: approach, label: "Approach to care, in the doctor's words (shown as a quote)", type: text }
+      - { name: procedures, label: Procedures and treatments, type: string, list: true }
+      - { name: conditions, label: Conditions commonly treated, type: string, list: true }
+      - { name: case_note, label: "Deliveries / surgeries performed (optional, e.g. Around 15,000 deliveries)", type: string }
+      - { name: previous_positions, label: Previous positions, type: string, list: true }
+      - { name: memberships, label: "Memberships (e.g. FOGSI, IMA)", type: string, list: true }
+      - { name: honours, label: Roles, awards and honours, type: string, list: true }
+      - { name: publications, label: Publications / presentations, type: string }
+      - { name: opd, label: "Consultation timings (leave empty to use the hospital OPD timings)", type: string }
+      - { name: show_on_fertility, label: Show on the Fertility Centre page, type: boolean, default: false }
+
+  # ------------------------------------------------------------ Service areas
+  - name: services
+    label: Service areas
+    description: Women's health service areas on the Services page and homepage cards.
+    type: collection
+    path: src/content/services
+    filename: "{primary}.md"
+    view:
+      primary: name
+      fields: [name, show_on_home, published, order]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - { name: published, label: Show on website, type: boolean, default: true }
+      - { name: order, label: Display order, type: number }
+      - { name: heading, label: "Heading (wrap a word in *asterisks* to make it italic)", type: string }
+      - { name: summary, label: One-line summary, type: string }
+      - { name: items, label: Services / treatments offered, type: string, list: true }
+      - { name: note, label: "Highlighted note (optional, e.g. legal notice)", type: string }
+      - { name: image, label: Main image, type: image }
+      - { name: image2, label: Second image (optional), type: image }
+      - name: cta
+        label: Button
+        type: select
+        options: { values: [call, fertility] }
+      - { name: show_on_home, label: Show as a card on the homepage, type: boolean }
+      - { name: card_image, label: Homepage card photo, type: image }
+      - { name: card_icon, label: Homepage card icon, type: image }
+      - name: card_colour
+        label: Homepage card colour
+        type: select
+        options: { values: [peach, sage, lilac, cream] }
+      - { name: card_link_label, label: Homepage card link text, type: string }
+      - { name: card_link, label: Homepage card link, type: string }
+
+  # ---------------------------------------------------------------- Settings
+  - name: settings
+    label: Hospital details & timings
+    description: Phone numbers, WhatsApp, timings, notice banner and homepage text.
+    type: file
+    path: src/_data/settings.yml
+    fields:
+      - { name: name, label: Hospital name, type: string }
+      - { name: short_name, label: Short name, type: string }
+      - { name: tagline, label: Tagline, type: string }
+      - { name: established_year, label: Year established, type: string }
+      - { name: established_date, label: Date established, type: string }
+      - { name: site_url, label: "Website address (e.g. https://www.example.com)", type: string }
+      - name: notice
+        label: Notice banner (top of every page)
+        type: object
+        fields:
+          - { name: enabled, label: Show the banner, type: boolean }
+          - { name: text, label: "Banner text (e.g. OPD closed on 15 August)", type: string }
+          - { name: link, label: Link (optional), type: string }
+      - name: address
+        label: Address
+        type: object
+        fields:
+          - { name: line1, label: Line 1, type: string }
+          - { name: line2, label: Line 2, type: string }
+          - { name: state, label: State, type: string }
+          - { name: short, label: Short address (top bar and footer), type: string }
+          - { name: map_query, label: Google Maps search text, type: string }
+          - { name: directions_url, label: Google Maps directions link, type: string }
+      - name: contact
+        label: Phone, WhatsApp & email
+        type: object
+        fields:
+          - { name: primary_phone, label: "Number for every 'Call the Hospital' button", type: string }
+          - { name: reception_phone, label: Reception phone, type: string }
+          - { name: hospital_mobile, label: Hospital mobile, type: string }
+          - { name: lab_pharmacy_phone, label: Lab & pharmacy phone, type: string }
+          - { name: whatsapp_hospital, label: WhatsApp (hospital), type: string }
+          - { name: whatsapp_lab_pharmacy, label: WhatsApp (lab & pharmacy), type: string }
+          - { name: email_general, label: General email, type: string }
+          - { name: email_lab, label: Lab email, type: string }
+      - name: timings
+        label: Timings
+        type: object
+        fields:
+          - { name: opd_days, label: "OPD days (e.g. Monday to Saturday)", type: string }
+          - { name: opd_days_short, label: "OPD days, short (e.g. Mon – Sat)", type: string }
+          - { name: opd_hours, label: "OPD hours (e.g. 10 AM – 1 PM)", type: string }
+          - { name: sunday, label: Sunday / holiday note, type: string }
+          - { name: emergency, label: Emergency & delivery hours, type: string }
+          - { name: visiting_hours, label: "Visiting hours for inpatients (leave empty to ask visitors to call)", type: string }
+          - { name: admission, label: Admission note, type: text }
+      - name: social
+        label: Social media
+        type: object
+        fields:
+          - { name: youtube, label: YouTube channel link, type: string }
+          - { name: instagram, label: Instagram link, type: string }
+          - { name: facebook, label: Facebook link, type: string }
+      - name: registrations
+        label: Registrations (shown in the footer when filled)
+        type: object
+        fields:
+          - { name: clinical_establishment, label: Clinical establishment registration no., type: string }
+          - { name: art_clinic, label: ART clinic registration no., type: string }
+      - name: home
+        label: Homepage text
+        type: object
+        fields:
+          - { name: hero_eyebrow, label: Small line above the headline, type: string }
+          - { name: hero_title, label: "Headline (wrap a word in *asterisks* for italic)", type: string }
+          - { name: hero_text, label: Text under the headline, type: text }
+          - { name: intro_title, label: Introduction heading, type: string }
+          - { name: intro_text, label: Introduction text, type: text }
+          - { name: doctors_title, label: Doctors section heading, type: string }
+          - { name: doctors_text, label: Doctors section text, type: text }
+
+  # -------------------------------------------------------------------- FAQs
+  - name: faqs
+    label: FAQs
+    type: file
+    path: src/_data/faqs.yml
+    fields:
+      - name: items
+        label: Questions
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string, required: true }
+          - { name: answer, label: Answer, type: text, required: true }
+          - name: show_on
+            label: Show on
+            type: select
+            options:
+              multiple: true
+              values:
+                - { value: home, label: Homepage }
+                - { value: fertility, label: Fertility Centre page }
+                - { value: faq, label: FAQ page }
+
+  # ------------------------------------------------------------------ Videos
+  - name: videos
+    label: YouTube videos
+    description: Videos appear on the Blog page and the homepage, and open on YouTube.
+    type: file
+    path: src/_data/videos.yml
+    fields:
+      - name: items
+        label: Videos (newest first)
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: url, label: YouTube link, type: string, required: true }
+          - name: category
+            label: Category
+            type: select
+            options:
+              values: [Pregnancy & Delivery, Fertility, Gynaecology, Surgery, Screening & Prevention, Scans & Diagnostics, General Health]
+          - { name: date, label: Date, type: date }
+
+  # -------------------------------------------------------------- Facilities
+  - name: facilities
+    label: Facilities & gallery
+    type: file
+    path: src/_data/facilities.yml
+    fields:
+      - name: highlights
+        label: Facility highlights
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - name: icon
+            label: Icon
+            type: select
+            options: { values: [clock, pulse, flask, pill, car, bowl, shield, heart, scan, stethoscope] }
+      - name: items
+        label: Gallery photos
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Caption, type: string }
+          - { name: image, label: Photo, type: image }
+          - { name: featured, label: "Show on homepage (first four)", type: boolean }
+
+  # ------------------------------------------------- Departments & services
+  - name: departments
+    label: Departments
+    type: file
+    path: src/_data/departments.yml
+    fields:
+      - name: items
+        label: Departments
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: description, label: Short description, type: string }
+
+  - name: hospital_services
+    label: Diagnostics & hospital services
+    type: file
+    path: src/_data/hospital_services.yml
+    fields:
+      - name: items
+        label: Services
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - name: icon
+            label: Icon
+            type: select
+            options: { values: [heart, scale, scan, ear, pulse, flask, pill, bone, stethoscope, shield] }
+
+  # -------------------------------------------------------- Fertility Centre
+  - name: fertility
+    label: Fertility Centre page
+    type: file
+    path: src/_data/fertility.yml
+    fields:
+      - { name: hero_title, label: "Headline (wrap a word in *asterisks* for italic)", type: string }
+      - { name: hero_text, label: Text under the headline, type: text }
+      - { name: journey_intro, label: Journey introduction, type: text }
+      - name: steps
+        label: Journey steps
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: image, label: Image, type: image }
+          - { name: caption, label: Image caption, type: string }
+      - { name: treatments_intro, label: Treatments introduction, type: text }
+      - name: treatments
+        label: Treatments
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Treatment, type: string }
+          - { name: text, label: Description, type: text }
+
+  # ---------------------------------------------------------------- Articles
+  - name: articles
+    label: Blog articles
+    description: Written health articles (optional). Videos are managed under "YouTube videos".
+    type: collection
+    path: src/blog/posts
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, category, date, published]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: published, label: Show on website, type: boolean, default: true }
+      - { name: date, label: Date, type: date, required: true }
+      - { name: author, label: Author, type: string }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Pregnancy & Delivery, Fertility, Gynaecology, Surgery, Screening & Prevention, Scans & Diagnostics, General Health]
+      - { name: excerpt, label: Short summary, type: text }
+      - { name: cover, label: Cover image, type: image }
+      - { name: body, label: Article, type: rich-text }

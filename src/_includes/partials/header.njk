@@ -1,0 +1,31 @@
+{%- from "partials/icons.njk" import icon -%}
+{%- set nav = [
+  { label: "Home", url: "/" },
+  { label: "About", url: "/about/" },
+  { label: "Doctors", url: "/doctors/" },
+  { label: "Services", url: "/services/" },
+  { label: "Fertility Centre", url: "/fertility-centre/" },
+  { label: "Facilities", url: "/facilities/" },
+  { label: "Patients & Visitors", url: "/patients-and-visitors/" },
+  { label: "Blog", url: "/blog/" },
+  { label: "Contact", url: "/contact/" }
+] -%}
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a class="brand" href="/" aria-label="{{ settings.name }}, home">
+      <img src="/assets/images/logo.png" alt="" width="44" height="44">
+      <span class="brand__text">Sree Devi Hospital<small>&amp; Fertility Centre</small></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        {%- for item in nav %}
+        {%- set active = (page.url == item.url) or (item.url != "/" and page.url and page.url.startsWith(item.url)) %}
+        <li><a href="{{ item.url }}"{% if active %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+      <a class="btn btn--primary btn--sm nav__call-mobile" href="{{ settings.contact.primary_phone | tel }}">{{ icon("phone", 16) }} Call the Hospital</a>
+    </nav>
+    <a class="btn btn--primary btn--sm header__call" href="{{ settings.contact.primary_phone | tel }}">{{ icon("phone", 16) }} Call the Hospital</a>
+    <button class="icon-btn nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">{{ icon("menu", 22) }}</button>
+  </div>
+</header>

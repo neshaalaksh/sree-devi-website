@@ -1,0 +1,48 @@
+hero_title: Begin your journey to *parenthood*.
+hero_text: Explore fertility care with clear guidance, personalised treatment options and support at every step.
+journey_intro: This is an illustrative pathway. Your actual care is guided by your doctor based on your individual needs and history.
+steps:
+  - title: First Conversation
+    text: Contact the hospital to ask about the Fertility Centre and confirm the next steps for your first visit.
+    image: /assets/images/fc-step-1.webp
+    caption: Fertility consultation
+  - title: Share Your History
+    text: During your consultation, you will have the opportunity to share your health history, previous investigations and any questions you may have.
+    image: /assets/images/fc-step-2.webp
+    caption: Understanding your health journey
+  - title: Understand Evaluation
+    text: Ask your doctor which evaluations may be appropriate for your situation and what they involve.
+    image: /assets/images/fc-step-3.webp
+    caption: Understanding your scan results
+  - title: Discuss Findings
+    text: Ask your doctor to explain any findings and what they may mean for the next steps.
+    image: /assets/images/fc-step-4.webp
+    caption: Understanding your results and treatment options
+  - title: Plan Next Steps
+    text: Discuss possible next steps with your doctor, including any questions you have about your care.
+    image: /assets/images/fc-step-5.webp
+    caption: Understanding your personalised treatment options
+  - title: Ongoing Guidance
+    text: Ask the hospital about follow-up arrangements and how to contact the team with further questions.
+    image: /assets/images/fc-step-6.webp
+    caption: Staying connected throughout your care journey
+treatments_intro: Treatments offered at the Fertility Centre. Your doctor will advise which options are appropriate for you.
+treatments:
+  - title: Infertility evaluation & counselling
+    text: Assessment of both partners' health history and investigations, with time to discuss questions and options.
+  - title: Ovulation induction
+    text: Medicines to help regular ovulation, with monitoring of the response.
+  - title: IUI
+    text: Intrauterine insemination, where prepared sperm is placed in the uterus around ovulation.
+  - title: IVF
+    text: In vitro fertilisation, where eggs and sperm are combined in the laboratory and an embryo is transferred to the uterus.
+  - title: ICSI
+    text: Intracytoplasmic sperm injection, where a single sperm is injected into each egg as part of IVF.
+  - title: Male infertility & semen analysis
+    text: Semen analysis and assessment of male fertility factors.
+  - title: Tubal patency test (HSG)
+    text: An X-ray test to check whether the fallopian tubes are open.
+  - title: Egg & embryo freezing
+    text: Fertility preservation by freezing eggs or embryos for future use.
+  - title: Recurrent pregnancy loss care
+    text: Investigation and care for couples who have experienced more than one pregnancy loss.
