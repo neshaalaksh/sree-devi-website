@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if title %}{{ title }} · {% endif %}{{ s.name }}, Srirangam, Trichy</title>
-  <meta name="description" content="{{ description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + ', ' + s.timings.opd_hours + '. Emergency & delivery ' + s.timings.emergency + '.') }}">
+  <meta name="description" content="{{ description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + '. Emergency & delivery ' + s.timings.emergency + '.') }}">
   <meta name="theme-color" content="#3a1f33">
   <meta property="og:title" content="{{ title or s.name }}">
   <meta property="og:type" content="website">
@@ -30,8 +30,7 @@
       "postalCode": "620006",
       "addressRegion": "Tamil Nadu",
       "addressCountry": "IN"
-    },
-    "openingHours": "Mo-Sa 10:00-13:00"
+    }
   }
   </script>
 </head>
@@ -50,7 +49,7 @@
     <span class="topbar__right">
       <a href="{{ s.contact.primary_phone | tel }}">Emergency &amp; Delivery: 24 × 7</a>
       <span class="topbar__sep" aria-hidden="true">|</span>
-      <span>OPD: {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}</span>
+      <span>OPD Days: {{ s.timings.opd_days_short }}</span>
     </span>
   </div>
 </div>

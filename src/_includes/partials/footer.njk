@@ -43,7 +43,7 @@
         <li>{{ icon("mail", 16) }}<span>{% if s.contact.email_general %}<a href="{{ s.contact.email_general | mailto }}">{{ s.contact.email_general }}</a><br>{% endif %}{% if s.contact.email_lab %}<a href="{{ s.contact.email_lab | mailto }}">{{ s.contact.email_lab }}</a>{% endif %}</span></li>
         {%- endif %}
       </ul>
-      <p class="footer__hours"><strong>OPD</strong> {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}<br>Emergency &amp; Delivery: 24 × 7</p>
+      <p class="footer__hours"><strong>OPD</strong> {{ s.timings.opd_days_short }}<br>Emergency &amp; Delivery: 24 × 7</p>
     </div>
   </div>
   <div class="container footer__bottom">

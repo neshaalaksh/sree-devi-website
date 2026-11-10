@@ -5,7 +5,7 @@ Last updated 4 Nov 2026. Sources: the discovery form, the doctor profile form re
 ## Confirmed and on the site
 
 - Name, address (No 16/4, Gandhi Road, Srirangam, Trichy 620006), founded 8 Sep 2005, tagline "Your health is our motive".
-- OPD Mon to Sat, 10 AM to 1 PM; OPD closed on Sundays and holidays; emergency and delivery 24×7.
+- OPD Mon to Sat (OPD hours deliberately not shown on the site); OPD closed on Sundays and holidays; emergency and delivery 24×7.
 - The 10 departments and the 10 hospital services from the hospital's boards.
 - Women's health service lists, corrected against the checklist. Not offered, so not listed: fetal medicine, NICU, colposcopy, mammography, bone density, blood bank, ambulance, teleconsultation.
 - Insurance: all accepted, with cashless facility; CM Health Insurance Scheme not accepted. Payment: cash, UPI, card. Parking available. Homemade food for admitted patients only.

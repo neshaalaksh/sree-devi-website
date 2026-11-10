@@ -121,7 +121,7 @@
 
       <h3 class="profile__h">Consultation Information</h3>
       <div class="profile__consult">
-        <p><strong>OPD timings</strong>{{ d.opd or (settings.timings.opd_days + ", " + settings.timings.opd_hours + ". Please call to confirm the doctor's availability.") }}</p>
+        <p><strong>OPD days</strong>{{ d.opd or (settings.timings.opd_days + ". Please call to confirm the doctor's availability.") }}</p>
         <p><strong>Location</strong>{{ settings.name }}, {{ settings.address.short }}</p>
         <p><strong>Languages spoken</strong>{{ d.languages | join(" · ") }}</p>
         <p><strong>Consultation</strong>For appointments and consultation enquiries, contact the hospital directly.</p>
@@ -139,7 +139,7 @@
     {%- if showHead %}
     <p class="eyebrow">Get in touch</p>
     <h2 class="h-display h-display--lg">Contact <em>Us</em></h2>
-    <p class="lead">Call the hospital or walk in during OPD hours. Our team will guide you to the right doctor.</p>
+    <p class="lead">Call the hospital or walk in on OPD days. Our team will guide you to the right doctor.</p>
     {%- endif %}
     <div class="contact">
       <div class="contact__details">
@@ -156,7 +156,7 @@
           {%- if s.contact.email_general %}<a href="{{ s.contact.email_general | mailto }}">{{ s.contact.email_general }}</a><br>{% endif %}
           {%- if s.contact.email_lab %}Lab: <a href="{{ s.contact.email_lab | mailto }}">{{ s.contact.email_lab }}</a>{% endif %}</p></div></div>
         {%- endif %}
-        <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days }}, {{ s.timings.opd_hours }}<br>{{ s.timings.sunday }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
+        <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days }}<br>{{ s.timings.sunday }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
         <div class="contact__actions">{{ btnCall() }} {{ btnWhatsApp() }}</div>
       </div>
       <div class="contact__map">

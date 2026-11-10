@@ -63,7 +63,7 @@ content:
       - { name: memberships, label: "Memberships (e.g. FOGSI, IMA)", type: string, list: true }
       - { name: honours, label: Roles, awards and honours, type: string, list: true }
       - { name: publications, label: Publications / presentations, type: string }
-      - { name: opd, label: "Consultation timings (leave empty to use the hospital OPD timings)", type: string }
+      - { name: opd, label: "Consultation days / timings (leave empty to use the hospital OPD days)", type: string }
       - { name: show_on_fertility, label: Show on the Fertility Centre page, type: boolean, default: false }
 
   # ------------------------------------------------------------ Service areas
@@ -151,7 +151,6 @@ content:
         fields:
           - { name: opd_days, label: "OPD days (e.g. Monday to Saturday)", type: string }
           - { name: opd_days_short, label: "OPD days, short (e.g. Mon – Sat)", type: string }
-          - { name: opd_hours, label: "OPD hours (e.g. 10 AM – 1 PM)", type: string }
           - { name: sunday, label: Sunday / holiday note, type: string }
           - { name: emergency, label: Emergency & delivery hours, type: string }
           - { name: visiting_hours, label: "Visiting hours for inpatients (leave empty to ask visitors to call)", type: string }

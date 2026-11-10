@@ -1,10 +1,10 @@
 # "show_on" decides where a question appears: home, fertility, faq (FAQ page).
 items:
-  - question: What are the OPD timings?
-    answer: The OPD is open Monday to Saturday, 10 AM to 1 PM. The OPD is closed on Sundays and holidays. Emergency and delivery care is available 24 hours, 7 days.
+  - question: When is the OPD open?
+    answer: The OPD is open Monday to Saturday. The OPD is closed on Sundays and holidays. Emergency and delivery care is available 24 hours, 7 days.
     show_on: [home, faq]
   - question: Do I need an appointment?
-    answer: You can call the hospital or walk in during OPD hours. Calling ahead helps reception tell you which doctor to see and when they are available.
+    answer: You can call the hospital or walk in on OPD days. Calling ahead helps reception tell you which doctor to see and when they are available.
     show_on: [home, faq]
   - question: Is emergency care available at night and on Sundays?
     answer: Yes. Emergency and delivery care is available 24 hours a day, 7 days a week. Please note that the hospital does not run an ambulance service.
@@ -22,7 +22,7 @@ items:
     answer: Homemade food is provided for admitted patients. Food is not provided for attenders.
     show_on: [faq]
   - question: Do you offer online or video consultations?
-    answer: Not at the moment. Please visit the hospital during OPD hours for a consultation.
+    answer: Not at the moment. Please visit the hospital on an OPD day for a consultation.
     show_on: [faq]
   - question: Are consultation fees listed on the website?
     answer: No. Costs depend on the doctor and the care you need, so please ask reception for details specific to you.
@@ -37,5 +37,5 @@ items:
     answer: The Fertility Centre offers infertility evaluation and counselling, ovulation induction, IUI, IVF, ICSI, male infertility and semen analysis, tubal patency tests (HSG), egg and embryo freezing, and recurrent pregnancy loss care. Your doctor will advise which options suit you.
     show_on: [fertility, faq]
   - question: What happens after my enquiry?
-    answer: Reception will help you book a consultation during OPD hours. At the consultation, the doctor will discuss your history and explain any tests or next steps.
+    answer: Reception will help you book a consultation on an OPD day. At the consultation, the doctor will discuss your history and explain any tests or next steps.
     show_on: [fertility, faq]

@@ -28,7 +28,7 @@ description: OPD timings, how to book a consultation, what to bring, admission, 
   <div class="container info-cards">
     <div class="info-card">
       <div class="info-card__head">{{ icon("clock", 22) }}<h3>OPD Days</h3></div>
-      <dl><dt>{{ s.timings.opd_days }}</dt><dd>{{ s.timings.opd_hours }}</dd><dt>Sundays &amp; holidays</dt><dd>OPD closed</dd></dl>
+      <dl><dt>{{ s.timings.opd_days }}</dt><dd>OPD open</dd><dt>Sundays &amp; holidays</dt><dd>OPD closed</dd></dl>
       <p class="hint">{{ icon("info", 14) }} Call the hospital to confirm a doctor's availability.</p>
     </div>
     <div class="info-card">
@@ -55,7 +55,7 @@ description: OPD timings, how to book a consultation, what to bring, admission, 
     <h2 class="h-display h-display--lg">Booking a <em>Consultation</em></h2>
     <p class="booking__sub">Simple steps to see the right doctor.</p>
     <ol class="steps">
-      <li><span class="num">1</span><div><h3>Call or walk in</h3><p>Call the hospital or walk in during OPD hours ({{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}). Reception will tell you which specialist suits your needs.</p></div></li>
+      <li><span class="num">1</span><div><h3>Call or walk in</h3><p>Call the hospital or walk in on OPD days ({{ s.timings.opd_days_short }}). Reception will tell you which specialist suits your needs.</p></div></li>
       <li><span class="num">2</span><div><h3>Register at reception</h3><p>Share your details at reception. If you called ahead, reception will confirm the doctor's availability.</p></div></li>
       <li><span class="num">3</span><div><h3>Attend your consultation</h3><p>Bring your previous medical records, prescriptions and current medicines. The care team will guide you from there.</p></div></li>
     </ol>
@@ -74,7 +74,7 @@ description: OPD timings, how to book a consultation, what to bring, admission, 
       <a class="link-arrow" href="{{ s.address.directions_url }}" target="_blank" rel="noopener">Get directions in Google Maps {{ icon("arrow", 16) }}</a>
       <p class="plan__label">Before you travel</p>
       <ul class="checks">
-        <li>{{ icon("check", 16) }} OPD runs {{ s.timings.opd_days }}, {{ s.timings.opd_hours }}.</li>
+        <li>{{ icon("check", 16) }} OPD runs {{ s.timings.opd_days }}.</li>
         <li>{{ icon("check", 16) }} Call ahead to confirm your doctor's availability.</li>
         <li>{{ icon("check", 16) }} Parking is available at the hospital.</li>
       </ul>
@@ -132,7 +132,7 @@ description: OPD timings, how to book a consultation, what to bring, admission, 
       <div class="contact__row">{{ icon("pin", 20) }}<div><h3>Address</h3><p>{{ s.address.line1 }}, {{ s.address.line2 }}, {{ s.address.state }}</p></div></div>
       <div class="contact__row">{{ icon("phone", 20) }}<div><h3>Call the hospital</h3><p><a href="{{ s.contact.reception_phone | tel }}">{{ s.contact.reception_phone }}</a> · <a href="{{ s.contact.hospital_mobile | tel }}">{{ s.contact.hospital_mobile }}</a></p></div></div>
       <div class="contact__row">{{ icon("whatsapp", 20) }}<div><h3>WhatsApp</h3><p>Hospital: {{ s.contact.whatsapp_hospital }}<br>Lab &amp; Pharmacy: {{ s.contact.whatsapp_lab_pharmacy }}</p></div></div>
-      <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days_short }}, {{ s.timings.opd_hours }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
+      <div class="contact__row">{{ icon("clock", 20) }}<div><h3>Hours</h3><p>OPD: {{ s.timings.opd_days_short }}<br>Emergency &amp; Delivery: {{ s.timings.emergency }}</p></div></div>
     </div>
     <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
   </div>

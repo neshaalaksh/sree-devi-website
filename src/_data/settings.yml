@@ -28,7 +28,6 @@ contact:
 timings:
   opd_days: Monday to Saturday
   opd_days_short: Mon – Sat
-  opd_hours: 10 AM – 1 PM
   sunday: OPD closed on Sundays and holidays
   emergency: 24 hours, 7 days
   visiting_hours: ""
