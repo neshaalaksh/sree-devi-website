@@ -23,13 +23,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - id: pages
-        uses: actions/configure-pages@v5
       - run: npm ci
       - run: npm run build
         env:
-          # Detected automatically: "/<repo>/" on github.io, "/" once a custom domain is connected.
-          PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
+          # Custom domain (sreedevihospital.com) serves the site from the root.
+          PATH_PREFIX: /
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

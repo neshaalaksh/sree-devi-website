@@ -44,7 +44,7 @@ Opens a live-reloading preview at http://localhost:8080. `npm run build` writes 
 1. **Push this folder to a GitHub repository** (branch `main`).
 2. **Turn on GitHub Pages:** repository Settings → Pages → Source: **GitHub Actions**. The workflow in `.github/workflows/deploy.yml` builds and publishes on every push to `main`.
 3. **Custom domain:** in Settings → Pages, enter the domain and follow GitHub's DNS instructions. Also create `src/CNAME` containing just the domain (e.g. `www.sreedevihospital.in`) so it survives each deploy.
-   The workflow detects the site's base path automatically, so links work both on `https://<user>.github.io/<repo>/` and on a custom domain.
+   The workflow builds with base path `/` for the custom domain (set via `PATH_PREFIX` in `.github/workflows/deploy.yml`; use `/<repo>/` only for github.io project hosting).
 4. **Give the staff member access:**
    - They create a free GitHub account.
    - Add them as a collaborator with **Write** access (Settings → Collaborators).
