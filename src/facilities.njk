@@ -7,32 +7,33 @@ description: Facilities at Sree Devi Hospital & Fertility Centre, Srirangam, Tri
 ---
 {%- from "partials/icons.njk" import icon -%}
 {%- from "partials/components.njk" import btnCall, btnWhatsApp with context -%}
+{%- set items = facilities.items -%}
+{%- set hasImg = false -%}
+{%- for f in items %}{% if f.image %}{% set hasImg = true %}{% endif %}{% endfor -%}
+{%- set shapes = ["fx-m-tall fx-m-arch", "fx-m-short fx-m-plain", "fx-m-circle", "fx-m-mid fx-m-leaf", "fx-m-tall fx-m-pill", "fx-m-mid fx-m-plain"] -%}
 
-<section class="page-hero page-hero--center">
-  <div class="container container--narrow">
-    <h1 class="h-hero">Our <em>Facilities</em></h1>
-    <p class="lead">Everything you need for your care, under one roof in Srirangam.</p>
+<section class="fx-hero">
+  <div class="container">
+    <div class="fx-hero__head">
+      <span class="eyebrow eyebrow--caps">Facilities</span>
+      <h1 class="h-hero">A walk <em>through the hospital</em></h1>
+      <p class="lead">Rooms and services designed for comfort, safety and clear care, all under one roof in Srirangam.</p>
+    </div>
+    <div class="fx-arcade">
+      {%- for i in [0, 1, 2, 3, 4] %}{% set f = items[i] %}{% if f %}
+      <figure class="ph-grad ph-c{{ i }} fx-a{{ i + 1 }}">{% if f.image %}<img src="{{ f.image }}" alt="{{ f.title }}" loading="lazy">{% endif %}<figcaption>{{ f.title }}</figcaption></figure>
+      {%- endif %}{% endfor %}
+    </div>
   </div>
+  <div class="fx-ground" aria-hidden="true"></div>
 </section>
 
-<section class="section section--cream">
+<section class="fx-eq section">
   <div class="container">
-    <ul class="highlights">
-      {%- for h in facilities.highlights %}<li>{{ icon(h.icon, 22) }}<h3>{{ h.title }}</h3><p>{{ h.text }}</p></li>{% endfor %}
-    </ul>
-  </div>
-</section>
-
-<section class="section section--sage">
-  <div class="container">
-    <p class="eyebrow">Inside the hospital</p>
-    <h2 class="h-display h-display--lg" style="margin-bottom:28px">A look <em>around</em>.</h2>
-    <div class="gallery">
-      {%- for f in facilities.items %}
-      <figure>
-        {%- if f.image %}<img src="{{ f.image }}" alt="{{ f.title }}" loading="lazy">{% else %}<div class="fac-tile__ph" aria-hidden="true"></div>{% endif %}
-        <figcaption>{{ f.title }}</figcaption>
-      </figure>
+    <div class="sec-head"><div><span class="eyebrow eyebrow--caps">What is available</span><h2 class="h-display h-display--lg">Care you can <em>count on</em></h2></div><p>Everything you need for your care, in one place.</p></div>
+    <div class="fx-eq-table">
+      {%- for h in facilities.highlights %}
+      <div class="fx-eq-row"><span class="n">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span><h3>{{ icon(h.icon, 36) }}{{ h.title }}</h3><p>{{ h.text }}</p></div>
       {%- endfor %}
     </div>
   </div>
@@ -40,11 +41,37 @@ description: Facilities at Sree Devi Hospital & Fertility Centre, Srirangam, Tri
 
 <section class="section section--cream">
   <div class="container">
-    <p class="eyebrow">Diagnostics &amp; services</p>
-    <h2 class="h-display h-display--lg" style="margin-bottom:28px">Services under <em>one roof</em>.</h2>
+    <div class="sec-head"><div><span class="eyebrow eyebrow--caps">Gallery</span><h2 class="h-display h-display--lg">The hospital <em>in pictures</em></h2></div>{% if not hasImg %}<p>Photographs are being added. Captions name each area.</p>{% endif %}</div>
+    <div class="fx-masonry">
+      {%- for f in items %}
+      <figure class="ph-grad ph-c{{ loop.index0 % 5 }} {{ shapes[loop.index0 % shapes.length] }}">{% if f.image %}<img src="{{ f.image }}" alt="{{ f.title }}" loading="lazy">{% endif %}<figcaption>{{ f.title }}</figcaption></figure>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section fx-eq">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow eyebrow--caps">Diagnostics &amp; services</span><h2 class="h-display h-display--lg">Services under <em>one roof</em></h2></div></div>
     <ul class="svc-list">
-      {%- for it in hospital_services.items %}<li>{{ icon(it.icon or "check", 20) }} {{ it.name }}</li>{% endfor %}
+      {%- for it in hospital_services.items %}<li>{{ icon(it.icon or "check", 36) }} {{ it.name }}</li>{% endfor %}
     </ul>
-    <div class="btn-row" style="margin-top:32px">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>
+
+<section class="fx-comfort" aria-label="At a glance">
+  <div class="container fx-comfort__grid">
+    <div class="fx-cf">{{ icon("clock", 54) }}<div><b>Open 24 hours, 7 days</b><span>Emergency and delivery care</span></div></div>
+    <div class="fx-cf">{{ icon("flask", 54) }}<div><b>Lab and pharmacy on site</b><span>With their own WhatsApp line</span></div></div>
+    <div class="fx-cf">{{ icon("shield", 54) }}<div><b>Insurance accepted</b><span>Cashless facility available</span></div></div>
+  </div>
+</section>
+
+<section class="fx-cta section">
+  <div class="container">
+    <span class="eyebrow eyebrow--caps">Plan a visit</span>
+    <h2 class="h-display h-display--lg">See it for <em>yourself</em>.</h2>
+    <p>Contact the hospital to arrange a visit. This is not an online booking or confirmed appointment.</p>
+    <div class="btn-row">{{ btnWhatsApp() }} {{ btnCall() }}</div>
   </div>
 </section>

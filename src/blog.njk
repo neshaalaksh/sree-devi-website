@@ -6,60 +6,144 @@ permalink: /blog/
 description: Health videos and articles from the doctors at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy.
 ---
 {%- from "partials/icons.njk" import icon -%}
-{%- set vids = videos.items or [] -%}
+{%- set vids = [] -%}
+{%- for v in (videos.items or []) %}{% if v.url | youtubeId %}{% set vids = (vids.push(v), vids) %}{% endif %}{% endfor -%}
 {%- set arts = collections.articles or [] -%}
+{%- set topics = [] -%}
+{%- for v in vids %}{% if v.category and v.category not in topics %}{% set topics = (topics.push(v.category), topics) %}{% endif %}{% endfor -%}
+{%- for a in arts %}{% if a.data.category and a.data.category not in topics %}{% set topics = (topics.push(a.data.category), topics) %}{% endif %}{% endfor -%}
+{%- set playTri = '<svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-left:5px"><path d="M8 5.5v13l11-6.5z"/></svg>' -%}
 
-<section class="page-hero page-hero--center">
-  <div class="container container--narrow">
-    <h1 class="h-hero">From Our <em>Blog</em></h1>
-    <p class="lead">Helpful information for your health, from our doctors.</p>
-    {%- if settings.social.youtube %}<div class="btn-row center" style="margin-top:20px"><a class="btn btn--primary" href="{{ settings.social.youtube }}" target="_blank" rel="noopener">{{ icon("youtube", 16) }} Visit our YouTube channel</a></div>{% endif %}
-  </div>
-</section>
-
-<section class="section section--sage">
+<section class="jr-mast">
   <div class="container">
-    <h2 class="h-display h-display--lg" style="margin-bottom:24px">Videos</h2>
-    {%- if vids.length %}
-    {%- set cats = vids | uniqueBy("category") %}
-    {%- if cats.length > 1 %}
-    <div class="tabs" role="tablist" data-filter-group="blog-videos">
-      <button role="tab" aria-selected="true" data-filter="all">All</button>
-      {%- for c in cats %}<button role="tab" aria-selected="false" data-filter="{{ c | slug2 }}">{{ c }}</button>{% endfor %}
+    <div class="jr-rule"><span>Health notes</span><span>Videos · Articles</span><span>From our doctors and care team</span></div>
+    <h1>The Sree Devi <em>Journal</em></h1>
+    <p class="jr-sub">Videos and articles on pregnancy, fertility and women's health, from the people who care for you.</p>
+    {%- if topics.length > 1 or arts.length > 1 %}
+    <div class="jr-tools">
+      <div class="jr-pills" role="group" aria-label="Filter by topic">
+        <button type="button" class="jr-pill" aria-pressed="true" data-topic="all">All topics</button>
+        {%- for t in topics %}<button type="button" class="jr-pill" aria-pressed="false" data-topic="{{ t | slug2 }}">{{ t }}</button>{% endfor %}
+      </div>
+      <label class="jr-search">{{ icon("scan", 18) }}<input type="search" id="jr-q" placeholder="Search articles" aria-label="Search articles"></label>
     </div>
-    {%- endif %}
-    <div class="video-grid" data-filter-target="blog-videos">
-      {%- for v in vids %}{% set id = v.url | youtubeId %}{% if id %}
-      <a class="video-card" href="{{ v.url }}" target="_blank" rel="noopener" data-cat="{{ v.category | slug2 }}">
-        <span class="video-card__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy">{{ icon("play", 44, "video-card__play") }}</span>
-        <span class="video-card__meta">{{ v.category }}{% if v.date %} · {{ v.date | readableDate }}{% endif %}</span>
-        <span class="video-card__title">{{ v.title }}</span>
-      </a>
-      {%- endif %}{% endfor %}
-    </div>
-    {%- else %}
-    <p class="empty">Health videos from our doctors are coming soon.</p>
     {%- endif %}
   </div>
 </section>
+
+{%- if vids.length %}
+{%- set feat = vids[0] %}{% set fid = feat.url | youtubeId %}
+<section class="section jr-watch">
+  <div class="container">
+    <span class="eyebrow eyebrow--caps">Now playing</span>
+    <div class="jr-watch__grid">
+      <a class="jr-player" href="{{ feat.url }}" target="_blank" rel="noopener" aria-label="Play video: {{ feat.title }}">
+        <img src="https://i.ytimg.com/vi/{{ fid }}/hqdefault.jpg" alt="" loading="lazy">
+        <span class="jr-playbtn">{{ playTri | safe }}</span>
+        <span class="jr-meta"><span>{{ feat.category }}</span><h2>{{ feat.title }}</h2></span>
+      </a>
+      {%- if vids.length > 1 %}
+      <div class="jr-upnext">
+        <h3>Up next</h3>
+        {%- for v in vids | limit(4) %}{% if not loop.first %}{% set id = v.url | youtubeId %}
+        <a class="jr-un" href="{{ v.url }}" target="_blank" rel="noopener">
+          <span class="jr-un__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy"></span>
+          <span><small>{{ v.category }}</small><b>{{ v.title }}</b></span>
+        </a>
+        {%- endif %}{% endfor %}
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- endif %}
 
 {%- if arts.length %}
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow eyebrow--caps">Read</span><h2 class="h-display h-display--lg">Latest <em>reading</em></h2></div><p>Helpful information for your health.</p></div>
+    {%- set a = arts[0] %}
+    <div class="jr-ed {% if arts.length < 2 %}jr-ed--2{% endif %}">
+      <article class="jr-card-a">
+        <a class="jr-img ph-grad ph-c0" href="{{ a.url }}" aria-hidden="true" tabindex="-1">{% if a.data.cover %}<img src="{{ a.data.cover }}" alt="" loading="lazy">{% endif %}</a>
+        <span class="jr-k">{{ a.data.category }}</span>
+        <h3><a href="{{ a.url }}">{{ a.data.title }}</a></h3>
+        <p class="jr-by">{{ a.data.author or "Sree Devi Care Team" }} · {{ a.date | readableDate }}</p>
+        <p>{{ a.data.excerpt }}</p>
+        <a class="link-arrow" href="{{ a.url }}">Read article {{ icon("arrow", 16) }}</a>
+      </article>
+      {%- if arts.length > 1 %}
+      <div class="jr-stack">
+        {%- for b in arts | limit(3) %}{% if not loop.first %}
+        <article class="jr-card-b">
+          <a class="jr-img ph-grad {% if loop.index0 % 2 %}ph-c1{% else %}ph-c4{% endif %}" href="{{ b.url }}" aria-hidden="true" tabindex="-1">{% if b.data.cover %}<img src="{{ b.data.cover }}" alt="" loading="lazy">{% endif %}</a>
+          <span class="jr-k">{{ b.data.category }}</span>
+          <h3><a href="{{ b.url }}">{{ b.data.title }}</a></h3>
+          <p class="jr-by">{{ b.data.author or "Sree Devi Care Team" }} · {{ b.date | readableDate }}</p>
+          <a class="link-arrow" href="{{ b.url }}">Read article {{ icon("arrow", 16) }}</a>
+        </article>
+        {%- endif %}{% endfor %}
+      </div>
+      {%- endif %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if settings.social.youtube %}
+<section class="jr-sub-band">
+  <div class="container jr-sub-band__grid">
+    <span class="jr-yt" aria-hidden="true">{{ playTri | safe }}</span>
+    <div><h2>Never miss a <em>health note</em></h2><p>Subscribe to Sree Devi on YouTube for new videos from our doctors.</p></div>
+    <a class="btn btn--primary" href="{{ settings.social.youtube }}" target="_blank" rel="noopener">Subscribe on YouTube {{ icon("arrow", 16) }}</a>
+  </div>
+</section>
+{%- endif %}
+
 <section class="section section--cream">
-  <div class="container container--narrow">
-    <h2 class="h-display h-display--lg" style="margin-bottom:24px">Articles</h2>
-    <div class="article-list">
+  <div class="container">
+    <div class="sec-head"><div><span class="eyebrow eyebrow--caps">Archive</span><h2 class="h-display h-display--lg">All <em>articles</em></h2></div><p>Written by our doctors and care team.</p></div>
+    {%- if arts.length %}
+    <div class="jr-rows" id="jr-rows">
       {%- for a in arts %}
-      <a class="article-card" href="{{ a.url }}">
-        {%- if a.data.cover %}<img src="{{ a.data.cover }}" alt="" loading="lazy">{% else %}<div class="fac-tile__ph" style="min-height:160px;border-radius:0"></div>{% endif %}
-        <div>
-          <p class="video-card__meta" style="margin:0 0 4px">{{ a.data.category }} · {{ a.date | readableDate }}{% if a.data.author %} · {{ a.data.author }}{% endif %}</p>
-          <h3>{{ a.data.title }}</h3>
-          <p>{{ a.data.excerpt }}</p>
-          <span class="link-arrow">Read more {{ icon("arrow", 16) }}</span>
-        </div>
+      <a class="jr-row" href="{{ a.url }}" data-topic="{{ a.data.category | slug2 }}">
+        <time datetime="{{ a.date | isoDate }}">{{ a.date | dayNum }}<small>{{ a.date | monthYear }}</small></time>
+        <div><h3>{{ a.data.title }}</h3><p>{{ a.data.excerpt }}</p></div>
+        <span class="jr-k">{{ a.data.category }}</span>
+        <span class="jr-go">{{ icon("arrow", 16) }}</span>
       </a>
       {%- endfor %}
     </div>
+    <p class="jr-empty" id="jr-empty" hidden>No articles match your search yet.</p>
+    {%- else %}
+    <p class="empty">Articles from our doctors are coming soon.</p>
+    {%- endif %}
+    <p class="jr-fine">Blog content is for general awareness and is not a substitute for a consultation with a doctor.</p>
   </div>
 </section>
+
+{%- if arts.length > 1 %}
+<script>
+(function () {
+  var pills = [].slice.call(document.querySelectorAll(".jr-pill")),
+      rows = [].slice.call(document.querySelectorAll(".jr-row")),
+      q = document.getElementById("jr-q"), empty = document.getElementById("jr-empty"), topic = "all";
+  function apply() {
+    var s = q ? q.value.trim().toLowerCase() : "", n = 0;
+    rows.forEach(function (r) {
+      var ok = (topic === "all" || r.dataset.topic === topic) && (!s || r.textContent.toLowerCase().indexOf(s) > -1);
+      r.hidden = !ok; if (ok) n++;
+    });
+    if (empty) empty.hidden = n > 0;
+  }
+  pills.forEach(function (p) {
+    p.addEventListener("click", function () {
+      pills.forEach(function (x) { x.setAttribute("aria-pressed", x === p ? "true" : "false"); });
+      topic = p.dataset.topic; apply();
+      document.getElementById("jr-rows").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  if (q) q.addEventListener("input", apply);
+})();
+</script>
 {%- endif %}

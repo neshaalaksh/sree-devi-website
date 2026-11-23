@@ -98,6 +98,11 @@ export default function (eleventyConfig) {
     const date = d instanceof Date ? d : new Date(d);
     return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
   });
+  eleventyConfig.addFilter("dayNum", (d) => (d ? String(new Date(d).getUTCDate()).padStart(2, "0") : ""));
+  eleventyConfig.addFilter("monthYear", (d) => {
+    if (!d) return "";
+    return new Date(d).toLocaleDateString("en-IN", { month: "short", year: "numeric", timeZone: "UTC" });
+  });
   eleventyConfig.addFilter("isoDate", (d) => (d ? new Date(d).toISOString().slice(0, 10) : ""));
   eleventyConfig.addFilter("year", () => new Date().getFullYear());
   eleventyConfig.addFilter("compact", (arr = []) => (arr || []).filter((x) => x && String(x).trim()));
