@@ -1,6 +1,6 @@
 # Content status
 
-Last updated 4 Nov 2026. Sources: the discovery form, the doctor profile form responses (5 of about 11 to 12), the hospital's departments and services boards, and the women's health yes/no checklist.
+Last updated 23 Nov 2026. Sources: the discovery form, the doctor profile form responses (8 received; 5 on the site so far), the hospital's departments and services boards, and the women's health yes/no checklist.
 
 ## Confirmed and on the site
 
@@ -12,6 +12,9 @@ Last updated 4 Nov 2026. Sources: the discovery form, the doctor profile form re
 - No fees on the website; no online appointment form (call and walk-in only).
 - WhatsApp button lets visitors choose Hospital or Lab & Pharmacy.
 - Bed count deliberately not shown.
+- Registrations shown in the footer and About page: Clinical Establishment Reg. No. TRCYALL20200020560; ART clinic Level II, registered under the ART (Regulation) Act, 2021.
+- Removed under the NMC advertising guidelines (6 Oct 2026): "Around 15,000 deliveries and surgeries"; "Safe. Affordable. Relieved."; "the best technologies of the time"; "Painless delivery" (now "Epidural pain relief in labour").
+- Doctor quotes for Dr. Punitha Rajesh and Dr. K. Rajesh are hidden until each doctor approves wording without "100%", "best" or "affordable".
 
 ## Needs confirmation from the hospital
 
@@ -26,7 +29,6 @@ Last updated 4 Nov 2026. Sources: the discovery form, the doctor profile form re
 | Fertility treatment descriptions | Short factual descriptions written by us | Doctor should review the wording. |
 | Fertility FAQ answers | Written from known facts | Doctor should review. |
 | Doctor bios | Written from each doctor's form answers | Each doctor should approve their bio. |
-| Dr. Punitha Rajesh: "Around 15,000 deliveries and surgeries" | Shown | Doctor gave this, but check it against NMC advertising rules. |
 | Dr. Punitha Rajesh: publications | Not shown | Form answer was "Yes, all" with no details. |
 | Dr. Gayathri J: Psychiatry | Shown as a department filter | Psychiatry is not on the departments board. |
 
@@ -39,7 +41,6 @@ Last updated 4 Nov 2026. Sources: the discovery form, the doctor profile form re
 - [ ] Inpatient visiting hours
 - [ ] Logo original file (current logo is taken from the Figma design)
 - [ ] YouTube channel link and videos to feature
-- [ ] Clinical establishment and ART clinic registration numbers (shown in the footer once added)
 - [ ] Facility photos (gallery shows labelled placeholders until then)
 - [ ] Top 5 questions reception gets (for the FAQs)
 - [ ] Real photos from the photo shoot

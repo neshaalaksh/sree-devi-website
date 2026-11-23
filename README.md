@@ -39,6 +39,8 @@ npm start
 
 Opens a live-reloading preview at http://localhost:8080. `npm run build` writes the site to `_site/`.
 
+Before publishing changes, run `npm run check`. It builds the site and checks it for restricted wording (NMC advertising guidelines), phone numbers that don't match the settings, missing or duplicate titles and descriptions, broken internal links, invalid structured data and sitemap errors.
+
 ## One-time setup
 
 1. **Push this folder to a GitHub repository** (branch `main`).
@@ -68,5 +70,7 @@ Changes are live about a minute after saving. If something looks wrong, every sa
 - No fees or prices on the website (hospital's instruction).
 - Factual, non-promotional tone (NMC guidelines): no guaranteed outcomes or "100% success" claims.
 - Never show fetal sex determination; the PCPNDT notice stays on Scans & Diagnostics.
+- No patient, delivery or surgery counts, and no "best", "No.1", "100%", "painless" or "affordable" wording. `npm run check` flags these.
+- No em dashes in website text.
 
 See `CONTENT-STATUS.md` for what is confirmed and what is still pending from the hospital.

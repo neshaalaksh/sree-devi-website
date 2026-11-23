@@ -6,11 +6,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if title %}{{ title }} · {% endif %}{{ s.name }}, Srirangam, Trichy</title>
-  <meta name="description" content="{{ description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + '. Emergency & delivery ' + s.timings.emergency + '.') }}">
+  {%- set pageDescription = description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + '. Emergency & delivery ' + s.timings.emergency + '.') %}
+  {%- set canonicalUrl = s.site_url + page.url %}
+  <meta name="description" content="{{ pageDescription }}">
+  {%- if noindex %}
+  <meta name="robots" content="noindex">
+  {%- else %}
+  <link rel="canonical" href="{{ canonicalUrl }}">
+  {%- endif %}
   <meta name="theme-color" content="#3a1f33">
+  <meta property="og:site_name" content="{{ s.name }}">
   <meta property="og:title" content="{{ title or s.name }}">
+  <meta property="og:description" content="{{ pageDescription }}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/images/home-hero-building.webp">
+  <meta property="og:url" content="{{ canonicalUrl }}">
+  <meta property="og:image" content="{{ s.site_url }}{{ ogImage or '/assets/images/home-hero-building.webp' }}">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +32,13 @@
   {
     "@context": "https://schema.org",
     "@type": "Hospital",
+    "@id": "{{ s.site_url }}/#hospital",
     "name": {{ s.name | dump | safe }},
-    "telephone": {{ s.contact.reception_phone | dump | safe }},
+    "alternateName": ["Sree Devi Hospital", "Sridevi Hospital"],
+    "url": "{{ s.site_url }}/",
+    "logo": "{{ s.site_url }}/assets/images/logo.png",
+    "image": "{{ s.site_url }}/assets/images/home-hero-building.webp",
+    "telephone": {{ s.contact.primary_phone | dump | safe }},
     "foundingDate": "2005-09-08",
     "address": {
       "@type": "PostalAddress",
@@ -30,7 +47,14 @@
       "postalCode": "620006",
       "addressRegion": "Tamil Nadu",
       "addressCountry": "IN"
-    }
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }],
+    "medicalSpecialty": ["Obstetric", "Gynecologic", "Otolaryngologic", "Radiography", "Psychiatric", "Physiotherapy"]
   }
   </script>
 </head>

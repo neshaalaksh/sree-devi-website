@@ -49,7 +49,7 @@
   <div class="container footer__bottom">
     <p>© {{ "" | year }} {{ s.name }}. All rights reserved.
       {%- if s.registrations.clinical_establishment %} · Clinical Establishment Reg. No. {{ s.registrations.clinical_establishment }}{% endif %}
-      {%- if s.registrations.art_clinic %} · ART Clinic Reg. No. {{ s.registrations.art_clinic }}{% endif %}</p>
+      {%- if s.registrations.art_clinic %} · ART clinic: {{ s.registrations.art_clinic }}{% endif %}</p>
     <p class="footer__disclaimer">Information on this website is for general guidance and does not replace a consultation with a doctor.</p>
   </div>
 </footer>
