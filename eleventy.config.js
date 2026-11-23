@@ -24,9 +24,23 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/css/");
 
   // ---------- Collections ----------
+  // Doctors appear on the site only with a TNMC registration number
+  // (NMC guidelines require name, qualification and registration number).
   eleventyConfig.addCollection("doctors", (api) =>
     api
       .getFilteredByGlob("src/content/doctors/*.md")
+      .filter((d) => d.data.published !== false && String(d.data.registration_no || "").trim())
+      .sort(byOrder)
+  );
+  eleventyConfig.addCollection("departments", (api) =>
+    api
+      .getFilteredByGlob("src/content/departments/*.md")
+      .filter((d) => d.data.published !== false)
+      .sort(byOrder)
+  );
+  eleventyConfig.addCollection("treatments", (api) =>
+    api
+      .getFilteredByGlob("src/content/fertility-treatments/*.md")
       .filter((d) => d.data.published !== false)
       .sort(byOrder)
   );
@@ -105,6 +119,18 @@ export default function (eleventyConfig) {
   });
   eleventyConfig.addFilter("isoDate", (d) => (d ? new Date(d).toISOString().slice(0, 10) : ""));
   eleventyConfig.addFilter("year", () => new Date().getFullYear());
+  // Departments whose page lists this doctor's department
+  eleventyConfig.addFilter("departmentsForDoctor", (depts = [], doctorDept) =>
+    (depts || []).filter((p) => (p.data.doctor_departments || []).includes(doctorDept))
+  );
+  // Doctors shown on a department page
+  eleventyConfig.addFilter("doctorsForDepartments", (docs = [], deptNames = []) =>
+    (docs || []).filter((d) => (deptNames || []).includes(d.data.department))
+  );
+  // Look up pages in a collection by file slug, keeping the given order
+  eleventyConfig.addFilter("bySlugs", (items = [], slugs = []) =>
+    (slugs || []).map((s) => (items || []).find((i) => i.page.fileSlug === s)).filter(Boolean)
+  );
   eleventyConfig.addFilter("compact", (arr = []) => (arr || []).filter((x) => x && String(x).trim()));
 
   return {

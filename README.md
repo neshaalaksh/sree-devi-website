@@ -15,7 +15,10 @@ There is no server or database to maintain. All content lives in this repository
 
 | What | File | CMS section |
 | --- | --- | --- |
-| Doctor profiles | `src/content/doctors/*.md` | Doctors |
+| Doctor profiles (one page each, shown only with a TNMC registration number) | `src/content/doctors/*.md` | Doctors |
+| Department pages (`/services/<name>/`) | `src/content/departments/*.md` | Department pages |
+| Fertility treatment pages (`/fertility-centre/<name>/`) | `src/content/fertility-treatments/*.md` | Fertility treatment pages |
+| Emergency page | `src/_data/emergency.yml` | Emergency page |
 | Women's health service areas | `src/content/services/*.md` | Service areas |
 | Phone, WhatsApp, timings, notice banner, homepage text | `src/_data/settings.yml` | Hospital details & timings |
 | FAQs | `src/_data/faqs.yml` | FAQs |
@@ -39,7 +42,7 @@ npm start
 
 Opens a live-reloading preview at http://localhost:8080. `npm run build` writes the site to `_site/`.
 
-Before publishing changes, run `npm run check`. It builds the site and checks it for restricted wording (NMC advertising guidelines), phone numbers that don't match the settings, missing or duplicate titles and descriptions, broken internal links, invalid structured data and sitemap errors.
+Every deploy runs `npm run qa` after the build: errors stop the deploy and the live site stays on the previous version; warnings do not. Branches and pull requests run the same checks without deploying. Before publishing changes locally, run `npm run check`. It builds the site and checks it for restricted wording (NMC advertising guidelines), phone numbers that don't match the settings, missing or duplicate titles and descriptions, broken internal links, invalid structured data and sitemap errors.
 
 ## One-time setup
 

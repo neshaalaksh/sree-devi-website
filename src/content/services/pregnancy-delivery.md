@@ -26,6 +26,7 @@ card_image: /assets/images/card-pregnancy.webp
 card_icon: /assets/images/icon-pregnancy.webp
 card_colour: peach
 card_link_label: Explore services
-card_link: /services/#pregnancy-delivery
+card_link: /services/pregnancy-delivery/
+detail_page: "/services/pregnancy-delivery/"
 cta: call
 ---

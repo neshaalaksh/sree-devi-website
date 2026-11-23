@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if title %}{{ title }} · {% endif %}{{ s.name }}, Srirangam, Trichy</title>
+  <title>{% if seoTitle %}{{ seoTitle }}{% else %}{% if title %}{{ title }} · {% endif %}{{ s.name }}, Srirangam, Trichy{% endif %}</title>
   {%- set pageDescription = description or (s.name + ', ' + s.address.short + '. Pregnancy, fertility and gynaecology care with specialists across ten departments. OPD ' + s.timings.opd_days_short + '. Emergency & delivery ' + s.timings.emergency + '.') %}
   {%- set canonicalUrl = s.site_url + page.url %}
   <meta name="description" content="{{ pageDescription }}">
@@ -16,7 +16,7 @@
   {%- endif %}
   <meta name="theme-color" content="#3a1f33">
   <meta property="og:site_name" content="{{ s.name }}">
-  <meta property="og:title" content="{{ title or s.name }}">
+  <meta property="og:title" content="{{ seoTitle or title or s.name }}">
   <meta property="og:description" content="{{ pageDescription }}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ canonicalUrl }}">
@@ -81,6 +81,23 @@
 {% include "partials/header.njk" %}
 
 <main id="main">
+{%- if page.url != "/" and not noindex %}
+{%- set trail = [{ label: "Home", url: "/" }] %}
+{%- for c in (breadcrumbs or []) %}{% set trail = (trail.push(c), trail) %}{% endfor %}
+{%- set trail = (trail.push({ label: crumbLabel or title, url: page.url }), trail) %}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol class="container">
+    {%- for c in trail %}
+    <li>{% if loop.last %}<span aria-current="page">{{ c.label }}</span>{% else %}<a href="{{ c.url }}">{{ c.label }}</a>{% endif %}</li>
+    {%- endfor %}
+  </ol>
+</nav>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{%- for c in trail %}{"@type":"ListItem","position":{{ loop.index }},"name":{{ c.label | dump | safe }},"item":"{{ s.site_url }}{{ c.url }}"}{% if not loop.last %},{% endif %}{% endfor -%}
+]}
+</script>
+{%- endif %}
 {{ content | safe }}
 </main>
 

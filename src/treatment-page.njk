@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.treatments
+  size: 1
+  alias: tr
+  addAllPagesToCollections: true
+permalink: "/fertility-centre/{{ tr.page.fileSlug }}/"
+pageClass: treatment
+breadcrumbs:
+  - label: Fertility Centre
+    url: /fertility-centre/
+eleventyComputed:
+  title: "{{ tr.data.title | safe }}"
+  seoTitle: "{{ tr.data.seo_title | safe }}"
+  description: "{{ tr.data.seo_description | safe }}"
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorCard with context -%}
+{%- set d = tr.data -%}
+{%- set docs = collections.doctors | where("data.show_on_fertility", true) -%}
+{%- set related = collections.treatments | bySlugs(d.related or []) -%}
+
+<section class="hero dept-hero">
+  <div class="container container--narrow">
+    <p class="eyebrow">Fertility Centre</p>
+    <h1 class="h-hero dept-hero__title">{{ d.h1 | accent | safe }}</h1>
+    <p class="hero__lead" style="max-width:56ch">{{ d.intro }}</p>
+    <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>
+
+{%- for sec in d.sections %}
+<section class="section {{ 'section--sage' if loop.index % 2 == 0 else 'section--cream' }}">
+  <div class="container container--narrow">
+    <h2 class="h-display h-display--md">{{ sec.heading | accent | safe }}</h2>
+    <div class="dept-text">{{ sec.text | md | safe }}</div>
+  </div>
+</section>
+{%- endfor %}
+
+{%- if docs.length %}
+<section class="section section--cream">
+  <div class="container">
+    <h2 class="h-display h-display--md">{{ "Your doctors" if docs.length > 1 else "Your doctor" }}</h2>
+    <div class="doc-grid" style="margin-top:24px">{% for doc in docs %}{{ doctorCard(doc) }}{% endfor %}</div>
+    <p class="dept-booking">{{ icon("clock", 16) }} OPD: {{ settings.timings.opd_days }}. Call to confirm the doctor's availability.</p>
+  </div>
+</section>
+{%- endif %}
+
+<section class="section section--sage">
+  <div class="container">
+    <h2 class="h-display h-display--md">Other fertility treatments</h2>
+    <div class="dept-grid" style="margin-top:24px">
+      {%- for r in related %}
+      <a class="dept-card dept-card--link" href="/fertility-centre/{{ r.page.fileSlug }}/"><h3>{{ r.data.title }}</h3><p>{{ r.data.card_summary }}</p></a>
+      {%- endfor %}
+      <a class="dept-card dept-card--link" href="/fertility-centre/"><h3>Fertility Centre</h3><p>All treatments, the first-visit journey and fertility questions.</p></a>
+    </div>
+  </div>
+</section>
+
+{%- if d.reviewed_by %}
+<div class="container container--narrow"><p class="review-line">Medically reviewed by {{ d.reviewed_by }}{% if d.reviewed_on %} on {{ d.reviewed_on | readableDate }}{% endif %}.</p></div>
+{%- endif %}
+
+<section class="section section--plum cta-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow eyebrow--peach">First step</p>
+    <h2 class="h-display h-display--lg">Book a fertility <em>consultation</em></h2>
+    <p class="lead">Call or walk in on OPD days. Bring previous reports, scans and prescriptions for both partners.</p>
+    <div class="btn-row center">{{ btnCall() }} {{ btnWhatsApp("Chat on WhatsApp", "btn--white") }}</div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": {{ d.seo_title | dump | safe }},
+  "url": "{{ settings.site_url }}{{ page.url }}",
+  "about": { "@type": "MedicalProcedure", "name": {{ d.title | dump | safe }} },
+  "mainEntity": { "@id": "{{ settings.site_url }}/#hospital" }
+  {%- if d.reviewed_by %},
+  "lastReviewed": "{{ d.reviewed_on | isoDate }}",
+  "reviewedBy": { "@type": "Person", "name": {{ d.reviewed_by | dump | safe }} }
+  {%- endif %}
+}
+</script>

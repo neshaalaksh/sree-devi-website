@@ -55,7 +55,7 @@ description: Fertility evaluation, counselling and treatment at Sree Devi Hospit
       {%- for t in fc.treatments %}
       <article class="treat-card">
         <span class="num">{{ "0" if loop.index < 10 }}{{ loop.index }}</span>
-        <h3>{{ t.title }}</h3>
+        <h3>{% if t.link %}<a href="{{ t.link }}">{{ t.title }}</a>{% else %}{{ t.title }}{% endif %}</h3>
         <p>{{ t.text }}</p>
       </article>
       {%- endfor %}

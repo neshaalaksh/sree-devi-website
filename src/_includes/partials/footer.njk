@@ -23,15 +23,17 @@
         <li><a href="/services/">Services</a></li>
         <li><a href="/facilities/">Facilities</a></li>
         <li><a href="/faq/">FAQs</a></li>
+        <li><a href="/emergency/">Emergency</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
     <div>
       <p class="footer__head">Areas of care</p>
       <ul>
-        {%- for svc in collections.services %}{% if svc.data.show_on_home %}
-        <li><a href="/services/#{{ svc.page.fileSlug }}">{{ svc.data.name }}</a></li>
-        {%- endif %}{% endfor %}
+        <li><a href="/fertility-centre/">Fertility Centre</a></li>
+        {%- for p in collections.departments %}
+        <li><a href="/services/{{ p.page.fileSlug }}/">{{ p.data.title }}</a></li>
+        {%- endfor %}
       </ul>
     </div>
     <div>

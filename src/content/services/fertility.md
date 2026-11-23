@@ -23,5 +23,6 @@ card_icon: /assets/images/icon-fertility.webp
 card_colour: peach
 card_link_label: Visit Fertility Centre
 card_link: /fertility-centre/
+detail_page: "/fertility-centre/"
 cta: fertility
 ---

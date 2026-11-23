@@ -49,6 +49,7 @@ description: Pregnancy and delivery, fertility (IUI, IVF, ICSI), gynaecology, gy
         {%- for it in d.items %}<li>{{ it }}</li>{% endfor %}
       </ul>
       {%- if d.note %}<p class="legal-note">{{ icon("info", 16) }} {{ d.note }}</p>{% endif %}
+      {%- if d.detail_page and d.cta != "fertility" %}<p><a class="link-arrow" href="{{ d.detail_page }}">More about {{ d.name | lower }} {{ icon("arrow", 16) }}</a></p>{% endif %}
       {%- if d.cta == "fertility" %}
       <a class="btn btn--primary btn--sm" href="/fertility-centre/">Visit Fertility Centre</a>
       {%- else %}
@@ -76,13 +77,27 @@ description: Pregnancy and delivery, fertility (IUI, IVF, ICSI), gynaecology, gy
     <p class="lead" style="margin-bottom:32px">Beyond women's health, the hospital has specialists for the whole family.</p>
     <div class="dept-grid">
       {%- for dep in departments.items %}
-      <div class="dept-card"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></div>
+      {%- if dep.link %}<a class="dept-card dept-card--link" href="{{ dep.link }}"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></a>{% else %}<div class="dept-card"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></div>{% endif %}
       {%- endfor %}
     </div>
   </div>
 </section>
 
-<section class="section section--cream" id="hospital-services" style="scroll-margin-top:130px">
+<section class="section section--cream" id="all-services">
+  <div class="container">
+    <p class="eyebrow">Service pages</p>
+    <h2 class="h-display h-display--lg">Find the right <em>department</em></h2>
+    <div class="dept-grid" style="margin-top:24px">
+      {%- for p in collections.departments %}
+      <a class="dept-card dept-card--link" href="/services/{{ p.page.fileSlug }}/"><h3>{{ p.data.title }}</h3><p>{{ p.data.card_summary }}</p></a>
+      {%- endfor %}
+      <a class="dept-card dept-card--link" href="/fertility-centre/"><h3>Fertility Centre</h3><p>Fertility evaluation and treatment, including IUI, IVF and ICSI.</p></a>
+      <a class="dept-card dept-card--link" href="/emergency/"><h3>Emergency &amp; 24-hour care</h3><p>Emergency and delivery care, 24 hours a day.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sage" id="hospital-services" style="scroll-margin-top:130px">
   <div class="container">
     <p class="eyebrow">Diagnostics &amp; facilities</p>
     <h2 class="h-display h-display--lg">Services under <em>one roof</em>.</h2>

@@ -19,6 +19,7 @@ card_image: /assets/images/card-scans.webp
 card_icon: /assets/images/icon-scans.webp
 card_colour: sage
 card_link_label: Explore services
-card_link: /services/#scans-diagnostics
+card_link: /services/scans-imaging/
+detail_page: "/services/scans-imaging/"
 cta: call
 ---

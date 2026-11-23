@@ -34,12 +34,16 @@ treatments:
     text: Medicines to help regular ovulation, with monitoring of the response.
   - title: IUI
     text: Intrauterine insemination, where prepared sperm is placed in the uterus around ovulation.
+    link: /fertility-centre/iui/
   - title: IVF
     text: In vitro fertilisation, where eggs and sperm are combined in the laboratory and an embryo is transferred to the uterus.
+    link: /fertility-centre/ivf-icsi/
   - title: ICSI
     text: Intracytoplasmic sperm injection, where a single sperm is injected into each egg as part of IVF.
+    link: /fertility-centre/ivf-icsi/
   - title: Male infertility & semen analysis
     text: Semen analysis and assessment of male fertility factors.
+    link: /fertility-centre/male-infertility/
   - title: Tubal patency test (HSG)
     text: An X-ray test to check whether the fallopian tubes are open.
   - title: Egg & embryo freezing

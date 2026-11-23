@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+title: Emergency & 24-hour care
+crumbLabel: Emergency
+seoTitle: 24-Hour Emergency & Delivery Care, Srirangam · Sree Devi Hospital
+pageClass: emergency
+permalink: /emergency/
+description: Emergency and delivery care 24 hours, 7 days at Sree Devi Hospital, Gandhi Road, Srirangam, Trichy, with ICU/HDU and a 24-hour lab. Call +91 98434 99055.
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, contactBlock with context -%}
+{%- set e = emergency -%}
+{%- set s = settings -%}
+
+<section class="hero dept-hero">
+  <div class="container container--narrow">
+    <p class="eyebrow">Emergency &amp; 24-hour care</p>
+    <h1 class="h-hero dept-hero__title">{{ e.title | accent | safe }}</h1>
+    <p class="hero__lead" style="max-width:56ch">{{ e.intro }}</p>
+    <a class="btn btn--primary btn--lg emergency-call" href="{{ s.contact.primary_phone | tel }}">{{ icon("phone", 20) }} Call {{ s.contact.primary_phone }}</a>
+    <p class="legal-note" style="margin-top:20px;max-width:56ch">{{ icon("info", 16) }} {{ e.ambulance_note }} {{ e.public_ambulance_note }}</p>
+  </div>
+</section>
+
+<section class="section section--cream">
+  <div class="container">
+    <h2 class="h-display h-display--md">{{ e.available_title }}</h2>
+    <div class="dept-grid" style="margin-top:24px">
+      {%- for a in e.available %}
+      <div class="dept-card"><h3>{{ a.title }}</h3><p>{{ a.text }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--sage">
+  <div class="container container--narrow">
+    <h2 class="h-display h-display--md">{{ e.bring_title }}</h2>
+    <ul class="bullets dept-bullets">{% for b in e.bring %}<li>{{ b }}</li>{% endfor %}</ul>
+    <p>Pregnant and in labour? See <a href="/services/pregnancy-delivery/">pregnancy care and delivery</a>.</p>
+  </div>
+</section>
+
+{{ contactBlock(false) }}

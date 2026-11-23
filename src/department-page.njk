@@ -1,0 +1,126 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.departments
+  size: 1
+  alias: dep
+  addAllPagesToCollections: true
+permalink: "/services/{{ dep.page.fileSlug }}/"
+pageClass: department
+breadcrumbs:
+  - label: Services
+    url: /services/
+eleventyComputed:
+  title: "{{ dep.data.title | safe }}"
+  seoTitle: "{{ dep.data.seo_title | safe }}"
+  description: "{{ dep.data.seo_description | safe }}"
+  ogImage: "{{ dep.data.image | safe }}"
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorCard with context -%}
+{%- set d = dep.data -%}
+{%- set docs = collections.doctors | doctorsForDepartments(d.doctor_departments or []) -%}
+{%- set related = collections.departments | bySlugs(d.related or []) -%}
+
+<section class="hero dept-hero">
+  <div class="container{{ ' hero__grid' if d.image }}">
+    <div class="hero__copy">
+      {%- if d.eyebrow %}<p class="eyebrow">{{ d.eyebrow }}</p>{% endif %}
+      <h1 class="h-hero dept-hero__title">{{ d.h1 | accent | safe }}</h1>
+      <p class="hero__lead">{{ d.intro }}</p>
+      <div class="btn-row">
+        {%- if d.cta == "lab" %}
+        <a class="btn btn--primary" href="{{ settings.contact.whatsapp_lab_pharmacy | wa }}" target="_blank" rel="noopener">{{ icon("whatsapp", 16) }} WhatsApp Lab &amp; Pharmacy</a>
+        <a class="btn btn--outline" href="{{ settings.contact.lab_pharmacy_phone | tel }}">{{ icon("phone", 16) }} Call Lab &amp; Pharmacy</a>
+        {%- else %}
+        {{ btnCall() }} {{ btnWhatsApp() }}
+        {%- endif %}
+      </div>
+    </div>
+    {%- if d.image %}
+    <div class="hero__media">
+      <img class="arch--soft" src="{{ d.image }}" alt="{{ d.image_alt or '' }}" style="aspect-ratio:668/480;width:100%;object-fit:cover" fetchpriority="high">
+    </div>
+    {%- endif %}
+  </div>
+</section>
+
+<section class="section section--cream dept-body">
+  <div class="container">
+    <div class="dept-panels">
+      {%- for sec in d.sections %}
+      <div class="dept-panel{% if sec.text and not (sec.items and sec.items.length) %} dept-panel--text{% endif %}"{% if sec.id %} id="{{ sec.id }}"{% endif %}>
+        <h2 class="h-display dept-panel__title">{{ sec.heading | accent | safe }}</h2>
+        {%- if sec.text %}<div class="dept-text">{{ sec.text | md | safe }}</div>{% endif %}
+        {%- if sec.items and sec.items.length %}
+        <ul class="dept-list">{% for it in sec.items %}<li>{{ it }}</li>{% endfor %}</ul>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+    </div>
+    {%- if d.note %}<p class="legal-note" style="margin-top:20px">{{ icon("info", 16) }} {{ d.note }}</p>{% endif %}
+  </div>
+</section>
+
+
+<section class="section section--sage">
+  <div class="container">
+    {%- if docs.length %}
+    <h2 class="h-display h-display--md">{{ "Your doctors" if docs.length > 1 else "Your doctor" }}</h2>
+    <div class="doc-grid" style="margin-top:24px">
+      {%- for doc in docs %}{{ doctorCard(doc) }}{% endfor %}
+    </div>
+    {%- elif d.practitioner_note %}
+    <h2 class="h-display h-display--md">Who you will see</h2>
+    <p class="lead">{{ d.practitioner_note }}</p>
+    {%- else %}
+    <h2 class="h-display h-display--md">Booking</h2>
+    <p class="lead">Call the hospital to confirm which doctor is consulting and when.</p>
+    {%- endif %}
+    <p class="dept-booking">{{ icon("clock", 16) }} OPD: {{ settings.timings.opd_days }}. {{ settings.timings.sunday }}. Call to confirm a doctor's availability. Emergency and delivery care: {{ settings.timings.emergency }}.</p>
+  </div>
+</section>
+
+{%- if related.length %}
+<section class="section section--cream">
+  <div class="container">
+    <h2 class="h-display h-display--md">Related services</h2>
+    <div class="dept-grid" style="margin-top:24px">
+      {%- for r in related %}
+      <a class="dept-card dept-card--link" href="/services/{{ r.page.fileSlug }}/"><h3>{{ r.data.title }}</h3><p>{{ r.data.card_summary }}</p></a>
+      {%- endfor %}
+      {%- for extra in (d.related_links or []) %}
+      <a class="dept-card dept-card--link" href="{{ extra.url }}"><h3>{{ extra.title }}</h3><p>{{ extra.summary }}</p></a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+
+{%- if d.reviewed_by %}
+<div class="container container--narrow"><p class="review-line">Medically reviewed by {{ d.reviewed_by }}{% if d.reviewed_on %} on {{ d.reviewed_on | readableDate }}{% endif %}.</p></div>
+{%- endif %}
+
+<section class="section section--plum cta-band">
+  <div class="container container--narrow center">
+    <p class="eyebrow eyebrow--peach">How to book</p>
+    <h2 class="h-display h-display--lg">Speak to the <em>hospital</em></h2>
+    <p class="lead">Call or walk in on OPD days. WhatsApp messages are for enquiries and are not confirmed appointments.</p>
+    <div class="btn-row center">{{ btnCall() }} {{ btnWhatsApp("Chat on WhatsApp", "btn--white") }}</div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": {{ (d.seo_title or d.title) | dump | safe }},
+  "url": "{{ settings.site_url }}{{ page.url }}",
+  "about": { "@type": "MedicalSpecialty", "name": {{ d.title | dump | safe }} },
+  "mainEntity": { "@id": "{{ settings.site_url }}/#hospital" }
+  {%- if d.reviewed_by %},
+  "lastReviewed": "{{ d.reviewed_on | isoDate }}",
+  "reviewedBy": { "@type": "Person", "name": {{ d.reviewed_by | dump | safe }} }
+  {%- endif %}
+}
+</script>

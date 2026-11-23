@@ -75,6 +75,11 @@
     if (location.hash.length > 1) openDoctor(decodeURIComponent(location.hash.slice(1)), false);
   }
 
+  /* ---------- Old profile links (/doctors/#slug) now open the doctor's own page ---------- */
+  if (/\/doctors\/?$/.test(location.pathname) && /^#dr-[a-z0-9-]+$/.test(location.hash)) {
+    location.replace(location.pathname.replace(/\/?$/, "/") + location.hash.slice(1) + "/");
+  }
+
   /* ---------- Generic filters (doctors by department, videos by category) ---------- */
   document.querySelectorAll("[data-filter-group]").forEach(function (group) {
     var name = group.getAttribute("data-filter-group");

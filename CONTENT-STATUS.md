@@ -1,6 +1,6 @@
 # Content status
 
-Last updated 23 Nov 2026. Sources: the discovery form, the doctor profile form responses (8 received; 5 on the site so far), the hospital's departments and services boards, and the women's health yes/no checklist.
+Last updated 23 Nov 2026. Sources: the discovery form, the doctor profile form responses (8 received, all 8 on the site), the hospital's departments and services boards, and the women's health yes/no checklist.
 
 ## Confirmed and on the site
 
@@ -16,6 +16,14 @@ Last updated 23 Nov 2026. Sources: the discovery form, the doctor profile form r
 - Removed under the NMC advertising guidelines (6 Oct 2026): "Around 15,000 deliveries and surgeries"; "Safe. Affordable. Relieved."; "the best technologies of the time"; "Painless delivery" (now "Epidural pain relief in labour").
 - Doctor quotes for Dr. Punitha Rajesh and Dr. K. Rajesh are hidden until each doctor approves wording without "100%", "best" or "affordable".
 
+## Pages added (Phase B, 23 Nov 2026)
+
+- A page for each doctor at /doctors/<name>/ (8 doctors). Doctors appear only once their TNMC registration number is on file.
+- Department pages at /services/<department>/: Pregnancy & Delivery, Gynaecology, Gynaecological Surgery, ENT, General Medicine, General Surgery, Orthopaedics, Physiotherapy, Psychiatry, Scans & Imaging, Lab & Pharmacy. Lists come from the hospital's services checklist, departments board and the doctors' own forms.
+- Fertility treatment pages: /fertility-centre/ivf-icsi/, /fertility-centre/iui/, /fertility-centre/male-infertility/.
+- /emergency/.
+- Dermatology and Pulmonology pages are not built until the hospital confirms who consults and when.
+
 ## Needs confirmation from the hospital
 
 | Item | Current value on site | Why it needs checking |
@@ -26,16 +34,18 @@ Last updated 23 Nov 2026. Sources: the discovery form, the doctor profile form r
 | Admission timing | "Admissions are taken at any time" | Form answer "anytime & not during op hours" is ambiguous. |
 | Breast care (Screening) | Listed | Not covered in the checklist, and mammography is "No". |
 | Obesity management | Listed under Supportive Care | From the services board; check where it belongs. |
-| Fertility treatment descriptions | Short factual descriptions written by us | Doctor should review the wording. |
+| Fertility treatment descriptions and the three treatment pages | Factual descriptions written by us | Dr. Punitha Rajesh should review the wording before these pages go live. |
 | Fertility FAQ answers | Written from known facts | Doctor should review. |
-| Doctor bios | Written from each doctor's form answers | Each doctor should approve their bio. |
+| Doctor bios | Written from each doctor's form answers | Each doctor should approve their bio (including the three new profiles: Dr. Samynathan, Dr. D. Uma, Dr. Karthikeyan Natarajan). |
+| Emergency page: "108 ambulance" line | Public information, shown | Hospital to confirm it is happy with this line. |
+| Dr. Gayathri J: Psychiatry page | Built from her form | Confirm she holds a regular OPD. |
+| Remaining doctors on the hospital list | Not shown | TNMC registration numbers and qualifications needed for Dr. Lalitha Raghunathan, Dr. G. Mohamed Muzaffer, Dr. R. Sindhuja, Dr. Vishnu Karthik Raj and Dr. Sarathy. |
 | Dr. Punitha Rajesh: publications | Not shown | Form answer was "Yes, all" with no details. |
 | Dr. Gayathri J: Psychiatry | Shown as a department filter | Psychiatry is not on the departments board. |
 
 ## Still to come
 
 - [ ] Doctor photos (5 received in the shared Drive folder; attach them to place on the site)
-- [ ] Remaining 6 to 7 doctor profiles
 - [ ] Doctor designations (form says these will come separately)
 - [ ] Individual doctor OPD days and timings (site currently shows the hospital OPD hours)
 - [ ] Inpatient visiting hours

@@ -51,14 +51,13 @@ content:
             - Paediatrics
       - { name: specialties, label: "Specialty tags (first two show on the card)", type: string, list: true }
       - { name: qualifications, label: "Qualifications (e.g. MBBS, MS (OG), DNB)", type: string, required: true }
-      - { name: registration_no, label: TNMC registration number, type: string }
+      - { name: registration_no, label: "TNMC registration number (required: doctors without one are not shown on the website)", type: string, required: true }
       - { name: experience, label: "Experience (e.g. 25 years)", type: string }
       - { name: languages, label: Languages spoken, type: string, list: true }
       - { name: bio, label: "About the doctor (3 to 5 lines)", type: text, required: true }
       - { name: approach, label: "Approach to care, in the doctor's words (shown as a quote)", type: text }
       - { name: procedures, label: Procedures and treatments, type: string, list: true }
       - { name: conditions, label: Conditions commonly treated, type: string, list: true }
-      - { name: case_note, label: "Deliveries / surgeries performed (optional, e.g. Around 15,000 deliveries)", type: string }
       - { name: previous_positions, label: Previous positions, type: string, list: true }
       - { name: memberships, label: "Memberships (e.g. FOGSI, IMA)", type: string, list: true }
       - { name: honours, label: Roles, awards and honours, type: string, list: true }
@@ -102,6 +101,7 @@ content:
         options: { values: [peach, sage, lilac, cream] }
       - { name: card_link_label, label: Homepage card link text, type: string }
       - { name: card_link, label: Homepage card link, type: string }
+      - { name: detail_page, label: "Page with more detail (e.g. /services/gynaecology/)", type: string }
 
   # ---------------------------------------------------------------- Settings
   - name: settings
@@ -263,6 +263,7 @@ content:
         fields:
           - { name: name, label: Name, type: string }
           - { name: description, label: Short description, type: string }
+          - { name: link, label: "Department page (e.g. /services/ent/; leave empty if none)", type: string }
 
   - name: hospital_services
     label: Diagnostics & hospital services
@@ -306,6 +307,115 @@ content:
         fields:
           - { name: title, label: Treatment, type: string }
           - { name: text, label: Description, type: text }
+          - { name: link, label: "Treatment page (e.g. /fertility-centre/iui/; optional)", type: string }
+
+  # ------------------------------------------------------- Department pages
+  - name: department_pages
+    label: Department pages
+    description: "One page per department at /services/<file name>/. Doctors are added automatically from the Doctors list by department."
+    type: collection
+    path: src/content/departments
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, published, order]
+      sort: [order, title]
+    fields:
+      - { name: title, label: "Department name (e.g. ENT)", type: string, required: true }
+      - { name: published, label: Show on website, type: boolean, default: true }
+      - { name: order, label: Display order, type: number, default: 20 }
+      - { name: card_summary, label: One-line summary used on cards and in Related services, type: string }
+      - { name: seo_title, label: "Search result title (60 characters or fewer)", type: string }
+      - { name: seo_description, label: "Search result description (120 to 160 characters)", type: text }
+      - { name: eyebrow, label: Small label above the headline, type: string }
+      - { name: h1, label: "Headline (wrap a word in *asterisks* for italic)", type: string, required: true }
+      - { name: intro, label: Introduction, type: text }
+      - { name: image, label: "Image (real hospital photos only)", type: image }
+      - { name: image_alt, label: Image description for screen readers, type: string }
+      - name: sections
+        label: Sections
+        type: object
+        list: true
+        fields:
+          - { name: heading, label: "Heading (wrap a word in *asterisks* for italic)", type: string }
+          - { name: text, label: "Text (optional; **bold** and numbered lists with 1. 2. 3. work)", type: text }
+          - { name: items, label: Bullet points (optional), type: string, list: true }
+          - { name: id, label: "Link anchor (optional, e.g. screening)", type: string }
+      - { name: note, label: "Highlighted note (optional, e.g. legal notice)", type: string }
+      - name: doctor_departments
+        label: Show doctors from these departments
+        type: select
+        options:
+          multiple: true
+          values: [Obstetrics & Gynaecology, Infertility, ENT, General Medicine, General Surgery, Orthopaedics, Dermatology, Pulmonology, Physiotherapy, Radiology, Anaesthesia, Psychiatry, Paediatrics]
+      - { name: practitioner_note, label: "Shown when no doctor is listed (e.g. the physiotherapist's name)", type: string }
+      - { name: related, label: "Related department pages (file names, e.g. scans-imaging)", type: string, list: true }
+      - name: related_links
+        label: Other related links
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: url, label: Link, type: string }
+          - { name: summary, label: One line, type: string }
+      - name: cta
+        label: Main buttons
+        type: select
+        options:
+          values: [call, lab]
+      - { name: reviewed_by, label: "Medically reviewed by (doctor's name and qualification)", type: string }
+      - { name: reviewed_on, label: Date of medical review, type: date }
+
+  # ---------------------------------------------------- Fertility treatments
+  - name: fertility_treatments
+    label: Fertility treatment pages
+    description: "One page per treatment at /fertility-centre/<file name>/. No success rates or patient numbers (NMC guidelines)."
+    type: collection
+    path: src/content/fertility-treatments
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, published, order]
+    fields:
+      - { name: title, label: Treatment name, type: string, required: true }
+      - { name: published, label: Show on website, type: boolean, default: true }
+      - { name: order, label: Display order, type: number }
+      - { name: card_summary, label: One-line summary, type: string }
+      - { name: seo_title, label: "Search result title (60 characters or fewer)", type: string }
+      - { name: seo_description, label: "Search result description (120 to 160 characters)", type: text }
+      - { name: h1, label: "Headline (wrap a word in *asterisks* for italic)", type: string, required: true }
+      - { name: intro, label: Introduction, type: text }
+      - name: sections
+        label: Sections
+        type: object
+        list: true
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: text, label: "Text (**bold** and numbered lists with 1. 2. 3. work)", type: text }
+      - { name: related, label: "Other treatment pages (file names)", type: string, list: true }
+      - { name: reviewed_by, label: "Medically reviewed by", type: string }
+      - { name: reviewed_on, label: Date of medical review, type: date }
+
+  # ------------------------------------------------------------ Emergency page
+  - name: emergency
+    label: Emergency page
+    type: file
+    path: src/_data/emergency.yml
+    fields:
+      - { name: title, label: "Headline (wrap a word in *asterisks* for italic)", type: string }
+      - { name: intro, label: Introduction, type: text }
+      - { name: available_title, label: Heading for what is available, type: string }
+      - name: available
+        label: Available round the clock
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: string }
+      - { name: ambulance_note, label: Ambulance note, type: string }
+      - { name: public_ambulance_note, label: Public ambulance note, type: string }
+      - { name: bring_title, label: Heading for what to bring, type: string }
+      - { name: bring, label: What to bring, type: string, list: true }
 
   # ---------------------------------------------------------------- Articles
   - name: articles

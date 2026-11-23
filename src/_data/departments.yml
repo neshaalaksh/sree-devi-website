@@ -2,21 +2,31 @@
 items:
   - name: Obstetrics
     description: Pregnancy care, normal and caesarean delivery, and postnatal care.
+    link: "/services/pregnancy-delivery/"
   - name: Gynaecology
     description: Menstrual, hormonal and reproductive health concerns at every age.
+    link: "/services/gynaecology/"
   - name: Infertility
     description: Fertility evaluation, counselling and treatment including IUI, IVF and ICSI.
+    link: "/fertility-centre/"
   - name: ENT
     description: Ear, nose and throat conditions, with audiometry and hearing aid fitting.
+    link: "/services/ent/"
   - name: General Medicine
     description: Diagnosis and treatment of common adult medical conditions.
+    link: "/services/general-medicine/"
   - name: General Surgery
     description: Surgical assessment and procedures.
+    link: "/services/general-surgery/"
   - name: Orthopaedics
     description: Bone, joint and muscle conditions.
+    link: "/services/orthopaedics/"
   - name: Dermatology
     description: Skin, hair and nail conditions.
+    link: ""
   - name: Pulmonology
     description: Lung and breathing conditions.
+    link: ""
   - name: Physiotherapy
     description: Rehabilitation, including postpartum exercise.
+    link: "/services/physiotherapy/"

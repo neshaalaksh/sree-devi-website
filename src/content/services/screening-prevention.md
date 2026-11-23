@@ -18,6 +18,7 @@ card_image: /assets/images/card-screening.webp
 card_icon: /assets/images/icon-screening.webp
 card_colour: cream
 card_link_label: Explore services
-card_link: /services/#screening-prevention
+card_link: /services/gynaecology/#screening
+detail_page: "/services/gynaecology/#screening"
 cta: call
 ---

@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.doctors
+  size: 1
+  alias: doc
+  addAllPagesToCollections: true
+permalink: "/doctors/{{ doc.page.fileSlug }}/"
+pageClass: doctor
+breadcrumbs:
+  - label: Doctors
+    url: /doctors/
+eleventyComputed:
+  title: "{{ doc.data.name | safe }}"
+  seoTitle: "{{ doc.data.name | safe }}, {{ doc.data.designation or doc.data.department | safe }} · Sree Devi Hospital"
+  description: "{{ doc.data.name | safe }} ({{ doc.data.department | safe }}), Sree Devi Hospital, Srirangam, Trichy. {{ doc.data.qualifications | safe }}. TNMC Reg. No. {{ doc.data.registration_no | safe }}."
+---
+{%- from "partials/components.njk" import doctorProfile, btnCall, btnWhatsApp with context -%}
+{%- set d = doc.data -%}
+{%- set depts = collections.departments | departmentsForDoctor(d.department) -%}
+
+<section class="doc-page section--cream">
+  <div class="container">
+    {{ doctorProfile(doc, depts) }}
+  </div>
+</section>
+
+<section class="section section--peach" style="padding:48px 0">
+  <div class="container care-strip">
+    <div>
+      <h2 class="h-display">Book a consultation with {{ d.name }}</h2>
+      <p>Call the hospital or walk in on OPD days ({{ settings.timings.opd_days }}). Reception will confirm the doctor's availability.</p>
+    </div>
+    <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "{{ settings.site_url }}{{ page.url }}#doctor",
+  "name": {{ d.name | dump | safe }},
+  "jobTitle": {{ (d.designation or d.department) | dump | safe }},
+  "url": "{{ settings.site_url }}{{ page.url }}",
+  "worksFor": { "@id": "{{ settings.site_url }}/#hospital" },
+  "hasCredential": {{ d.qualifications | dump | safe }},
+  "identifier": { "@type": "PropertyValue", "propertyID": "TNMC registration number", "value": {{ d.registration_no | dump | safe }} },
+  "knowsLanguage": {{ (d.languages or []) | dump | safe }}
+  {%- if d.memberships and d.memberships.length %},
+  "memberOf": [{% for m in d.memberships %}{ "@type": "Organization", "name": {{ m | dump | safe }} }{% if not loop.last %}, {% endif %}{% endfor %}]
+  {%- endif %}
+}
+</script>

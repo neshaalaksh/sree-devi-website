@@ -18,5 +18,6 @@ card_icon: ""
 card_colour: peach
 card_link_label: Explore services
 card_link: /services/#supportive-care
+detail_page: ""
 cta: call
 ---

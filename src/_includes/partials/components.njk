@@ -70,15 +70,14 @@
       {%- for sp in d.specialties | limit(2) %}<span class="chip chip--{{ loop.index }}">{{ sp }}</span>{% endfor %}
     </div>
     <p class="doc-card__meta">{{ icon("award", 14) }} {{ d.experience }} experience</p>
-    <button class="link-arrow" type="button" data-doctor="{{ doc.page.fileSlug }}" aria-haspopup="dialog">View Profile {{ icon("arrow", 16) }}</button>
+    <a class="link-arrow" href="/doctors/{{ doc.page.fileSlug }}/">View profile<span class="sr-only"> of {{ d.name }}</span> {{ icon("arrow", 16) }}</a>
   </div>
 </article>
 {%- endmacro -%}
 
-{#- Full profile, rendered into a <template> and shown in the modal -#}
-{%- macro doctorProfile(doc) -%}
+{#- Full doctor profile, used on each doctor's own page -#}
+{%- macro doctorProfile(doc, depts=[]) -%}
 {%- set d = doc.data -%}
-<template id="doctor-{{ doc.page.fileSlug }}">
   <div class="profile">
     <div class="profile__side">
       <div class="profile__photo">
@@ -89,7 +88,7 @@
       {%- if d.registration_no %}<p class="profile__reg">TNMC Reg. No. {{ d.registration_no }}</p>{% endif %}
     </div>
     <div class="profile__main">
-      <h2 class="profile__name" id="profile-title">{{ d.name }}</h2>
+      <h1 class="profile__name">{{ d.name }}</h1>
       {%- if d.designation %}<p class="profile__designation">{{ d.designation }}</p>{% endif %}
       <p class="profile__quals">{{ d.qualifications }}</p>
       <div class="chips">
@@ -108,11 +107,10 @@
       <div class="pills">{% for e in expertise %}<span class="pill">{{ e }}</span>{% endfor %}</div>
       {%- endif %}
 
-      {%- if d.case_note or (d.previous_positions and d.previous_positions.length) or (d.memberships and d.memberships.length) or (d.honours and d.honours.length) or d.publications %}
+      {%- if (d.previous_positions and d.previous_positions.length) or (d.memberships and d.memberships.length) or (d.honours and d.honours.length) or d.publications %}
       <h3 class="profile__h">Experience &amp; Credentials</h3>
       <dl class="profile__list">
         {%- if d.previous_positions and d.previous_positions.length %}<dt>Previous positions</dt><dd><ul>{% for p in d.previous_positions %}<li>{{ p }}</li>{% endfor %}</ul></dd>{% endif %}
-        {%- if d.case_note %}<dt>Experience</dt><dd>{{ d.case_note }}</dd>{% endif %}
         {%- if d.memberships and d.memberships.length %}<dt>Memberships</dt><dd>{{ d.memberships | join(", ") }}</dd>{% endif %}
         {%- if d.honours and d.honours.length %}<dt>Roles &amp; honours</dt><dd><ul>{% for h in d.honours %}<li>{{ h }}</li>{% endfor %}</ul></dd>{% endif %}
         {%- if d.publications %}<dt>Publications</dt><dd>{{ d.publications }}</dd>{% endif %}
@@ -125,10 +123,12 @@
         <p><strong>Location</strong>{{ settings.name }}, {{ settings.address.short }}</p>
         <p><strong>Languages spoken</strong>{{ d.languages | join(" · ") }}</p>
         <p><strong>Consultation</strong>For appointments and consultation enquiries, contact the hospital directly.</p>
+        {%- if depts.length or d.show_on_fertility %}
+        <p><strong>{{ "Departments" if (depts.length + (1 if d.show_on_fertility else 0)) > 1 else "Department" }}</strong>{% for dp in depts %}<a href="/services/{{ dp.page.fileSlug }}/">{{ dp.data.title }}</a>{% if not loop.last or d.show_on_fertility %} · {% endif %}{% endfor %}{% if d.show_on_fertility %}<a href="/fertility-centre/">Fertility Centre</a>{% endif %}</p>
+        {%- endif %}
       </div>
     </div>
   </div>
-</template>
 {%- endmacro -%}
 
 {#- Contact details + map, used on Home and Contact pages -#}

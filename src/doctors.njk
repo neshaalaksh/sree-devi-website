@@ -3,10 +3,10 @@ layout: layouts/base.njk
 title: Our Doctors
 pageClass: doctors
 permalink: /doctors/
-description: Meet the specialists at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy, in obstetrics and gynaecology, fertility, ENT, radiology, anaesthesia and psychiatry.
+description: "Doctors at Sree Devi Hospital & Fertility Centre, Srirangam, Trichy, with qualifications and TNMC registration numbers for gynaecology, fertility, ENT, orthopaedics and surgery."
 ---
 {%- from "partials/icons.njk" import icon -%}
-{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorCard, doctorProfile with context -%}
+{%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorCard with context -%}
 {%- set docs = collections.doctors -%}
 {%- set depts = [] -%}
 {%- for doc in docs %}{% if not (doc.data.department in depts) %}{% set depts = (depts.push(doc.data.department), depts) %}{% endif %}{% endfor -%}
@@ -14,7 +14,7 @@ description: Meet the specialists at Sree Devi Hospital & Fertility Centre, Srir
 <section class="page-hero page-hero--center">
   <div class="container container--narrow">
     <h1 class="h-hero">Meet Our <em>Specialists</em></h1>
-    <p class="lead">{{ settings.name }} brings together a dedicated team of specialists committed to compassionate care for women and families.</p>
+    <p class="lead">{{ settings.name }} brings together specialists across obstetrics and gynaecology, fertility, ENT, orthopaedics, general surgery, radiology, anaesthesia and psychiatry, caring for families across Trichy.</p>
   </div>
 </section>
 
@@ -22,7 +22,7 @@ description: Meet the specialists at Sree Devi Hospital & Fertility Centre, Srir
   <div class="container">
     <div class="center" style="margin-bottom:28px">
       <h2 class="h-display h-display--lg">Dedicated to <em>Your Care</em></h2>
-      <p class="lead">Each profile below was provided by the doctor. Tap a card to see their qualifications, experience and approach to care.</p>
+      <p class="lead">Each profile was shared by the doctor. Open a profile to see their qualifications, registration number, experience and consultation details.</p>
     </div>
 
     {%- if depts.length > 1 %}
@@ -48,16 +48,3 @@ description: Meet the specialists at Sree Devi Hospital & Fertility Centre, Srir
     <div class="btn-row">{{ btnCall("Call Us") }} {{ btnWhatsApp() }}</div>
   </div>
 </section>
-
-{%- for doc in docs %}{{ doctorProfile(doc) }}{% endfor %}
-
-<dialog class="doc-modal" id="doctor-modal" aria-labelledby="profile-title">
-  <div class="doc-modal__bar">
-    <p>Doctor Profile</p>
-    <button class="icon-btn" type="button" data-close aria-label="Close profile">{{ icon("x", 18) }}</button>
-  </div>
-  <div class="doc-modal__body"></div>
-  <div class="doc-modal__foot">
-    {{ btnCall() }} {{ btnWhatsApp() }}
-  </div>
-</dialog>

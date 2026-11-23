@@ -24,6 +24,7 @@ card_image: /assets/images/card-gynaecology.webp
 card_icon: /assets/images/icon-gynaecology.webp
 card_colour: sage
 card_link_label: Explore services
-card_link: /services/#gynaecology
+card_link: /services/gynaecology/
+detail_page: "/services/gynaecology/"
 cta: call
 ---

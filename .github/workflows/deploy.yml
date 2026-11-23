@@ -28,6 +28,11 @@ jobs:
         env:
           # Custom domain (sreedevihospital.com) serves the site from the root.
           PATH_PREFIX: /
+      # Blocks the deploy on errors (restricted wording, wrong phone numbers,
+      # broken links, invalid structured data). Warnings do not block.
+      # If a save from Pages CMS fails here, the live site stays on the previous version.
+      - name: Quality checks
+        run: npm run qa
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

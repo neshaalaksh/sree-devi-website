@@ -18,6 +18,7 @@ card_image: /assets/images/card-surgery.webp
 card_icon: /assets/images/icon-surgery.webp
 card_colour: lilac
 card_link_label: Explore services
-card_link: /services/#surgery
+card_link: /services/gynaecological-surgery/
+detail_page: "/services/gynaecological-surgery/"
 cta: call
 ---

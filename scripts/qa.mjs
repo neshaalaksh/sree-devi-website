@@ -90,10 +90,25 @@ for (const file of pages) {
     if (!matches) err(rel, `phone ${m[1] || m[2]} is not in settings.yml contact numbers`);
   }
 
+  // Text escaped twice shows up as "&amp;" on the page
+  if (/&(amp|lt|gt|quot);/.test(text)) {
+    const i = text.search(/&(amp|lt|gt|quot);/);
+    err(rel, `double-escaped text: "...${text.slice(Math.max(0, i - 30), i + 30).trim()}..."`);
+  }
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    if (/&(amp|lt|gt|quot);/.test(m[1])) { err(rel, "HTML-escaped text inside structured data"); break; }
+  }
+
+  // Doctor pages must show the registration number (NMC guidelines)
+  if (/^\/doctors\/[^/]+\/$/.test(rel) && !/TNMC Reg\. No\. \d+/.test(text)) {
+    err(rel, "doctor page does not show a TNMC registration number");
+  }
+
   // Head
   const title = (html.match(/<title>([\s\S]*?)<\/title>/i) || [])[1]?.trim();
   const desc = attr((html.match(/<meta name="description"[^>]*>/i) || [""])[0], "content");
   if (!title) err(rel, "missing <title>");
+  if (/&amp;(amp|lt|gt|quot);/.test(title || "")) err(rel, "double-escaped text in <title>");
   if (!desc) err(rel, "missing meta description");
   if (!noindex) {
     indexable.push(rel);
