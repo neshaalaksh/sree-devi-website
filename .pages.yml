@@ -166,7 +166,9 @@ content:
         type: object
         fields:
           - { name: clinical_establishment, label: Clinical establishment registration no., type: string }
-          - { name: art_clinic, label: ART clinic registration no., type: string }
+          - { name: art_clinic, label: ART clinic level and Act, type: string }
+          - { name: art_reg_no, label: ART clinic registration no., type: string }
+          - { name: pcpndt, label: PCPNDT registration no. (scan centre), type: string }
       - name: home
         label: Homepage text
         type: object

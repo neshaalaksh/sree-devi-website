@@ -1,86 +1,87 @@
 # "What we offer" cards on the homepage (12 cards, 3 per row).
-# Colour options: peach, salmon, sage, lilac, sage-2, cream.
+# Each card is a one-line summary that links to the page or section that owns the service.
+# Colour options: peach, salmon, sage, sage-2, lilac, cream.
 # Image and icon options are the six card photos and icons already in the site.
 items:
   - name: Pregnancy & Delivery
-    text: Antenatal care, normal and caesarean delivery, 3D/4D scans, delivery 24×7
+    text: Antenatal care, normal and caesarean delivery, high-risk pregnancy care, 24×7
     colour: peach
     image: /assets/images/card-pregnancy.webp
     icon: /assets/images/icon-pregnancy.webp
-    link_label: Explore services
+    link_label: Pregnancy & delivery care
     link: /services/#pregnancy-delivery
   - name: Fertility Centre
-    text: IUI, IVF, ICSI
+    text: IUI, IVF and ICSI, with fertility evaluation for both partners
     colour: salmon
     image: /assets/images/card-fertility.webp
     icon: /assets/images/icon-fertility.webp
     link_label: Visit Fertility Centre
     link: /fertility-centre/
   - name: Gynaecology
-    text: Menstrual, hormonal and menopause care
+    text: PCOS, period problems, fibroids and menopause care
     colour: sage
     image: /assets/images/card-gynaecology.webp
     icon: /assets/images/icon-gynaecology.webp
-    link_label: Explore services
+    link_label: Gynaecology services
     link: /services/#gynaecology
-  - name: ENT
-    text: Ear, nose and throat care, hearing tests, hearing aid fitting
+  - name: Gynaecological Surgery
+    text: Laparoscopic surgery, hysteroscopy, hysterectomy and myomectomy
     colour: lilac
     image: /assets/images/card-surgery.webp
     icon: /assets/images/icon-surgery.webp
-    link_label: Explore services
-    link: /services/#departments
-  - name: General Medicine
-    text: Adult medical care, ECG and Echo
+    link_label: Surgery services
+    link: /services/#surgery
+  - name: Scans & Imaging
+    text: Ultrasound, 3D/4D and anomaly scans, Doppler and X-ray
     colour: sage-2
     image: /assets/images/card-scans.webp
     icon: /assets/images/icon-scans.webp
-    link_label: Explore services
-    link: /services/#departments
-  - name: General Surgery
-    text: Surgical assessment and procedures
+    link_label: Scans & diagnostics
+    link: /services/#scans-diagnostics
+  - name: Screening & Prevention
+    text: Cancer screening, HPV testing and vaccination, women's health check-ups
     colour: cream
     image: /assets/images/card-screening.webp
     icon: /assets/images/icon-screening.webp
-    link_label: Explore services
-    link: /services/#surgery
-  - name: Orthopaedics
-    text: Bone, joint and muscle care
+    link_label: Screening services
+    link: /services/#screening-prevention
+  - name: Physiotherapy
+    text: Back and joint pain, recovery after surgery, postpartum exercise
     colour: peach
     image: /assets/images/card-pregnancy.webp
     icon: /assets/images/icon-pregnancy.webp
-    link_label: Explore services
-    link: /services/#departments
-  - name: Dermatology
-    text: Skin, hair and nail care
+    link_label: Supportive care
+    link: /services/#supportive-care
+  - name: Orthopaedics
+    text: Bone, joint and muscle conditions, fractures and joint replacement
     colour: salmon
     image: /assets/images/card-fertility.webp
     icon: /assets/images/icon-fertility.webp
-    link_label: Explore services
+    link_label: All departments
     link: /services/#departments
-  - name: Pulmonology
-    text: Lung and breathing care
+  - name: General Medicine
+    text: Fever, diabetes, blood pressure and thyroid care, with ECG and Echo
     colour: sage
     image: /assets/images/card-gynaecology.webp
     icon: /assets/images/icon-gynaecology.webp
-    link_label: Explore services
+    link_label: All departments
     link: /services/#departments
-  - name: Physiotherapy
-    text: Rehab, postpartum exercise
+  - name: General Surgery
+    text: Hernia, appendix, gall bladder, breast and thyroid surgery, including keyhole
     colour: lilac
     image: /assets/images/card-surgery.webp
     icon: /assets/images/icon-surgery.webp
-    link_label: Explore services
-    link: /services/#supportive-care
-  - name: Scans & Imaging
-    text: Ultrasound, Doppler, X-ray
+    link_label: All departments
+    link: /services/#departments
+  - name: ENT
+    text: Ear, nose and throat care, hearing tests and hearing aid fitting
     colour: sage-2
     image: /assets/images/card-scans.webp
     icon: /assets/images/icon-scans.webp
-    link_label: Explore services
-    link: /services/#scans-diagnostics
+    link_label: All departments
+    link: /services/#departments
   - name: Lab & Pharmacy
-    text: 24-hour laboratory and in-house pharmacy
+    text: 24-hour laboratory for blood tests, and an in-house pharmacy
     colour: cream
     image: /assets/images/card-screening.webp
     icon: /assets/images/icon-screening.webp
