@@ -1,22 +1,76 @@
 # Departments listed by the hospital. Shown on the Services and About pages.
+# Departments with "link" point to their existing section on the Services page
+# (or the Fertility Centre); the others get their own section on the Services page.
 items:
   - name: Obstetrics
+    slug: obstetrics
     description: Pregnancy care, normal and caesarean delivery, and postnatal care.
+    link: /services/#pregnancy-delivery
   - name: Gynaecology
+    slug: gynaecology-dept
     description: Menstrual, hormonal and reproductive health concerns at every age.
+    link: /services/#gynaecology
   - name: Infertility
+    slug: infertility
     description: Fertility evaluation, counselling and treatment including IUI, IVF and ICSI.
+    link: /fertility-centre/
   - name: ENT
+    slug: ent
     description: Ear, nose, throat, and head and neck conditions, with hearing tests and hearing aid fitting.
+    heading: Ear, nose and *throat* care
+    intro: Medical and surgical care for ear, nose, throat, and head and neck conditions, with hearing tests and hearing aid fitting.
+    doctor_department: ENT
+    lists:
+      - heading: Conditions we treat
+        items: [Sinusitis and nasal blockage, Deviated nasal septum, Tonsillitis, Ear infections and discharge (CSOM), Hearing loss, Voice problems and vocal nodules, Snoring, Thyroid and other head and neck conditions]
+      - heading: Procedures and tests
+        items: [Tonsillectomy, Tympanoplasty, Septoplasty, Functional endoscopic sinus surgery, Microlaryngeal surgery, Head and neck surgery, Snoring surgery, Audiometry (hearing tests), Hearing aid fitting]
   - name: General Medicine
+    slug: general-medicine
     description: Fever, diabetes, blood pressure, thyroid and other adult medical conditions, with a 24-hour laboratory and ECG and Echo.
+    heading: General *medicine*
+    intro: Diagnosis and ongoing care for common adult medical conditions, with a 24-hour laboratory and ECG and Echo in the hospital.
+    doctor_department: General Medicine
+    lists:
+      - heading: What we treat
+        items: [Fever and infections, Diabetes, Blood pressure, Thyroid conditions, Heart check-ups with ECG and Echo, Obesity management, Health check-ups]
   - name: General Surgery
+    slug: general-surgery
     description: General and laparoscopic (keyhole) surgery for hernia, appendix, gall bladder, breast and thyroid conditions.
+    heading: General and laparoscopic *surgery*
+    intro: Surgical assessment, general and laparoscopic (keyhole) procedures, and care before and after surgery.
+    doctor_department: General Surgery
+    lists:
+      - heading: Conditions we treat
+        items: [Hernia, Appendicitis, Gall bladder conditions, Breast conditions, Thyroid conditions, Skin swellings, Salivary gland swellings, Diabetic ulcers]
+    note: Your surgeon will explain whether keyhole or open surgery suits you, the type of anaesthesia and what recovery involves. Ask reception for an estimate before a planned procedure.
   - name: Orthopaedics
+    slug: orthopaedics
     description: Bone, joint and muscle conditions, fractures, and joint replacement surgery.
+    heading: Bone and joint *care*
+    intro: Diagnosis and treatment of bone, joint and muscle conditions and injuries, with X-ray and physiotherapy in the hospital.
+    doctor_department: Orthopaedics
+    lists:
+      - heading: Conditions we treat
+        items: [Knee pain, Back pain, Neck and shoulder pain, Heel pain, Fractures, Arthritis]
+      - heading: Procedures
+        items: [Primary and revision joint replacement surgery, Fracture fixation, Pelvis and acetabular surgery, Paediatric fracture fixation]
   - name: Dermatology
+    slug: dermatology
     description: Skin, hair and nail conditions.
+    heading: Skin, hair and nail *care*
+    intro: Consultation for skin, hair and nail conditions. Call the hospital to check the dermatologist's consultation days.
   - name: Pulmonology
+    slug: pulmonology
     description: Lung and breathing conditions.
+    heading: Lung and breathing *care*
+    intro: Consultation for lung and breathing conditions. Call the hospital to check the pulmonologist's consultation days.
   - name: Physiotherapy
+    slug: physiotherapy
     description: Recovery after surgery or injury, joint and back pain, and postpartum exercise.
+    heading: Physiotherapy and *rehabilitation*
+    intro: Exercise-based care to restore movement, reduce pain and support recovery.
+    lists:
+      - heading: What we help with
+        items: [Back and neck pain, Joint and muscle pain, Recovery after surgery or injury, Postpartum exercise, Posture correction]
+    practitioner: "Physiotherapist: S. Muthukumarasamy, BPT, MIAP."

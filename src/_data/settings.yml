@@ -44,6 +44,9 @@ registrations:
   art_reg_no: ""
   pcpndt: ""
 
+# Blog preview: show placeholder articles and videos until real ones are added
+blog_preview: true
+
 # Optional banner shown at the very top of every page (e.g. holiday timings)
 notice:
   enabled: false

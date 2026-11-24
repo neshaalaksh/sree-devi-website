@@ -98,7 +98,7 @@ seoTitle: "About Sree Devi Hospital, Trichy · Since 2005"
       <div><span class="eyebrow eyebrow--caps">Departments</span><h2 class="h-display h-display--lg">Specialists across <em>{{ departments.items.length }} departments</em>.</h2></div>
     </div>
     <div class="dept-grid">
-      {%- for dep in departments.items %}<div class="dept-card"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p></div>{% endfor %}
+      {%- for dep in departments.items %}<a class="dept-card" href="{{ dep.link or ('/services/#' + dep.slug) }}"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p><span class="dept-card__go">{{ icon("arrow", 16) }}</span></a>{% endfor %}
     </div>
   </div>
 </section>

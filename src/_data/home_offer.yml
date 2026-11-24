@@ -50,36 +50,36 @@ items:
     colour: peach
     image: /assets/images/card-pregnancy.webp
     icon: /assets/images/icon-pregnancy.webp
-    link_label: Supportive care
-    link: /services/#supportive-care
+    link_label: Explore services
+    link: /services/#physiotherapy
   - name: Orthopaedics
     text: Bone, joint and muscle conditions, fractures and joint replacement
     colour: salmon
     image: /assets/images/card-fertility.webp
     icon: /assets/images/icon-fertility.webp
-    link_label: All departments
-    link: /services/#departments
+    link_label: Explore services
+    link: /services/#orthopaedics
   - name: General Medicine
     text: Fever, diabetes, blood pressure and thyroid care, with ECG and Echo
     colour: sage
     image: /assets/images/card-gynaecology.webp
     icon: /assets/images/icon-gynaecology.webp
-    link_label: All departments
-    link: /services/#departments
+    link_label: Explore services
+    link: /services/#general-medicine
   - name: General Surgery
     text: Hernia, appendix, gall bladder, breast and thyroid surgery, including keyhole
     colour: lilac
     image: /assets/images/card-surgery.webp
     icon: /assets/images/icon-surgery.webp
-    link_label: All departments
-    link: /services/#departments
+    link_label: Explore services
+    link: /services/#general-surgery
   - name: ENT
     text: Ear, nose and throat care, hearing tests and hearing aid fitting
     colour: sage-2
     image: /assets/images/card-scans.webp
     icon: /assets/images/icon-scans.webp
-    link_label: All departments
-    link: /services/#departments
+    link_label: Explore services
+    link: /services/#ent
   - name: Lab & Pharmacy
     text: 24-hour laboratory for blood tests, and an in-house pharmacy
     colour: cream

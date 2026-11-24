@@ -10,6 +10,8 @@ description: Health videos and articles from the doctors at Sree Devi Hospital &
 {%- set vids = [] -%}
 {%- for v in (videos.items or []) %}{% if v.url | youtubeId %}{% set vids = (vids.push(v), vids) %}{% endif %}{% endfor -%}
 {%- set arts = collections.articles or [] -%}
+{%- set preview = settings.blog_preview and not arts.length and not vids.length -%}
+{%- if preview %}{% set arts = blogPreview.articles %}{% set vids = blogPreview.videos %}{% endif -%}
 {%- set topics = [] -%}
 {%- for v in vids %}{% if v.category and v.category not in topics %}{% set topics = (topics.push(v.category), topics) %}{% endif %}{% endfor -%}
 {%- for a in arts %}{% if a.data.category and a.data.category not in topics %}{% set topics = (topics.push(a.data.category), topics) %}{% endif %}{% endfor -%}
@@ -33,22 +35,22 @@ description: Health videos and articles from the doctors at Sree Devi Hospital &
 </section>
 
 {%- if vids.length %}
-{%- set feat = vids[0] %}{% set fid = feat.url | youtubeId %}
+{%- set feat = vids[0] %}{% set fid = (feat.url | youtubeId) if feat.url else "" %}
 <section class="section jr-watch">
   <div class="container">
     <span class="eyebrow eyebrow--caps">Now playing</span>
     <div class="jr-watch__grid">
-      <a class="jr-player" href="{{ feat.url }}" target="_blank" rel="noopener" aria-label="Play video: {{ feat.title }}">
-        <img src="https://i.ytimg.com/vi/{{ fid }}/hqdefault.jpg" alt="" loading="lazy">
+      <a class="jr-player{% if not fid %} ph-grad ph-c3{% endif %}" href="{{ feat.url or '#' }}"{% if fid %} target="_blank" rel="noopener"{% endif %} aria-label="Play video: {{ feat.title }}">
+        {%- if fid %}<img src="https://i.ytimg.com/vi/{{ fid }}/hqdefault.jpg" alt="" loading="lazy">{% endif %}
         <span class="jr-playbtn">{{ playTri | safe }}</span>
         <span class="jr-meta"><span>{{ feat.category }}</span><h2>{{ feat.title }}</h2></span>
       </a>
       {%- if vids.length > 1 %}
       <div class="jr-upnext">
         <h3>Up next</h3>
-        {%- for v in vids | limit(4) %}{% if not loop.first %}{% set id = v.url | youtubeId %}
-        <a class="jr-un" href="{{ v.url }}" target="_blank" rel="noopener">
-          <span class="jr-un__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy"></span>
+        {%- for v in vids | limit(4) %}{% if not loop.first %}{% set id = (v.url | youtubeId) if v.url else "" %}
+        <a class="jr-un" href="{{ v.url or '#' }}"{% if id %} target="_blank" rel="noopener"{% endif %}>
+          <span class="jr-un__thumb{% if not id %} ph-grad ph-c{{ loop.index0 }}{% endif %}">{% if id %}<img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy">{% endif %}</span>
           <span><small>{{ v.category }}</small><b>{{ v.title }}</b></span>
         </a>
         {%- endif %}{% endfor %}
