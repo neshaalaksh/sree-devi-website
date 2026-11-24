@@ -18,7 +18,7 @@ items:
     slug: ent
     description: Ear, nose, throat, and head and neck conditions, with hearing tests and hearing aid fitting.
     heading: Ear, nose and *throat* care
-    intro: Medical and surgical care for ear, nose, throat, and head and neck conditions, with hearing tests and hearing aid fitting.
+    intro: "An ENT doctor in Trichy for ear, nose and throat problems, from sinusitis and tonsillitis to hearing loss, with hearing tests, hearing aid fitting and ENT surgery in the hospital."
     doctor_department: ENT
     lists:
       - heading: Conditions we treat
@@ -28,8 +28,8 @@ items:
   - name: General Medicine
     slug: general-medicine
     description: Fever, diabetes, blood pressure, thyroid and other adult medical conditions, with a 24-hour laboratory and ECG and Echo.
-    heading: General *medicine*
-    intro: Diagnosis and ongoing care for common adult medical conditions, with a 24-hour laboratory and ECG and Echo in the hospital.
+    heading: "General *physician* care"
+    intro: "A general physician for fever, diabetes, blood pressure, thyroid and other adult medical conditions, with a 24-hour laboratory and ECG and Echo in the hospital."
     doctor_department: General Medicine
     lists:
       - heading: What we treat
@@ -38,7 +38,7 @@ items:
     slug: general-surgery
     description: General and laparoscopic (keyhole) surgery for hernia, appendix, gall bladder, breast and thyroid conditions.
     heading: General and laparoscopic *surgery*
-    intro: Surgical assessment, general and laparoscopic (keyhole) procedures, and care before and after surgery.
+    intro: "A general surgeon for hernia, appendicitis, gall bladder, breast and thyroid conditions, with laparoscopic (keyhole) and open surgery, and care before and after the operation."
     doctor_department: General Surgery
     lists:
       - heading: Conditions we treat
@@ -47,8 +47,8 @@ items:
   - name: Orthopaedics
     slug: orthopaedics
     description: Bone, joint and muscle conditions, fractures, and joint replacement surgery.
-    heading: Bone and joint *care*
-    intro: Diagnosis and treatment of bone, joint and muscle conditions and injuries, with X-ray and physiotherapy in the hospital.
+    heading: "Bone, joint and *orthopaedic* care"
+    intro: "An orthopaedic doctor for knee, back and joint pain, fractures and arthritis, with joint replacement surgery, X-ray and physiotherapy in the hospital."
     doctor_department: Orthopaedics
     lists:
       - heading: Conditions we treat
@@ -59,17 +59,17 @@ items:
     slug: dermatology
     description: Skin, hair and nail conditions.
     heading: Skin, hair and nail *care*
-    intro: Consultation for skin, hair and nail conditions. Call the hospital to check the dermatologist's consultation days.
+    intro: "Dermatology consultations for skin, hair and nail conditions. Call the hospital to check the dermatologist's consultation days."
   - name: Pulmonology
     slug: pulmonology
     description: Lung and breathing conditions.
     heading: Lung and breathing *care*
-    intro: Consultation for lung and breathing conditions. Call the hospital to check the pulmonologist's consultation days.
+    intro: "Pulmonology consultations for lung and breathing conditions. Call the hospital to check the pulmonologist's consultation days."
   - name: Physiotherapy
     slug: physiotherapy
     description: Recovery after surgery or injury, joint and back pain, and postpartum exercise.
     heading: Physiotherapy and *rehabilitation*
-    intro: Exercise-based care to restore movement, reduce pain and support recovery.
+    intro: "Physiotherapy for back, neck and joint pain, recovery after surgery or injury, and postpartum exercise, to restore movement and reduce pain."
     lists:
       - heading: What we help with
         items: [Back and neck pain, Joint and muscle pain, Recovery after surgery or injury, Postpartum exercise, Posture correction]
