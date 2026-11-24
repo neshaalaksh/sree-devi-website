@@ -1,0 +1,88 @@
+# "What we offer" cards on the homepage (12 cards, 3 per row).
+# Colour options: peach, salmon, sage, lilac, sage-2, cream.
+# Image and icon options are the six card photos and icons already in the site.
+items:
+  - name: Pregnancy & Delivery
+    text: Antenatal care, normal and caesarean delivery, 3D/4D scans, delivery 24×7
+    colour: peach
+    image: /assets/images/card-pregnancy.webp
+    icon: /assets/images/icon-pregnancy.webp
+    link_label: Explore services
+    link: /services/#pregnancy-delivery
+  - name: Fertility Centre
+    text: IUI, IVF, ICSI
+    colour: salmon
+    image: /assets/images/card-fertility.webp
+    icon: /assets/images/icon-fertility.webp
+    link_label: Visit Fertility Centre
+    link: /fertility-centre/
+  - name: Gynaecology
+    text: Menstrual, hormonal and menopause care
+    colour: sage
+    image: /assets/images/card-gynaecology.webp
+    icon: /assets/images/icon-gynaecology.webp
+    link_label: Explore services
+    link: /services/#gynaecology
+  - name: ENT
+    text: Ear, nose and throat care, hearing tests, hearing aid fitting
+    colour: lilac
+    image: /assets/images/card-surgery.webp
+    icon: /assets/images/icon-surgery.webp
+    link_label: Explore services
+    link: /services/#departments
+  - name: General Medicine
+    text: Adult medical care, ECG and Echo
+    colour: sage-2
+    image: /assets/images/card-scans.webp
+    icon: /assets/images/icon-scans.webp
+    link_label: Explore services
+    link: /services/#departments
+  - name: General Surgery
+    text: Surgical assessment and procedures
+    colour: cream
+    image: /assets/images/card-screening.webp
+    icon: /assets/images/icon-screening.webp
+    link_label: Explore services
+    link: /services/#surgery
+  - name: Orthopaedics
+    text: Bone, joint and muscle care
+    colour: peach
+    image: /assets/images/card-pregnancy.webp
+    icon: /assets/images/icon-pregnancy.webp
+    link_label: Explore services
+    link: /services/#departments
+  - name: Dermatology
+    text: Skin, hair and nail care
+    colour: salmon
+    image: /assets/images/card-fertility.webp
+    icon: /assets/images/icon-fertility.webp
+    link_label: Explore services
+    link: /services/#departments
+  - name: Pulmonology
+    text: Lung and breathing care
+    colour: sage
+    image: /assets/images/card-gynaecology.webp
+    icon: /assets/images/icon-gynaecology.webp
+    link_label: Explore services
+    link: /services/#departments
+  - name: Physiotherapy
+    text: Rehab, postpartum exercise
+    colour: lilac
+    image: /assets/images/card-surgery.webp
+    icon: /assets/images/icon-surgery.webp
+    link_label: Explore services
+    link: /services/#supportive-care
+  - name: Scans & Imaging
+    text: Ultrasound, Doppler, X-ray
+    colour: sage-2
+    image: /assets/images/card-scans.webp
+    icon: /assets/images/icon-scans.webp
+    link_label: Explore services
+    link: /services/#scans-diagnostics
+  - name: Lab & Pharmacy
+    text: 24-hour laboratory and in-house pharmacy
+    colour: cream
+    image: /assets/images/card-screening.webp
+    icon: /assets/images/icon-screening.webp
+    link_label: See facilities
+    link: /facilities/
