@@ -143,41 +143,63 @@ seoTitle: "Sree Devi Hospital, Trichy: Maternity & Fertility Care"
   </div>
 </section>
 
-{%- set vids = videos.items or [] %}
-{%- set arts = collections.articles or [] %}
-{%- if vids.length or arts.length or s.social.youtube %}
-<section class="section section--sage" id="blog">
+{%- set hArts = collections.articles or [] %}
+{%- if not hArts.length and settings.blog_preview %}{% set hArts = blogPreview.articles %}{% endif %}
+{%- if hArts.length %}
+{%- set hCats = [] %}{% for a in hArts %}{% if a.data.category and a.data.category not in hCats %}{% set hCats = (hCats.push(a.data.category), hCats) %}{% endif %}{% endfor %}
+<section class="section section--sage hb" id="blog">
   <div class="container">
-    <div class="split-head split-head--center">
-      <h2 class="h-display h-display--lg">From Our <em>Blog</em></h2>
-      <p class="split-head__strong">Helpful information for your health.</p>
+    <div class="hb__head">
+      <h2 class="hb__title">From Our <em>Blog</em></h2>
+      <p class="hb__sub">Helpful information for your health.</p>
     </div>
-    {%- if vids.length %}
-    {%- set cats = vids | uniqueBy("category") %}
-    {%- if cats.length > 1 %}
-    <div class="tabs" role="tablist" data-filter-group="home-blog">
-      <button role="tab" aria-selected="true" data-filter="all">All</button>
-      {%- for c in cats %}<button role="tab" aria-selected="false" data-filter="{{ c | slug2 }}">{{ c }}</button>{% endfor %}
+    <div class="hb__tabs" role="tablist" aria-label="Blog topics">
+      <button type="button" role="tab" aria-selected="true" data-hb="all">All</button>
+      {%- for c in hCats %}<button type="button" role="tab" aria-selected="false" data-hb="{{ c | slug2 }}">{{ c }}</button>{% endfor %}
     </div>
-    {%- endif %}
-    <div class="video-grid" data-filter-target="home-blog">
-      {%- for v in vids | limit(6) %}{% set id = v.url | youtubeId %}{% if id %}
-      <a class="video-card" href="{{ v.url }}" target="_blank" rel="noopener" data-cat="{{ v.category | slug2 }}">
-        <span class="video-card__thumb"><img src="https://i.ytimg.com/vi/{{ id }}/hqdefault.jpg" alt="" loading="lazy">{{ icon("play", 44, "video-card__play") }}</span>
-        <span class="video-card__meta">{{ v.category }}{% if v.date %} · {{ v.date | readableDate }}{% endif %}</span>
-        <span class="video-card__title">{{ v.title }}</span>
-      </a>
-      {%- endif %}{% endfor %}
+    {%- set groups = [{ key: "all", items: hArts }] %}
+    {%- for c in hCats %}{% set its = [] %}{% for a in hArts %}{% if a.data.category == c %}{% set its = (its.push(a), its) %}{% endif %}{% endfor %}{% set groups = (groups.push({ key: c | slug2, items: its }), groups) %}{% endfor %}
+    {%- for g in groups %}
+    <div class="hb__panel" data-hb-panel="{{ g.key }}"{% if not loop.first %} hidden{% endif %}>
+      {%- set f = g.items[0] %}
+      <article class="hb-feat">
+        <a class="hb-feat__img ph-grad ph-c0" href="{{ f.url if f.url != '#' else '/blog/' }}" aria-hidden="true" tabindex="-1">{% if f.data.cover %}<img src="{{ f.data.cover }}" alt="" loading="lazy">{% endif %}</a>
+        <p class="hb__meta">{{ f.data.author or "Sree Devi Care Team" }} • {{ f.date | readableDate }}</p>
+        <h3><a href="{{ f.url if f.url != '#' else '/blog/' }}">{{ f.data.title }}</a></h3>
+        <p class="hb__ex">{{ f.data.excerpt }}</p>
+        <a class="hb__more" href="{{ f.url if f.url != '#' else '/blog/' }}">Read more →</a>
+      </article>
+      {%- if g.items.length > 1 %}
+      <div class="hb-side">
+        {%- for b in g.items | limit(3) %}{% if not loop.first %}
+        {%- if loop.index > 2 %}<hr class="hb-side__rule">{% endif %}
+        <article class="hb-card">
+          <a class="hb-card__img ph-grad {{ 'ph-c1' if loop.index == 2 else 'ph-c4' }}" href="{{ b.url if b.url != '#' else '/blog/' }}" aria-hidden="true" tabindex="-1">{% if b.data.cover %}<img src="{{ b.data.cover }}" alt="" loading="lazy">{% endif %}</a>
+          <div>
+            <p class="hb__meta">{{ b.data.author or "Sree Devi Care Team" }} • {{ b.date | readableDate }}</p>
+            <h3><a href="{{ b.url if b.url != '#' else '/blog/' }}">{{ b.data.title }}</a></h3>
+            <p class="hb__ex">{{ b.data.excerpt }}</p>
+          </div>
+        </article>
+        {%- endif %}{% endfor %}
+      </div>
+      {%- endif %}
     </div>
-    {%- elif arts.length == 0 %}
-    <p class="empty">Health videos from our doctors are coming soon.</p>
-    {%- endif %}
-    <div class="btn-row center">
-      {%- if s.social.youtube %}<a class="btn btn--primary" href="{{ s.social.youtube }}" target="_blank" rel="noopener">{{ icon("youtube", 16) }} Watch on YouTube</a>{% endif %}
-      <a class="btn btn--outline" href="/blog/">Visit the Blog {{ icon("arrow", 16) }}</a>
-    </div>
+    {%- endfor %}
   </div>
 </section>
+<script>
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll(".hb__tabs [data-hb]"));
+  var panels = [].slice.call(document.querySelectorAll("[data-hb-panel]"));
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () {
+      tabs.forEach(function (x) { x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+      panels.forEach(function (p) { p.hidden = p.getAttribute("data-hb-panel") !== t.getAttribute("data-hb"); });
+    });
+  });
+})();
+</script>
 {%- endif %}
 
 {{ faqBlock(faqs.items | where("show_on", "home")) }}
