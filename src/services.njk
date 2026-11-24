@@ -84,11 +84,11 @@ seoTitle: "Hospital Services in Trichy · Sree Devi Hospital"
       <p class="svc__eyebrow">{{ dep.name }}</p>
       <h2 class="h-display h-display--lg">{{ (dep.heading or dep.name) | accent | safe }}</h2>
       <p class="svc__summary">{{ dep.intro or dep.description }}</p>
-      {%- for l in dep.lists %}
+      {%- if dep.lists %}
       <ul class="bullets">
-        {%- for it in l.items %}<li>{{ it }}</li>{% endfor %}
+        {%- for l in dep.lists %}{% for it in l.items %}<li>{{ it }}</li>{% endfor %}{% endfor %}
       </ul>
-      {%- endfor %}
+      {%- endif %}
       {%- if dep.note %}<p class="legal-note">{{ icon("info", 16) }} {{ dep.note }}</p>{% endif %}
       {{ btnCall("Call the Hospital", "btn--primary btn--sm") }}
     </div>
