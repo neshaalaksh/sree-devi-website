@@ -249,6 +249,28 @@ content:
           - { name: image, label: Photo, type: image }
           - { name: featured, label: "Show on homepage (first four)", type: boolean }
 
+  # ---------------------------------------------------- Homepage offer cards
+  - name: home_offer
+    label: Homepage "What we offer" cards
+    type: file
+    path: src/_data/home_offer.yml
+    fields:
+      - name: items
+        label: Cards
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Title, type: string }
+          - { name: text, label: Short description, type: string }
+          - name: colour
+            label: Card colour
+            type: select
+            options: { values: [peach, salmon, sage, sage-2, lilac, cream] }
+          - { name: image, label: Card photo, type: image }
+          - { name: icon, label: Icon, type: image }
+          - { name: link_label, label: Link text, type: string }
+          - { name: link, label: Link, type: string }
+
   # ------------------------------------------------- Departments & services
   - name: departments
     label: Departments

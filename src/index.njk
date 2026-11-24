@@ -71,18 +71,16 @@ seoTitle: "Sree Devi Hospital, Trichy: Maternity & Fertility Care"
       <p>Care for every stage of a woman's health, from adolescence and pregnancy to menopause, with specialists in {{ departments.items.length }} departments.</p>
     </div>
     <div class="offer-grid">
-      {%- for svc in collections.services %}{% if svc.data.show_on_home %}
-      {%- set d = svc.data %}
-      <a class="offer-card offer-card--{{ d.card_colour }}" href="{{ d.card_link }}">
-        {%- if d.card_image %}<img class="offer-card__photo" src="{{ d.card_image }}" alt="" loading="lazy">{% endif %}
-        {%- if d.card_icon %}<img class="offer-card__icon" src="{{ d.card_icon }}" alt="" width="44" height="44" loading="lazy">{% endif %}
+      {%- for d in home_offer.items %}
+      <a class="offer-card offer-card--{{ d.colour }}" href="{{ d.link }}">
+        {%- if d.image %}<img class="offer-card__photo" src="{{ d.image }}" alt="" width="205" height="300" loading="lazy">{% endif %}
+        {%- if d.icon %}<span class="offer-card__icon"><img src="{{ d.icon }}" alt="" loading="lazy"></span>{% endif %}
         <h3>{{ d.name }}</h3>
-        <p>{{ d.summary }}</p>
-        <span class="offer-card__link">{{ d.card_link_label }} →</span>
+        <p>{{ d.text }}</p>
+        <span class="offer-card__link">{{ d.link_label }} &nbsp;→</span>
       </a>
-      {%- endif %}{% endfor %}
+      {%- endfor %}
     </div>
-    <p class="center more-link"><a class="link-arrow" href="/services/#departments">See all {{ departments.items.length }} departments {{ icon("arrow", 16) }}</a></p>
   </div>
 </section>
 
