@@ -7,16 +7,16 @@ items:
   - name: Infertility
     description: Fertility evaluation, counselling and treatment including IUI, IVF and ICSI.
   - name: ENT
-    description: Ear, nose and throat conditions, with audiometry and hearing aid fitting.
+    description: Ear, nose, throat, and head and neck conditions, with hearing tests and hearing aid fitting.
   - name: General Medicine
-    description: Diagnosis and treatment of common adult medical conditions.
+    description: Fever, diabetes, blood pressure, thyroid and other adult medical conditions, with a 24-hour laboratory and ECG and Echo.
   - name: General Surgery
-    description: Surgical assessment and procedures.
+    description: General and laparoscopic (keyhole) surgery for hernia, appendix, gall bladder, breast and thyroid conditions.
   - name: Orthopaedics
-    description: Bone, joint and muscle conditions.
+    description: Bone, joint and muscle conditions, fractures, and joint replacement surgery.
   - name: Dermatology
     description: Skin, hair and nail conditions.
   - name: Pulmonology
     description: Lung and breathing conditions.
   - name: Physiotherapy
-    description: Rehabilitation, including postpartum exercise.
+    description: Recovery after surgery or injury, joint and back pain, and postpartum exercise.

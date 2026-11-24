@@ -3,9 +3,10 @@ name: Scans & Diagnostics
 published: true
 order: 6
 heading: Scans & *diagnostics*.
-summary: Ultrasound, scans and laboratory tests.
+summary: Ultrasound and pregnancy scans, X-ray, ECG and Echo, and a laboratory open 24 hours, all in the hospital.
 items:
   - Ultrasound scans
+  - Pregnancy and anomaly scans
   - Doppler and 3D/4D scans
   - CTG and NST monitoring
   - X-ray

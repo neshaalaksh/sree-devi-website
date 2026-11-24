@@ -3,7 +3,7 @@ name: Fertility
 published: true
 order: 2
 heading: Fertility *care* & treatment.
-summary: Fertility evaluation, counselling and treatments.
+summary: Fertility evaluation and counselling for both partners, and treatment including IUI, IVF and ICSI.
 items:
   - Infertility evaluation and counselling
   - Ovulation induction
