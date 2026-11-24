@@ -60,12 +60,12 @@ The real building photo is used on the homepage, About page and the "We are here
 - Tamil / English toggle (English only for launch)
 - Online booking system (later)
 
-## Draft content for pages not yet built
+## Draft source text (not published)
 
-These files hold reviewed-for-wording text for pages that the developer will build. They are not published: nothing in `src/content` creates a page on its own.
+The site keeps its existing pages; no separate department, treatment or Emergency pages are planned. These files hold checked source text that will be moved into sections of the existing pages (mainly Services and the Fertility Centre). Nothing in `src/content` creates a page on its own.
 
-- `src/content/departments/*.md`: 11 department pages (planned URLs /services/<file name>/)
-- `src/content/fertility-treatments/*.md`: IVF & ICSI, IUI, Male infertility (planned URLs /fertility-centre/<file name>/). Need Dr. Punitha Rajesh's review before publishing.
-- `src/_data/emergency.yml`: Emergency page text (planned URL /emergency/)
+- `src/content/departments/*.md`: department text (for Services)
+- `src/content/fertility-treatments/*.md`: IVF & ICSI, IUI, Male infertility (for the Fertility Centre). Needs Dr. Punitha Rajesh's review before use.
+- `src/_data/emergency.yml`: 24-hour and emergency text
 
 Doctors are shown on the website only when a TNMC registration number is on file.
