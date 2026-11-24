@@ -329,6 +329,10 @@ button { font: inherit; }
 .svc__media { display: grid; gap: 16px; }
 .svc__media img { width: 100%; object-fit: cover; border-radius: 120px 24px 24px 24px; aspect-ratio: 4 / 3; }
 .svc--flip .svc__media img { border-radius: 24px 120px 24px 24px; }
+.svc__media { grid-template-columns: minmax(0, 1fr); }
+.svc__ph { display: block; width: 100%; aspect-ratio: 668 / 376; min-height: 240px; border-radius: 190px 190px 20px 20px; }
+.svc__docs { font-size: .95rem; color: var(--ink); margin: 0 0 1em; }
+.svc__docs a { color: var(--plum); font-weight: 600; }
 .svc__media--two img:first-child { width: 55%; aspect-ratio: 346 / 183; border-radius: 16px 60px 16px 16px; }
 .svc__media--two img:last-child { aspect-ratio: 16 / 6; border-radius: 0 0 0 120px; border-radius: 120px 16px 16px 0; }
 .svc__summary { font-size: 1.15rem; color: var(--ink); margin-bottom: 1em; }
@@ -359,14 +363,6 @@ button { font: inherit; }
 .dept-card { position: relative; display: block; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 44px; text-decoration: none; color: var(--text); transition: border-color .2s, transform .2s; }
 .dept-card:hover { border-color: var(--salmon); transform: translateY(-2px); }
 .dept-card__go { position: absolute; left: 20px; bottom: 16px; color: var(--plum); }
-.dept-sec__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.dept-sec__head .h-display { margin-bottom: .4em; }
-.dept-sec__docs { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; font-size: .9rem; color: var(--ink); margin: 0 0 20px; }
-.dept-sec__docs a { color: var(--plum); font-weight: 600; }
-.dept-sec__body { display: grid; gap: 24px; }
-.dept-sec__list h3 { font: 700 1rem/1.3 var(--sans); color: var(--ink); margin: 0 0 10px; }
-.dept-sec__body .legal-note { margin: 0; }
-@media (max-width: 860px) { .dept-sec__grid { grid-template-columns: 1fr; gap: 28px; } }
 .dept-card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; margin-bottom: .3em; }
 .dept-card p { font-size: .85rem; margin: 0; }
 .svc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
