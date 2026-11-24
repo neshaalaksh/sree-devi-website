@@ -74,7 +74,6 @@ seoTitle: "Hospital Services in Trichy · Sree Devi Hospital"
 {%- set nSvc = collections.services.length %}
 {%- for dep in deptSections %}
 {%- set i = nSvc + loop.index %}
-{%- set docs = collections.doctors | where("data.department", dep.doctor_department) if dep.doctor_department else [] %}
 <section class="section {{ 'section--sage' if i % 2 == 0 else 'section--cream' }}" id="{{ dep.slug }}" style="scroll-margin-top:130px">
   {%- if loop.first %}<span id="departments" style="position:relative;top:-130px"></span>{% endif %}
   <div class="container svc{% if i % 2 == 0 %} svc--flip{% endif %}">
@@ -90,8 +89,6 @@ seoTitle: "Hospital Services in Trichy · Sree Devi Hospital"
         {%- for it in l.items %}<li>{{ it }}</li>{% endfor %}
       </ul>
       {%- endfor %}
-      {%- if docs.length %}<p class="svc__docs">{% for d in docs %}<a href="/doctors/">{{ d.data.name }}</a>{% if d.data.qualifications %}, {{ d.data.qualifications }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</p>{% endif %}
-      {%- if dep.practitioner %}<p class="svc__docs">{{ dep.practitioner }}</p>{% endif %}
       {%- if dep.note %}<p class="legal-note">{{ icon("info", 16) }} {{ dep.note }}</p>{% endif %}
       {{ btnCall("Call the Hospital", "btn--primary btn--sm") }}
     </div>
