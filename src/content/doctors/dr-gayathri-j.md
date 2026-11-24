@@ -3,7 +3,7 @@ name: Dr. Gayathri J
 published: true
 order: 5
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-gayathri-j.webp
 designation: ""
 department: Psychiatry
 specialties:

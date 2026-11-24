@@ -3,7 +3,7 @@ name: Dr. D. Uma
 published: true
 order: 7
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-d-uma.webp
 designation: ""
 department: General Surgery
 specialties:

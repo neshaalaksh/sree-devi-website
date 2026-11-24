@@ -3,7 +3,7 @@ name: Dr. Arthy E
 published: true
 order: 4
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-arthy-e.webp
 designation: ""
 department: Anaesthesia
 specialties:

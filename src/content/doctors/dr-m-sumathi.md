@@ -3,7 +3,7 @@ name: Dr. M. Sumathi
 published: true
 order: 3
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-m-sumathi.webp
 designation: ""
 department: Radiology
 specialties:

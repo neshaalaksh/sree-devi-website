@@ -3,7 +3,7 @@ name: Dr. Punitha Rajesh
 published: true
 order: 1
 lead: true
-photo: ""
+photo: /assets/images/doctors/dr-punitha-rajesh.webp
 designation: ""
 department: Obstetrics & Gynaecology
 specialties:
