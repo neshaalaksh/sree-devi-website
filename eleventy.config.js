@@ -24,10 +24,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("src/assets/css/");
 
   // ---------- Collections ----------
+  // Doctors appear on the site only with a TNMC registration number
+  // (NMC guidelines require name, qualification and registration number).
   eleventyConfig.addCollection("doctors", (api) =>
     api
       .getFilteredByGlob("src/content/doctors/*.md")
-      .filter((d) => d.data.published !== false)
+      .filter((d) => d.data.published !== false && String(d.data.registration_no || "").trim())
       .sort(byOrder)
   );
   eleventyConfig.addCollection("services", (api) =>

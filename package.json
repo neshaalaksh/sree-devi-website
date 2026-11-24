@@ -5,7 +5,9 @@
   "description": "Sree Devi Hospital & Fertility Centre website (Eleventy + Pages CMS)",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "qa": "node scripts/qa.mjs",
+    "check": "eleventy && node scripts/qa.mjs"
   },
   "engines": {
     "node": ">=18"

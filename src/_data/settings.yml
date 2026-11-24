@@ -4,7 +4,7 @@ short_name: Sree Devi Hospital
 tagline: Your health is our motive
 established_year: "2005"
 established_date: 8 September 2005
-site_url: ""
+site_url: "https://sreedevihospital.com"
 
 address:
   line1: No 16/4, Gandhi Road
@@ -39,8 +39,8 @@ social:
   facebook: ""
 
 registrations:
-  clinical_establishment: ""
-  art_clinic: ""
+  clinical_establishment: "TRCYALL20200020560"
+  art_clinic: "Level II, registered under the ART (Regulation) Act, 2021"
 
 # Optional banner shown at the very top of every page (e.g. holiday timings)
 notice:
@@ -51,8 +51,8 @@ notice:
 home:
   hero_eyebrow: Trichy · Since 2005
   hero_title: Your health is our *motive*
-  hero_text: Women's healthcare, pregnancy care and fertility treatment, with specialists across ten departments, close to home.
+  hero_text: Care for women and families across Trichy since 2005, with specialists across 10 departments, close to home.
   intro_title: Healthcare that feels closer to *home*.
-  intro_text: Since 2005, Sree Devi Hospital & Fertility Centre has cared for women and families in Srirangam, with services spanning pregnancy, fertility, gynaecology, surgery and diagnostics, alongside specialists in ENT, general medicine and more.
+  intro_text: Since 2005, Sree Devi Hospital & Fertility Centre has cared for women and families across Trichy, with services spanning pregnancy, fertility, gynaecology, surgery and diagnostics, alongside specialists in ENT, general medicine and more.
   doctors_title: Meet the *doctors* who care for you.
   doctors_text: Our consultants cover obstetrics and gynaecology, fertility, ENT, anaesthesia, radiology and psychiatry. Every doctor listed here has shared their own qualifications and approach to care, so you know who you will be seeing.

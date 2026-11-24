@@ -9,7 +9,7 @@ items:
   - Normal delivery
   - Caesarean delivery
   - High-risk pregnancy care
-  - Painless delivery (epidural)
+  - Epidural pain relief in labour
   - Prenatal screening and genetic testing
   - Anomaly scans
   - Vaccination during pregnancy
