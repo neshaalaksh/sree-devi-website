@@ -291,6 +291,7 @@ content:
           - { name: link, label: "Link instead of own section (optional)", type: string }
           - { name: heading, label: "Section heading (*word* = italic)", type: string }
           - { name: intro, label: Section intro, type: text }
+          - { name: image, label: Section photo, type: image }
           - { name: doctor_department, label: "Show doctors from department", type: string }
           - name: lists
             label: Lists

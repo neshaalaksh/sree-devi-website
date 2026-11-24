@@ -28,7 +28,6 @@ seoTitle: "Hospital Services in Trichy · Sree Devi Hospital"
       {%- for svc in collections.services %}
       <li><a href="#{{ svc.page.fileSlug }}">{{ svc.data.name }}</a></li>
       {%- endfor %}
-      <li><a href="#departments">All Departments</a></li>
       {%- for dep in departments.items %}{% if not dep.link %}<li><a href="#{{ dep.slug }}">{{ dep.name }}</a></li>{% endif %}{% endfor %}
       <li><a href="#hospital-services">Diagnostics &amp; Facilities</a></li>
     </ul>
@@ -71,47 +70,33 @@ seoTitle: "Hospital Services in Trichy · Sree Devi Hospital"
 {%- endif %}
 {%- endfor %}
 
-<section class="section section--sage" id="departments" style="scroll-margin-top:130px">
-  <div class="container">
-    <p class="eyebrow">Departments</p>
-    <h2 class="h-display h-display--lg">Specialists across <em>{{ departments.items.length }} departments</em>.</h2>
-    <p class="lead" style="margin-bottom:32px">Beyond women's health, the hospital has specialists for the whole family.</p>
-    <div class="dept-grid">
-      {%- for dep in departments.items %}
-      <a class="dept-card" href="{{ dep.link or ('#' + dep.slug) }}"><h3>{{ dep.name }}</h3><p>{{ dep.description }}</p><span class="dept-card__go">{{ icon("arrow", 16) }}</span></a>
-      {%- endfor %}
-    </div>
-  </div>
-</section>
-
 {%- set deptSections = [] %}{% for dep in departments.items %}{% if not dep.link %}{% set deptSections = (deptSections.push(dep), deptSections) %}{% endif %}{% endfor %}
+{%- set nSvc = collections.services.length %}
 {%- for dep in deptSections %}
-{%- set docs = collections.doctors | where("data.department", dep.doctor_department) if dep.doctor_department else [] %}
-<section class="section dept-sec {{ 'section--cream' if loop.index % 2 else 'section--sage' }}" id="{{ dep.slug }}" style="scroll-margin-top:130px">
-  <div class="container dept-sec__grid">
-    <div class="dept-sec__head">
+{%- set i = nSvc + loop.index %}
+<section class="section {{ 'section--sage' if i % 2 == 0 else 'section--cream' }}" id="{{ dep.slug }}" style="scroll-margin-top:130px">
+  {%- if loop.first %}<span id="departments" style="position:relative;top:-130px"></span>{% endif %}
+  <div class="container svc{% if i % 2 == 0 %} svc--flip{% endif %}">
+    <div class="svc__media">
+      {%- if dep.image %}<img src="{{ dep.image }}" alt="" loading="lazy">{% else %}<div class="svc__ph ph-grad ph-c{{ loop.index0 % 5 }}" aria-hidden="true"></div>{% endif %}
+    </div>
+    <div class="svc__copy">
       <p class="svc__eyebrow">{{ dep.name }}</p>
       <h2 class="h-display h-display--lg">{{ (dep.heading or dep.name) | accent | safe }}</h2>
       <p class="svc__summary">{{ dep.intro or dep.description }}</p>
-      {%- if docs.length %}
-      <p class="dept-sec__docs">{{ icon("stethoscope", 16) }} <span>{% for d in docs %}<a href="/doctors/">{{ d.data.name }}</a>{% if d.data.qualifications %}, {{ d.data.qualifications }}{% endif %}{% if not loop.last %} · {% endif %}{% endfor %}</span></p>
+      {%- if dep.lists %}
+      <ul class="bullets">
+        {%- for l in dep.lists %}{% for it in l.items %}<li>{{ it }}</li>{% endfor %}{% endfor %}
+      </ul>
       {%- endif %}
-      {%- if dep.practitioner %}<p class="dept-sec__docs">{{ icon("stethoscope", 16) }} <span>{{ dep.practitioner }}</span></p>{% endif %}
+      {%- if dep.note %}<p class="legal-note">{{ icon("info", 16) }} {{ dep.note }}</p>{% endif %}
       {{ btnCall("Call the Hospital", "btn--primary btn--sm") }}
     </div>
-    {%- if dep.lists or dep.note %}
-    <div class="dept-sec__body">
-      {%- for l in dep.lists %}
-      <div class="dept-sec__list"><h3>{{ l.heading }}</h3><ul class="bullets">{% for it in l.items %}<li>{{ it }}</li>{% endfor %}</ul></div>
-      {%- endfor %}
-      {%- if dep.note %}<p class="legal-note">{{ icon("info", 16) }} {{ dep.note }}</p>{% endif %}
-    </div>
-    {%- endif %}
   </div>
 </section>
 {%- endfor %}
 
-<section class="section {{ 'section--sage' if deptSections.length % 2 else 'section--cream' }}" id="hospital-services" style="scroll-margin-top:130px">
+<section class="section {{ 'section--sage' if (nSvc + deptSections.length + 1) % 2 == 0 else 'section--cream' }}" id="hospital-services" style="scroll-margin-top:130px">
   <div class="container">
     <p class="eyebrow">Diagnostics &amp; facilities</p>
     <h2 class="h-display h-display--lg">Services under <em>one roof</em>.</h2>
