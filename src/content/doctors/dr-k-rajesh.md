@@ -16,7 +16,7 @@ languages:
   - Tamil
   - English
 bio: Dr. K. Rajesh is an ENT surgeon with 24 years of experience, including 17 years as Professor and Head of the Department of ENT at two medical colleges. He treats ear, nose, throat, and head and neck conditions.
-approach: Personalised one-to-one attention, a caring attitude, and the best care at an affordable cost.
+approach: ""
 procedures:
   - Tonsillectomy
   - Tympanoplasty

@@ -3,9 +3,9 @@ name: Gynaecology
 published: true
 order: 3
 heading: Women's *health* & gynaecology.
-summary: Women's health, menstrual concerns and more.
+summary: Care for menstrual, hormonal and reproductive health concerns, from adolescence through menopause.
 items:
-  - Menstrual problems and PCOS
+  - Menstrual problems and PCOD / PCOS
   - Menopause
   - Endometriosis
   - PID

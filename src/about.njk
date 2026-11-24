@@ -3,21 +3,22 @@ layout: layouts/base.njk
 title: About Us
 pageClass: about
 permalink: /about/
-description: Sree Devi Hospital & Fertility Centre has cared for women and families in Srirangam, Trichy since 8 September 2005.
+description: Sree Devi Hospital & Fertility Centre on Gandhi Road, Srirangam, has cared for families across Trichy since 8 September 2005. Departments, doctors and registrations.
+seoTitle: "About Sree Devi Hospital, Trichy · Since 2005"
 ---
 {%- from "partials/icons.njk" import icon -%}
 {%- from "partials/components.njk" import btnCall, btnWhatsApp, doctorPhoto with context -%}
 {%- set s = settings -%}
 {%- set lead = collections.doctors | where("data.lead", true) -%}
 {%- set regs = [] -%}
-{%- if s.registrations.clinical_establishment %}{% set regs = (regs.push({ title: "Clinical establishment", no: s.registrations.clinical_establishment }), regs) %}{% endif -%}
-{%- if s.registrations.art_clinic %}{% set regs = (regs.push({ title: "ART clinic", no: s.registrations.art_clinic }), regs) %}{% endif -%}
+{%- if s.registrations.clinical_establishment %}{% set regs = (regs.push({ title: "Clinical establishment", text: "Reg. No. " + s.registrations.clinical_establishment }), regs) %}{% endif -%}
+{%- if s.registrations.art_clinic %}{% set regs = (regs.push({ title: "ART clinic", text: s.registrations.art_clinic }), regs) %}{% endif -%}
 
 <section class="ab-hero">
   <div class="container ab-hero__grid">
     <div>
       <p class="eyebrow eyebrow--caps">About us</p>
-      <h1 class="h-hero">Caring for Srirangam <em>since {{ s.established_year }}</em></h1>
+      <h1 class="h-hero">Caring for families across Trichy <em>since {{ s.established_year }}</em></h1>
       <p class="lead">{{ s.name }} opened on {{ s.established_date }} to serve the community of Srirangam and Trichy, caring for women and families close to home.</p>
       <div class="btn-row">{{ btnCall() }} {{ btnWhatsApp() }}</div>
     </div>
@@ -35,7 +36,7 @@ description: Sree Devi Hospital & Fertility Centre has cared for women and famil
     <div class="ab-side"><b>01</b>Our story</div>
     <article>
       <h2 class="h-display h-display--lg">A hospital built around <em>women and families</em></h2>
-      <p class="drop">The hospital was started to do right by the community. When it opened in {{ s.established_year }}, it brought the best technologies of the time to Srirangam, so families could find good care close to home.</p>
+      <p class="drop">The hospital was started to do right by the community. It opened on Gandhi Road, Srirangam, in {{ s.established_year }} so that families in Srirangam and across Trichy could find good care close to home.</p>
       <p>Today the hospital offers pregnancy and delivery care, a dedicated Fertility Centre, gynaecology and gynaecological surgery, scans and diagnostics, and specialists across {{ departments.items.length }} departments, with emergency and delivery care available 24 hours a day.</p>
       <blockquote class="ab-pull">{{ s.tagline }}.</blockquote>
       <p>From routine check-ups to delivery, surgery and fertility treatment, our teams work together under one roof, so care stays familiar and continuous.</p>
@@ -55,14 +56,14 @@ description: Sree Devi Hospital & Fertility Centre has cared for women and famil
 <section class="section section--cream">
   <div class="container ab-values__grid">
     <div class="ab-values__intro">
-      <span class="eyebrow eyebrow--caps">What we want you to feel</span>
-      <h2 class="h-display h-display--lg">Safe. Affordable. <em>Relieved.</em></h2>
-      <p class="lead">Three promises that shape every consultation, every delivery and every conversation at Sree Devi.</p>
+      <span class="eyebrow eyebrow--caps">How we work</span>
+      <h2 class="h-display h-display--lg">What you can <em>expect</em></h2>
+      <p class="lead">How care works at Sree Devi, from the first call to discharge.</p>
     </div>
     <div class="ab-vgrid">
-      <div class="ab-v"><i>i.</i><h3>Safe</h3><p>Experienced specialists, 24×7 emergency and delivery care, ICU/HDU, and an in-house laboratory and pharmacy.</p></div>
-      <div class="ab-v"><i>ii.</i><h3>Affordable</h3><p>Care planned around your needs. All health insurance accepted, with a cashless facility.</p></div>
-      <div class="ab-v"><i>iii.</i><h3>Relieved</h3><p>Clear information, doctors who explain, and a team that guides you through every step.</p></div>
+      <div class="ab-v"><i>i.</i><h3>Care round the clock</h3><p>Emergency and delivery care 24 hours, 7 days, with ICU/HDU, an in-house laboratory open 24 hours and a pharmacy.</p></div>
+      <div class="ab-v"><i>ii.</i><h3>Costs explained first</h3><p>Fees are not listed on the website. Reception gives an estimate before your consultation or procedure, and all health insurance is accepted with a cashless facility.</p></div>
+      <div class="ab-v"><i>iii.</i><h3>Doctors who explain</h3><p>Clear information, doctors who explain, and a team that guides you through every step.</p></div>
     </div>
   </div>
 </section>
@@ -105,7 +106,7 @@ description: Sree Devi Hospital & Fertility Centre has cared for women and famil
   <div class="container">
     <div class="sec-head"><div><span class="eyebrow eyebrow--caps">Registrations</span><h2 class="h-display h-display--lg">Registrations &amp; <em>accreditations</em></h2></div><p>Official details, shown for patient reassurance.</p></div>
     <div class="ab-certs">
-      {%- for r in regs %}<div class="ab-cert"><div>{{ icon("file", 26) }}<h3>{{ r.title }}</h3><p>Reg. No. {{ r.no }}</p></div></div>{% endfor %}
+      {%- for r in regs %}<div class="ab-cert"><div>{{ icon("file", 26) }}<h3>{{ r.title }}</h3><p>{{ r.text }}</p></div></div>{% endfor %}
     </div>
   </div>
 </section>

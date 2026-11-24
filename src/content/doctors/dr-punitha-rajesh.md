@@ -17,7 +17,7 @@ languages:
   - Tamil
   - English
 bio: Dr. Punitha Rajesh is an obstetrician and gynaecologist with 25 years of experience in obstetrics, gynaecology, infertility and IVF, and laparoscopic and endoscopic surgery. She cares for women with high-risk pregnancies, common gynaecological conditions and infertility.
-approach: I take a professional approach by educating my patients, because knowledge is power. I keep my own knowledge up to date, train my juniors and staff, and believe in giving 100% care and earning my patients' trust.
+approach: ""
 procedures:
   - High-risk obstetrics
   - Infertility treatment
@@ -27,7 +27,7 @@ conditions:
   - High-risk pregnancy
   - Common gynaecological conditions
   - Infertility
-case_note: Around 15,000 deliveries and surgeries
+case_note: ""
 previous_positions:
   - Consultant, Seahorse Hospital (3 years)
 memberships:

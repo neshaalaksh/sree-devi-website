@@ -1,0 +1,23 @@
+# Emergency & 24-hour care page. Edit through the CMS (Emergency page).
+title: Emergency and delivery care, 24 hours a *day*
+intro: Emergency and delivery care is available 24 hours a day, 7 days a week, including Sundays and holidays. Call the hospital on the way so the team can prepare.
+available_title: Available round the clock
+available:
+  - title: Emergency care
+    text: 24 hours, 7 days.
+  - title: Labour and delivery
+    text: 24 hours, 7 days.
+  - title: ICU / HDU
+    text: Intensive and high-dependency care for patients who need close monitoring.
+  - title: Laboratory
+    text: In-house laboratory, open 24 hours.
+  - title: Admission
+    text: Admissions are taken at any time.
+ambulance_note: The hospital does not run an ambulance service.
+public_ambulance_note: In a medical emergency, the 108 ambulance service can be called free of charge anywhere in Tamil Nadu.
+bring_title: What to bring if you can
+bring:
+  - Previous medical reports, scan reports and discharge summaries
+  - Current prescriptions and medicines
+  - A government-issued ID
+  - Insurance card or policy details

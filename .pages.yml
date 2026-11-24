@@ -51,14 +51,13 @@ content:
             - Paediatrics
       - { name: specialties, label: "Specialty tags (first two show on the card)", type: string, list: true }
       - { name: qualifications, label: "Qualifications (e.g. MBBS, MS (OG), DNB)", type: string, required: true }
-      - { name: registration_no, label: TNMC registration number, type: string }
+      - { name: registration_no, label: "TNMC registration number (required: doctors without one are not shown on the website)", type: string, required: true }
       - { name: experience, label: "Experience (e.g. 25 years)", type: string }
       - { name: languages, label: Languages spoken, type: string, list: true }
       - { name: bio, label: "About the doctor (3 to 5 lines)", type: text, required: true }
       - { name: approach, label: "Approach to care, in the doctor's words (shown as a quote)", type: text }
       - { name: procedures, label: Procedures and treatments, type: string, list: true }
       - { name: conditions, label: Conditions commonly treated, type: string, list: true }
-      - { name: case_note, label: "Deliveries / surgeries performed (optional, e.g. Around 15,000 deliveries)", type: string }
       - { name: previous_positions, label: Previous positions, type: string, list: true }
       - { name: memberships, label: "Memberships (e.g. FOGSI, IMA)", type: string, list: true }
       - { name: honours, label: Roles, awards and honours, type: string, list: true }

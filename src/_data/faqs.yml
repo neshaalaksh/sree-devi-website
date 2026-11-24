@@ -39,3 +39,33 @@ items:
   - question: What happens after my enquiry?
     answer: Reception will help you book a consultation on an OPD day. At the consultation, the doctor will discuss your history and explain any tests or next steps.
     show_on: [fertility, faq]
+  - question: What is the difference between IVF and ICSI?
+    answer: In IVF, eggs and sperm are placed together in the laboratory to fertilise. In ICSI, an embryologist injects one sperm into each egg. Your doctor will advise which is suitable, for example when there are concerns about sperm count or movement.
+    show_on: [fertility, faq]
+  - question: What does IVF treatment involve?
+    answer: "IVF usually has five stages: medicines to help the ovaries produce eggs, with scans and blood tests to check the response; egg collection, usually under anaesthesia; fertilisation in the laboratory by IVF or ICSI; transfer of an embryo to the uterus; and a pregnancy test about two weeks later. Suitable extra embryos can be frozen for future use."
+    show_on: [fertility, faq]
+  - question: Should both partners be tested?
+    answer: Yes. Fertility problems can involve either partner, so the Fertility Centre assesses both from the start. This avoids delays and helps the doctor choose the right treatment. Consultations and test results are confidential.
+    show_on: [fertility, faq]
+  - question: Do I need to sign a consent form for fertility treatment?
+    answer: Yes. Under the Assisted Reproductive Technology (Regulation) Act, 2021, treatment needs your written informed consent. Your doctor will explain the procedure, its risks and what to expect before you decide. The Fertility Centre is registered as an ART clinic (Level II).
+    show_on: [fertility, faq]
+  - question: How much does fertility treatment cost?
+    answer: Costs depend on the treatment plan and the medicines needed, so fees are not listed on this website. Ask for an estimate at your consultation.
+    show_on: [fertility, faq]
+  - question: What should I bring in an emergency?
+    answer: If you can, bring previous medical reports, scan reports and discharge summaries, your current prescriptions and medicines, a government-issued ID, and your insurance card or policy details. Call the hospital on the way so the team can prepare.
+    show_on: [faq]
+  - question: Does the hospital have an ambulance?
+    answer: The hospital does not run an ambulance service. In a medical emergency, the 108 ambulance service can be called free of charge anywhere in Tamil Nadu.
+    show_on: [faq]
+  - question: Can I be admitted at night?
+    answer: Yes. Admissions are taken at any time, and emergency care, labour and delivery, ICU/HDU and the laboratory are available 24 hours.
+    show_on: [faq]
+  - question: Is physiotherapy available?
+    answer: "Yes. The hospital's physiotherapist, S. Muthukumarasamy (BPT, MIAP), helps with back and neck pain, joint and muscle pain, recovery after surgery or injury, postpartum exercise and posture correction."
+    show_on: [faq]
+  - question: How do I contact the lab or pharmacy?
+    answer: Call or WhatsApp the Lab & Pharmacy line on +91 73058 79055, or email sreedevihospitallab@gmail.com. The laboratory is open 24 hours. WhatsApp messages are for enquiries only.
+    show_on: [faq]
