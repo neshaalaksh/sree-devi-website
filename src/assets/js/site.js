@@ -143,9 +143,17 @@
 
       var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      // Endless loop needs enough circles to fill both sides of the centre; fewer than that stays a plain, clamped row
+      var loop = cfN >= 8;
       var pos = 0;
       var activeIdx = -1;
       var pending = false;
+      var prevO = [];
+      var mod = function (v) { return ((v % cfN) + cfN) % cfN; };
+      // Offset from the centre, wrapped round the ring into [-n/2, n/2)
+      var ringOffset = function (v) { return v - cfN * Math.round(v / cfN); };
+      // Same position as t, but the copy nearest the current one, so the row takes the short way round
+      var nearest = function (t) { return t + cfN * Math.round((pos - t) / cfN); };
 
       var q = function (el, sel) { return el.querySelector(sel); };
       var setText = function (sel, value) { q(cfCaption, sel).textContent = value; };
@@ -159,26 +167,49 @@
         q(cfCaption, "[data-cf-link]").setAttribute("href", item.getAttribute("data-href"));
       };
 
+      var place = function (item, o, base) {
+        var a = Math.abs(o);
+        var x = (o < 0 ? -1 : 1) * interp(XS, a) * base;
+        item.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + interp(SIZES, a).toFixed(3) + ")";
+        item.style.opacity = interp(OPAC, a).toFixed(3);
+        item.style.zIndex = String(Math.round(100 - a * 10));
+      };
+
       var render = function () {
         pending = false;
         var base = cfItems[0].offsetWidth;
-        var idx = clamp(Math.round(pos), 0, cfN - 1);
+        if (loop && Math.abs(pos) > cfN * 4) pos -= cfN * Math.round(pos / cfN); // keep the number small, same picture
+        var idx = loop ? mod(Math.round(pos)) : clamp(Math.round(pos), 0, cfN - 1);
+        var offsets = cfItems.map(function (item, i) { return loop ? ringOffset(i - pos) : i - pos; });
+        var jumped = [];
+        if (loop) {
+          // A circle that goes round the back restarts at the hidden far side (no transition), so it fades in
+          // there instead of sliding across the whole row
+          cfItems.forEach(function (item, i) {
+            var prev = prevO[i];
+            if (prev !== undefined && Math.abs(offsets[i] - prev) > cfN / 2) {
+              item.style.transition = "none";
+              place(item, offsets[i] > prev ? prev + cfN : prev - cfN, base);
+              jumped.push(item);
+            }
+          });
+          if (jumped.length) void cfStage.offsetWidth;
+          jumped.forEach(function (item) { item.style.transition = ""; });
+        }
         cfItems.forEach(function (item, i) {
-          var o = i - pos;
+          var o = offsets[i];
           var a = Math.abs(o);
-          var x = (o < 0 ? -1 : 1) * interp(XS, a) * base;
           var visible = a <= 3.5;
-          item.style.transform = "translateX(" + x.toFixed(1) + "px) scale(" + interp(SIZES, a).toFixed(3) + ")";
-          item.style.opacity = interp(OPAC, a).toFixed(3);
-          item.style.zIndex = String(Math.round(100 - a * 10));
+          prevO[i] = o;
+          place(item, o, base);
           item.classList.toggle("is-active", i === idx);
           var link = item.querySelector("a");
           link.setAttribute("tabindex", visible ? "0" : "-1");
           if (visible) { item.removeAttribute("aria-hidden"); } else { item.setAttribute("aria-hidden", "true"); }
         });
         cfDots.forEach(function (d, i) { d.setAttribute("aria-current", i === idx ? "true" : "false"); });
-        cfPrev.setAttribute("aria-disabled", String(idx <= 0));
-        cfNext.setAttribute("aria-disabled", String(idx >= cfN - 1));
+        cfPrev.setAttribute("aria-disabled", String(!loop && idx <= 0));
+        cfNext.setAttribute("aria-disabled", String(!loop && idx >= cfN - 1));
         if (idx !== activeIdx) {
           activeIdx = idx;
           showCaption(idx);
@@ -190,7 +221,17 @@
         window.requestAnimationFrame(render);
       };
       var goTo = function (i) {
-        pos = clamp(i, 0, cfN - 1);
+        pos = loop ? nearest(i) : clamp(i, 0, cfN - 1);
+        schedule();
+      };
+      var step = function (dir) {
+        if (loop) {
+          pos = Math.round(pos) + dir;
+        } else {
+          var t = activeIdx + dir;
+          if (t < 0 || t > cfN - 1) return;
+          pos = t;
+        }
         schedule();
       };
 
@@ -199,8 +240,8 @@
       if (cfDotsBox) cfDotsBox.hidden = false;
       render();
 
-      cfPrev.addEventListener("click", function () { if (activeIdx > 0) goTo(activeIdx - 1); });
-      cfNext.addEventListener("click", function () { if (activeIdx < cfN - 1) goTo(activeIdx + 1); });
+      cfPrev.addEventListener("click", function () { step(-1); });
+      cfNext.addEventListener("click", function () { step(1); });
       cfDots.forEach(function (d, i) { d.addEventListener("click", function () { goTo(i); }); });
 
       // Mouse: the row follows the cursor across the stage
@@ -211,11 +252,12 @@
           if (!(r.width > 0)) return;
           var margin = Math.min(cfItems[0].offsetWidth * 0.64, r.width * 0.15);
           var u = clamp((e.clientX - r.left - margin) / (r.width - 2 * margin), 0, 1);
-          pos = u * (cfN - 1);
+          var target = u * (cfN - 1);
+          pos = loop ? nearest(target) : target;
           schedule();
         });
         cfStage.addEventListener("pointerleave", function () {
-          pos = clamp(Math.round(pos), 0, cfN - 1);
+          pos = loop ? Math.round(pos) : clamp(Math.round(pos), 0, cfN - 1);
           schedule();
         });
       }
@@ -235,8 +277,8 @@
         if (item) goTo(cfItems.indexOf(item));
       });
       cf.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft" && activeIdx > 0) { e.preventDefault(); goTo(activeIdx - 1); }
-        if (e.key === "ArrowRight" && activeIdx < cfN - 1) { e.preventDefault(); goTo(activeIdx + 1); }
+        if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+        if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
       });
       window.addEventListener("resize", schedule);
     }
