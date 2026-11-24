@@ -3,7 +3,7 @@ name: Dr. Samynathan
 published: true
 order: 6
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-samynathan.webp
 designation: ""
 department: Orthopaedics
 specialties:

@@ -3,7 +3,7 @@ name: Dr. K. Rajesh
 published: true
 order: 2
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-k-rajesh.webp
 designation: ""
 department: ENT
 specialties:

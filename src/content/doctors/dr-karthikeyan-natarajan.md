@@ -3,7 +3,7 @@ name: Dr. Karthikeyan Natarajan
 published: true
 order: 8
 lead: false
-photo: ""
+photo: /assets/images/doctors/dr-karthikeyan-natarajan.webp
 designation: ""
 department: Anaesthesia
 specialties:
