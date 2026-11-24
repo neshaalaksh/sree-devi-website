@@ -22,20 +22,20 @@ seoTitle: "Sree Devi Hospital, Trichy: Maternity & Fertility Care"
       <img class="arch arch--tl" src="/assets/images/home-hero-building.webp" alt="Sree Devi Hospital & Fertility Centre building on Gandhi Road, Srirangam" width="960" height="1056" fetchpriority="high">
     </div>
   </div>
-  <div class="container">
+  <div class="container container--strip">
     <div class="info-strip">
       <div class="info-strip__item">
-        <span class="info-strip__icon">{{ icon("clock", 20) }}</span>
+        <span class="info-strip__icon"><img src="/assets/images/icons/info-clock.svg" alt="" width="23" height="23"></span>
         <p class="info-strip__label">OPD Days</p>
         <p class="info-strip__value">{{ s.timings.opd_days_short }}</p>
       </div>
       <div class="info-strip__item">
-        <span class="info-strip__icon">{{ icon("pulse", 20) }}</span>
+        <span class="info-strip__icon"><img src="/assets/images/icons/info-heart.svg" alt="" width="23" height="21"></span>
         <p class="info-strip__label">Emergency &amp; Delivery</p>
         <p class="info-strip__value">{{ s.timings.emergency }}</p>
       </div>
       <a class="info-strip__item" href="{{ s.address.directions_url }}" target="_blank" rel="noopener">
-        <span class="info-strip__icon">{{ icon("pin", 20) }}</span>
+        <span class="info-strip__icon"><img src="/assets/images/icons/info-pin.svg" alt="" width="21" height="25"></span>
         <p class="info-strip__label">Find Us</p>
         <p class="info-strip__value">{{ s.address.short }}</p>
       </a>
@@ -68,7 +68,7 @@ seoTitle: "Sree Devi Hospital, Trichy: Maternity & Fertility Care"
   <div class="container">
     <div class="split-head">
       <h2 class="h-display h-display--lg">What we <em>offer</em></h2>
-      <p>Care for every stage of a woman's health, from adolescence and pregnancy to menopause, with specialists in {{ departments.items.length }} departments.</p>
+      <p>Maternity, fertility and women's health care in Trichy, with specialists in {{ departments.items.length }} departments for the whole family.</p>
     </div>
     <div class="offer-grid">
       {%- for d in home_offer.items %}

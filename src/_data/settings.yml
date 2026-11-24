@@ -41,6 +41,11 @@ social:
 registrations:
   clinical_establishment: "TRCYALL20200020560"
   art_clinic: "Level II, registered under the ART (Regulation) Act, 2021"
+  art_reg_no: ""
+  pcpndt: ""
+
+# Blog preview: show placeholder articles and videos until real ones are added
+blog_preview: true
 
 # Optional banner shown at the very top of every page (e.g. holiday timings)
 notice:

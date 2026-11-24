@@ -161,12 +161,15 @@ content:
           - { name: youtube, label: YouTube channel link, type: string }
           - { name: instagram, label: Instagram link, type: string }
           - { name: facebook, label: Facebook link, type: string }
+      - { name: blog_preview, label: "Blog: show placeholder articles and videos (turn off when real posts are added)", type: boolean }
       - name: registrations
         label: Registrations (shown in the footer when filled)
         type: object
         fields:
           - { name: clinical_establishment, label: Clinical establishment registration no., type: string }
-          - { name: art_clinic, label: ART clinic registration no., type: string }
+          - { name: art_clinic, label: ART clinic level and Act, type: string }
+          - { name: art_reg_no, label: ART clinic registration no., type: string }
+          - { name: pcpndt, label: PCPNDT registration no. (scan centre), type: string }
       - name: home
         label: Homepage text
         type: object
@@ -283,7 +286,21 @@ content:
         list: true
         fields:
           - { name: name, label: Name, type: string }
+          - { name: slug, label: "Section id (no spaces)", type: string }
           - { name: description, label: Short description, type: string }
+          - { name: link, label: "Link instead of own section (optional)", type: string }
+          - { name: heading, label: "Section heading (*word* = italic)", type: string }
+          - { name: intro, label: Section intro, type: text }
+          - { name: doctor_department, label: "Show doctors from department", type: string }
+          - name: lists
+            label: Lists
+            type: object
+            list: true
+            fields:
+              - { name: heading, label: Heading, type: string }
+              - { name: items, label: Items, type: string, list: true }
+          - { name: note, label: Note, type: text }
+          - { name: practitioner, label: Practitioner line, type: string }
 
   - name: hospital_services
     label: Diagnostics & hospital services

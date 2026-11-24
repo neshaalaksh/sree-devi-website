@@ -84,12 +84,12 @@ seoTitle: "Fertility Centre in Trichy: IUI, IVF & ICSI · Sree Devi"
 
 {{ faqBlock(faqs.items | where("show_on", "fertility"), lead="Contact the Fertility Centre for confirmed information, timings and next steps.") }}
 
-<section class="section section--cream cta-band">
-  <div class="container container--narrow center">
-    <p class="eyebrow">Get in touch</p>
-    <h2 class="h-display h-display--lg">Ready to take the <em>first step?</em></h2>
-    <p class="lead">Reach out to the Fertility Centre to speak with the team and understand how they can support you.</p>
+<section class="fc-cta">
+  <div class="container center">
+    <p class="fc-cta__eyebrow">Get In Touch</p>
+    <h2 class="fc-cta__title">Ready to take the <em>first step?</em></h2>
+    <p class="fc-cta__lead">Reach out to the Fertility Centre to speak with the team and understand how they can support you.</p>
     <div class="btn-row center">{{ btnWhatsApp() }} {{ btnCall() }}</div>
-    <p style="margin-top:20px;font-size:.8rem">{{ settings.address.short }} · Since {{ settings.established_year }}</p>
+    <p class="fc-cta__meta">{{ settings.address.short }} · Since {{ settings.established_year }}</p>
   </div>
 </section>
