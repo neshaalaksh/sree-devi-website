@@ -201,9 +201,59 @@ button { font: inherit; }
 .fertility-band p { color: #f3dcd3; }
 .fertility-band .btn { margin-top: 8px; }
 
-/* ---------- Home: doctors feature ---------- */
-.doctors-feature { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
-.doctors-feature__media img { width: 100%; aspect-ratio: 622 / 574; object-fit: cover; border-radius: 160px 0 0 0; }
+/* ---------- Home: doctors carousel ---------- */
+.doctors-cf__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; margin-bottom: 40px; }
+.doctors-cf__copy { flex: 1 1 520px; max-width: 640px; }
+.doctors-cf__copy p:last-child { margin-bottom: 0; }
+
+.cf { --cf: 220px; }
+.cf__row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: end; gap: 16px; }
+.cf__stage { list-style: none; margin: 0; padding: 0; min-width: 0; }
+.cf__link { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; border: 4px solid #fff; background: var(--peach-200); box-shadow: 0 6px 16px rgba(58, 31, 51, .16); transition: box-shadow .26s ease; }
+.cf__link img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.cf__initials { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-family: var(--serif); font-size: 2.4rem; font-weight: 700; color: var(--plum); }
+.cf__meta h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--ink); margin: 0; }
+.cf__meta p { margin: 2px 0 0; font-size: .85rem; color: var(--muted); }
+.cf__meta .cf__dept { color: var(--plum-700); font-weight: 600; }
+.cf__arrow, .cf__caption, .cf__dots { display: none; }
+.icon--flip { transform: rotate(180deg); }
+
+/* Without JavaScript: a simple wrapped set of circles with details underneath */
+.cf:not(.is-ready) .cf__row { display: block; }
+.cf:not(.is-ready) .cf__stage { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px 24px; }
+.cf:not(.is-ready) .cf__item { width: 160px; text-align: center; }
+.cf:not(.is-ready) .cf__link { width: 132px; height: 132px; margin: 0 auto 12px; }
+
+/* With JavaScript: coverflow of circles, positioned by site.js */
+.cf.is-ready .cf__stage { position: relative; height: calc(var(--cf) + 20px); overflow: hidden; }
+.cf.is-ready .cf__item { position: absolute; left: 50%; bottom: 10px; width: var(--cf); height: var(--cf); margin-left: calc(var(--cf) / -2); transform-origin: 50% 100%; will-change: transform, opacity; transition: transform .56s cubic-bezier(.22, .8, .3, 1), opacity .56s ease; }
+.cf.is-ready .cf__item.is-active .cf__link { box-shadow: 0 0 0 3px var(--plum), 0 14px 30px rgba(58, 31, 51, .28); }
+.cf.is-ready .cf__meta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cf.is-ready .cf__arrow { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-bottom: calc(var(--cf) / 2 - 14px); padding: 0; border-radius: 50%; border: 1.5px solid var(--plum); background: #fff; color: var(--plum); cursor: pointer; transition: background .2s, opacity .2s; }
+.cf.is-ready .cf__arrow:hover { background: var(--peach); }
+.cf.is-ready .cf__arrow[aria-disabled="true"] { opacity: .35; cursor: default; }
+.cf.is-ready .cf__arrow[aria-disabled="true"]:hover { background: #fff; }
+.cf.is-ready .cf__caption { display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 160px; padding-top: 16px; text-align: center; }
+.cf.is-ready .cf__caption[hidden] { display: none; }
+.cf__cap-name { margin: 0; font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.3rem); line-height: 1.1; color: var(--ink); }
+.cf__chip { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--peach); color: var(--plum-700); font-size: .8rem; font-weight: 700; }
+.cf__cap-quals { margin: 0; font-size: .95rem; color: var(--text); }
+.cf__cap-reg { margin: 0; font-size: .82rem; color: var(--muted); }
+.cf.is-ready .cf__dots { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+.cf.is-ready .cf__dots[hidden] { display: none; }
+.cf__dots button { display: flex; align-items: center; justify-content: center; width: 40px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.cf__dots span { display: block; width: 9px; height: 9px; border-radius: 999px; background: #c9bdc6; transition: width .22s ease, background-color .22s ease; }
+.cf__dots button[aria-current="true"] span { width: 26px; background: var(--plum); }
+@media (max-width: 760px) {
+  .cf { --cf: 150px; }
+  .cf__row { grid-template-columns: 1fr 1fr; grid-template-areas: "stage stage" "prev next"; }
+  .cf__stage { grid-area: stage; }
+  .cf__arrow--prev { grid-area: prev; justify-self: end; }
+  .cf__arrow--next { grid-area: next; justify-self: start; }
+  .cf.is-ready .cf__arrow { margin-bottom: 0; margin-top: 8px; }
+}
+
+/* Compact doctor list (Fertility Centre) */
 .doctor-mini { margin: 20px 0 28px; display: grid; gap: 10px; }
 .doctor-mini li { display: flex; flex-direction: column; padding: 10px 14px; background: #fff; border-radius: 12px; border: 1px solid #e3e7da; }
 .doctor-mini strong { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); font-weight: 700; }
@@ -574,7 +624,7 @@ button { font: inherit; }
 @media (max-width: 860px) {
   .topbar__left { display: none; }
   .topbar__inner { justify-content: center; }
-  .hero__grid, .intro, .doctors-feature, .svc, .contact, .team, .booking, .plan, .help, .lead-doc, .profile { grid-template-columns: 1fr; }
+  .hero__grid, .intro, .svc, .contact, .team, .booking, .plan, .help, .lead-doc, .profile { grid-template-columns: 1fr; }
   .hero__media { order: -1; }
   .arch--tl { max-height: 360px; width: 100%; aspect-ratio: 4/3; border-top-left-radius: 100px; }
   .svc--flip .svc__media { order: 0; }

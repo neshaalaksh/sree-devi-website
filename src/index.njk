@@ -93,20 +93,52 @@ seoTitle: "Sree Devi Hospital, Trichy: Maternity & Fertility Care"
   </div>
 </section>
 
-<section class="section section--sage">
-  <div class="container doctors-feature">
-    <div class="doctors-feature__copy">
-      <h2 class="h-display h-display--lg">{{ h.doctors_title | accent | safe }}</h2>
-      <p>{{ h.doctors_text }}</p>
-      <ul class="doctor-mini">
-        {%- for doc in collections.doctors | limit(5) %}
-        <li><strong>{{ doc.data.name }}</strong><span>{{ doc.data.department }} · {{ doc.data.qualifications }}</span></li>
-        {%- endfor %}
-      </ul>
-      <a class="btn btn--primary" href="/doctors/">Meet All Doctors →</a>
+<section class="section section--sage doctors-cf" aria-labelledby="doctors-title">
+  <div class="container">
+    <div class="doctors-cf__head">
+      <div class="doctors-cf__copy">
+        <p class="eyebrow">Our doctors</p>
+        <h2 class="h-display h-display--lg" id="doctors-title">{{ h.doctors_title | accent | safe }}</h2>
+        <p>{{ h.doctors_text }}</p>
+      </div>
+      <a class="btn btn--outline" href="/doctors/">Meet All Doctors →</a>
     </div>
-    <div class="doctors-feature__media">
-      <img src="/assets/images/home-doctors-team.webp" alt="" loading="lazy">
+
+    <div class="cf" data-cf role="region" aria-roledescription="carousel" aria-label="Our doctors">
+      <div class="cf__row">
+        <button class="cf__arrow cf__arrow--prev" type="button" data-cf-prev aria-label="Previous doctor">{{ icon("arrow", 20, "icon--flip") }}</button>
+        <ul class="cf__stage" data-cf-stage>
+          {%- for doc in collections.doctors %}
+          {%- set d = doc.data %}
+          <li class="cf__item" data-cf-item data-name="{{ d.name }}" data-dept="{{ d.department }}" data-quals="{{ d.qualifications }}" data-reg="{{ d.registration_no }}" data-href="/doctors/#{{ doc.page.fileSlug }}">
+            <a class="cf__link" href="/doctors/#{{ doc.page.fileSlug }}" aria-label="{{ d.name }}, {{ d.department }}. View profile">
+              {%- if d.photo %}<img src="{{ d.photo }}" alt="" width="800" height="1000" loading="lazy" decoding="async">{% else %}<span class="cf__initials" aria-hidden="true">{{ d.name | initials }}</span>{% endif %}
+            </a>
+            <div class="cf__meta">
+              <h3>{{ d.name }}</h3>
+              <p class="cf__dept">{{ d.department }}</p>
+              <p>{{ d.qualifications }}</p>
+              <p>TNMC Reg. No. {{ d.registration_no }}</p>
+            </div>
+          </li>
+          {%- endfor %}
+        </ul>
+        <button class="cf__arrow cf__arrow--next" type="button" data-cf-next aria-label="Next doctor">{{ icon("arrow", 20) }}</button>
+      </div>
+
+      <div class="cf__caption" data-cf-caption hidden>
+        <p class="cf__cap-name" data-cf-name></p>
+        <span class="cf__chip" data-cf-dept></span>
+        <p class="cf__cap-quals" data-cf-quals></p>
+        <p class="cf__cap-reg">TNMC Reg. No. <span data-cf-reg></span></p>
+        <a class="link-arrow" href="/doctors/" data-cf-link>View profile {{ icon("arrow", 16) }}</a>
+      </div>
+
+      <div class="cf__dots" data-cf-dots hidden>
+        {%- for doc in collections.doctors %}
+        <button type="button" data-cf-dot aria-label="Show {{ doc.data.name }}"><span></span></button>
+        {%- endfor %}
+      </div>
     </div>
   </div>
 </section>
